@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Artikel</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <style>
+        h3 {
+            margin-top: 50px;
+            margin-bottom: 0;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        .wichtig {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .dark-mode .wichtig {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
+            <div id="audioPlayer">
+                <button id="speakerBtn"><img src="b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button>
+                <button id="playBtn"><img src="b/play.png" class="dark-switch" alt="Play"></button>
+                <button id="pauseBtn"><img src="b/pause.png" class="dark-switch" alt="Pause"></button>
+                <button id="backBtn"><img src="b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
+            </div>
+            <audio id="myAudio" src="m/ex.mp3"></audio>
+        </div>
+    </div>
+
+    <h1>Vorwort</h1>
+
+    <article>
+    <p>Es folgt eine kurze Ein- und Anleitung zu dieser Internetseite sowie zum Umgang mit den darauf 
+    publizierten Inhalten. In erster Linie ist die ganze Seite selbsterklärend gebaut, es ist also nicht zwingend 
+    notwendig, diesen Beitrag zu lesen.</p>
+    
+    <p>Du wurdest von mir, Jeremias „Jerry“ Ruff wahrscheinlich über einen einfachen Link mit einer kurzen Beschreibung 
+    auf diese Seite geleitet, erwartest nun eine Fortsetzung der Arbeit beim Spickzettel, unserer ehemaligen 
+    Schulzeitung. Durchaus ist geplant, alte Beiträge dessen ebenfalls im Archiv online zu Verfügung zu stellen, 
+    jedoch ist das nicht der primäre Zweck des Projektes. Den primärer Zweck habe ich bereits unter den „Fremden 
+    Federn“ niedergeschrieben: noch so kurz tretenden Gedanken verschiedensten Inhaltes ein Medium, einen Raum zur 
+    Entfaltung zu bieten. Gedanken, Zustände oder auch Gefühle die ich sonst so nicht formuliert hätte oder 
+    zumindest nicht mit einem solch „großen“ Kreis an Kontakten geteilt hätte. Neben der Kategorie des Kapitalistenbashings 
+    fallen darunter auch nunja Beschreibungen von Problemen, momentan ziemlich tief sitzenden.</p>
+
+    <p class="wichtig">Ich bitte darum folgenden Sätzen Priorität zu verleihen.<br>
+    In einigen Beiträgen werde ich beschreiben <i>wie</i> es mir geht - aber nicht warum - nicht hier online und 
+    auch nicht über einen Messenger und auch nicht in der realen Welt, meistens. Es steht nichts dagegen zu fragen, 
+    aber sollte ich darauf nicht antworten wollen so muss das akzeptiert werden. Ich bin stolz darauf, in einer 
+    solchen Freundesgruppe wie der meinen zu sein; wir sprechen über unsere Sorgen und stützen einander. Jedoch kann 
+    und will ich nicht allen davon berichten - nicht wegen mangelnden Vertrauens sondern schlichtweg weil ich das 
+    nicht möchte. Und im Sinne des Rechtes auf Privatsphäre muss ich auch nicht begründen, warum.</p>
+    
+    <p>Das soll keine kommunikative Einschränkung sein - sprich und frag und agiere wie du es für gut hält. Es ist 
+    lediglich eine Bitte um Entschuldigung falls ich nicht antworten möchte.</p>
+    
+
+    <p>Nun zu den Funktionen des Fragezeichen. [Ernst zuende, hier fängt Spaß an]</p>
+
+
+    <h3>1. Navigation</h3>
+    <p>Bevor ich ein/zwei Worte zur Startseite verliere, muss ich noch erklären wie man dahin gelangt: auf &#10024; fast &#10024; 
+    jeder Subsite findet sich am oberen Rand ein Menü. Auf dem Desktop, also großen Bildschirmen von PC oder Laptop, 
+    ist dies relativ einfach zu bedienen, am Handy ein wenig trickier:<br>    
+    <ul><li>Tippe in die Nähe des Menü-Icons mit den drei Punkten</li>
+        <li>Schwenke dann den Finger um den Punkt herum</li>
+        <li>lasse los um zu gewählter Seite zu gelangen</li></ul>
+    Meist findet man „Startseite“ ausgeschrieben, alternativ aber auch nur „Root“, ein technisches Synonym dass 
+    zur selbigen Index führt. Gibt es Probleme mit dem Menü, helfe ich gern nochmal persönlich (; 
+    <br><br>
+    Sagt dir das Radialmenü nicht zu, kannst du dich alternativ auch einfach über die sogenannte Sitemap navigieren, 
+    welche am Ende einer jeden Seite platziert ist.</p>
+
+
+    <h3>2. Startseite & Beitragsübersicht</h3>
+    <p>Auf der Startseite finden sich die zehn zuletzt gelisteten Beiträge. Doch keine Sorge: unter dem 
+    <a href="../t/archiv.html"><u>Archiv</u></a> finden sich alle je online gestellten. Dieses ist bei den Kategorien 
+    (s. Menü) aufzufinden. Die URLs (zB. https://fragezeichen.github.io/a/lieblingsartikel) sind dauerhaft gültig 
+    und können daher auch einfach so geteilt oder unter den Lesezeichen des Browsers gespeichert werden.</p>
+
+
+    <h3>3. Login</h3>
+    <p>Aaaaalles hat heutzutage eine Möglichkeit, sich anzumelden. Du dachtest im Sinne des Datenschutzes hätte ich 
+    einen vermieden? Ich wünschte, wirklich! Ebenfalls über das Menü erreichbar gibt es eine Loginfunktion. Du 
+    musst nicht zwingend eingeloggt sein, lediglich zum Schreiben von Kommentaren sowie zum Einsehen einiger 
+    geschützter Artikel.
+    <br><br>
+    Einige Texte sind unter einem speziellen Lesezugriff gespeichert. Das heißt dass sie nur für bestimmte Personen 
+    und Leser freigegeben sind. Selbst für Daniel wäre es -hoffe ich doch- nicht möglich, ohne fremden Account den 
+    geschützen Beitrag einzusehen wenn er wöllte jedoch nicht könnte. [Es besteht natürlich die Möglichkeit von 
+    Social Hacking oder schlichter Gewaltandrohung, in verweise auf Maren.] Im Falle eines Lesezugriff kommt dann 
+    ganz einfach eine Warnmeldung zu Beginn des Textes - in der steht um was es sich handelt und ob du mit deinem 
+    Account Zugriff hast.
+    <br><br>
+    Ein solcher Account ist nicht selber anlegbar, das übernehme lieber ich. Dazu sende ich dir einen Benutzernamen 
+    und du mir ein Passwort zu - wenn du darum bittest. Vergisst du deine Anmeldedaten ist das kein Problem. 
+    <br><br>
+    Selbst wenn du eingeloggt bist kann niemand einsehen, wer welchen Beitrag gesichtigt hat oder sonstiges auf 
+    dieser Website getan hat. Es fließen ebenfalls keine Daten aus dieser Kategorie an Google und Co. ab. Ich als 
+    Superadmin (also Verwalter der entsprechenden Datenbanken und Systemen hinter der Seite) kann lediglich einsehen, 
+    wer sich wann eingeloggt hat. Einen Grund das zu tuen habe ich nicht. 
+    <br><br>
+    Wichtig: du kannst dich jederzeit ausloggen über die Seite, in der du dich eingeloggt hast. Alternativ kannst 
+    du den Browser (die App ins Internet) schließen, dann wirst du automatisch ausgeloggt.</p>
+
+
+    <h3>4. Kommentare</h3>
+    <p>Unter einem jeden Beitrag ist eine Kommentarsektion zu finden. Dort gilt das klassische Prinzip von 
+    <s>H</s><i>Sp</i>ass im Netz: Anmerkungen, Meinungen, Kritik und Co. sind frei veröffentlichbar. Entweder unter deinem 
+    Benutzernamen oder anonym - <b>aber für jeden im Internet einsehbar</b>. Wenn du einen Kommentar anonym einreichen 
+    möchtes, aktiviere einfach das entsprechende Kontrollkästchen bevor du den Kommentar absendest. Dann kann nicht 
+    einmal ich direkt einsehen, von wem der Kommentar kommt [ich könnte lediglich raten, anhand dessen, wer sich 
+    zuletzt eingeloggt hat].
+    <br><br>
+    Unabhängig davon, ob du anonym posten möchtest, musst du dich trotzdem vorerst einloggen. Das geht über die 
+    Login-Seite oderunter den Kommentaren selbst.</p>
+
+
+    <h3>5. letzter und wichtigster Punkt: Fremde Federn</h3>
+    <p>Eine ausführliche Beschreibung der Idee findet sich unter der Subseite selbst. Aber die Kurzfassung beläuft 
+    sich auf: ein jeder kann wenn er denn möchte hier schreiben bzw. Bildprojekte starten. Diese erscheinen dann 
+    in der Kategorie „<a href="../t/fremde-federn.html"><u>Fremde Federn</u></a>“ - im Hauptmenü rechts. Schaut gerne mal 
+    vorbei und lest, was dort dazu steht!</p>
+
+
+    <p>Das soll es erstmal gewesen sein. Ich hoffe, das Projekt sowie vor allem die Texte selbst freut dich!</p>
+    </article>
+    <p class="verfasst">Jerry <br><span class="datum">25/10/25</span></p>
+</main>
+
+<footer>
+    <div class="komments">
+        <p>Kommentare</p>
+        <div id="commentRead">Lade Kommentare...</div>
+
+        <form id="commentWrite">
+            <textarea id="commentText" placeholder="POST /comments {body: …} | Eigenen Gedanken Platz verschaffen (öffentlich)" required></textarea>
+            <div><div id="loginDiv">
+                    <div id="loginForm">
+                        <input id="email" placeholder="Benutzername" required>
+                        <input type="password" id="password" placeholder="Passwort" required>
+                        <button type="button" id="loginBtn"><img src="b/login.png" class="dark-switch" alt="Einloggen"></button>
+                    </div>
+                    <button type="button" id="logoutBtn" style="display:none;">Logout</button></div>
+
+                 <div id="sendDiv">
+                    <label><input type="checkbox" id="anonymousCheck"> anonym posten</label>
+                    <button type="submit">Absenden <img src="b/send.png" class="dark-switch" alt="Abschicken"></button></div>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="index.html">Root | Startseite</a></li>
+                    <li><a href="t/zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="t/fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="t/kategorien.html">Kategorien</a></li>
+                    <li><a href="auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="t/upload.html">Aktualisierung</a></li>
+                    <li><a href="t/rechtliches.html">Rechtliches</a></li>
+                    <li><a href="t/kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js"></script>
+
+</body>
+</html>

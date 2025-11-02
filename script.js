@@ -119,7 +119,7 @@ async function loadProtectedArticles() {
             <p>${json.content}</p>
             <p class="verfasst">${json.autor} <br><span class="datum">${json.datum}</span></p>`;
           json.title = json.title.replaceAll(" ", "_");
-          audio.src = 'm/' + json.title + '.mp3';
+          audio.src = '../m/' + json.title + '.mp3';
         } catch (err) {
           article.innerHTML = '<p>Fehler [LOL] - Frage doch den mächtigen Guru (Jerry/Jeremias)</p>[' + err.message + ']';
         }

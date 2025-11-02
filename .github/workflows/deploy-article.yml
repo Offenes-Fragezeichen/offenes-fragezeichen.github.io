@@ -21,7 +21,7 @@ jobs:
       - name: Download Article JSON from Supabase
         env:
           SUPABASE_URL: https://ngtujvgsbymtxphwncuj.supabase.co
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
           mkdir -p work
           filename="${{ github.event.inputs.filename }}"

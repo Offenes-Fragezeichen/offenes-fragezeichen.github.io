@@ -481,12 +481,12 @@ const svg = document.querySelector("svg.menu");
 
 const segments = 6;
 const labels = [
-  { image: "/b/dark/root-dark.png", text: "Root", size: 50, link: "index.html" },
+  { image: "/b/dark/root-dark.png", text: "Root", size: 50, link: "/t/index.html" },
   { image: "/b/dark/feder-dark.png", text: "Fremde Federn", size: 50, link: "/t/fremde-federn.html" },
-  { image: "/b/dark/kategorien-dark.png", text: "Kategorien", size: 50, link: "t/kategorien.html" },
-  { image: "/b/dark/login-dark.png", text: "Login", size: 58, link: "auth.html" },
+  { image: "/b/dark/kategorien-dark.png", text: "Kategorien", size: 50, link: "/t/kategorien.html" },
+  { image: "/b/dark/login-dark.png", text: "Login", size: 58, link: "/t/auth.html" },
   { image: "/p/symbol.png", text: "Symbol", size: 50, link: "https://example.com/symbol" },
-  { image: "/b/dark/zufall-dark.png", text: "Einfach mal irgendwo starten", size: 50, link: "t/zufall.html" }
+  { image: "/b/dark/zufall-dark.png", text: "Einfach mal irgendwo starten", size: 50, link: "/t/zufall.html" }
 ];
 
 const colors = ["#6667AB", "#F18AAD", "#EA6759", "#8BC28C", "#F3C65F", "#F88F58"];

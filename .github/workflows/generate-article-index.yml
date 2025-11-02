@@ -24,7 +24,7 @@ jobs:
           # leeres Array starten
           all="[]"
 
-          for f in public/*.html; do
+          for f in beitrag/*.html; do
             base=$(basename "$f" .html)
             json_file="${base}.json"
 

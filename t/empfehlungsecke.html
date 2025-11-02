@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Kategorien</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    
+    <style>
+        h1  {
+            margin-bottom: 5%;
+        }
+        
+        .werkzeuge {
+            right: 25%;
+        }
+
+        .toggleTrigger[data-direction="left"] + .toggleContent {
+            right: 5%;
+        }
+
+        main {
+            position: relative;
+            width: 50%;
+            margin-left: 25%;
+        }
+
+        main img {
+            width: 80px;
+            height: auto;
+            margin: 0;
+        }
+        
+        main div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            min-height: 150px;
+            padding: 20px;
+            margin: 0 0 18px 0;
+            border-radius: 20px;
+            width: 50%;            
+        }
+        
+        main div:nth-of-type(1n) {
+            background-color: rgba(0, 255, 0, 0.1);
+            align-items: flex-start;
+        }
+        
+        main div:nth-of-type(2n) {
+            background-color: rgba(255, 0, 0, 0.1);
+            align-items: flex-end;
+            margin-left: 12.5%;
+        }
+
+        main div:nth-of-type(3n) {
+            margin-left: 25%;
+        }
+
+        main div:nth-of-type(4n) {
+            margin-left: 12.5%;
+        }
+
+        main div:nth-of-type(5n) {
+            margin-left: 0%;
+        }
+        
+        main p {
+            margin-top: 5px;
+            line-height: 1.6;
+        }
+        
+        main b {
+            line-height: 2.3;
+        }
+        
+        .netzpolitik {
+            width: 110px;
+            margin-bottom: -30px;
+        }
+        
+        .chaosradio {
+            width: 130px;
+            margin-bottom: -10px;
+        }
+        
+        .pentaradio {
+            width: 110px;
+            margin-bottom: -20px;
+        }
+
+        main > p {
+            margin-left: 90%;
+        }
+
+        @media (max-width: 768px) {
+            h1  {
+                margin-bottom: 10%;
+            }
+            
+            .werkzeuge {
+                right: 10%;
+                margin-bottom: 10%;
+            }
+
+            main {
+                width: 98%;
+                margin-left: 5%;
+                max-width: 95%;
+            }
+
+            main div {
+                width: 65%;
+            }
+
+            main div:nth-of-type(2n) {
+                margin-left: 10%;
+            }
+
+            main div:nth-of-type(3n) {
+                margin-left: 20%;
+            }
+
+            main div:nth-of-type(4n) {
+                margin-left: 10%;
+            }
+
+            main div:nth-of-type(5n) {
+                margin-left: 0%;
+            }
+
+            .netzpolitik {
+                width: 90px;
+                margin-bottom: -15px;
+            }
+        
+            .pentaradio {
+                width: 90px;
+                margin-bottom: 0;
+            }
+            
+            .fremde-federn {
+                width: 60px;
+                margin-bottom: -20px;
+            }
+
+            main > p {
+                margin-left: 70%;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+<svg viewBox="0 0 500 500" class="menu"><g id="menu" transform="translate(200, 200)"></g><circle id="center" class="center-circle" cx="200" cy="200" r="60"/><image id="centerImage" href="../b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/></svg>
+
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
+        </div>
+    </div>
+
+<main>
+    <h1>Empfehlungsecke</h1>
+    
+    <div><img src="../b/empf/ccc.png" class="dark-switch" alt="Logo des Chaos">
+         <p><a href="https://ccc.de" title="Externer Link"><b>CCC - Chaos Computer Club</b></a><br>
+               Der CCC ist die größte europäische Vereinigung von sog. White-Hat-Hackern. Sie decken Datenlecks und Sicherheitslücken für die Allgemeinheit gut verständlich auf.</p></div>
+    
+    <div><img src="../b/empf/netzpolitik.png" class="dark-switch netzpolitik" alt="Logo Netzpolitik">
+         <p><a href="https://netzpolitik.org" title="Externer Link"><b>Netzpolitik</b></a><br>
+               Netzpolitik ist ein journalistes Medium für digitale Freiheit und Grundrechte. Der Blog bietet einen umfassenden Stand der Dinge im verbleibendem Prozentum digitaler Privatsphäre - bzw. eben dieser nicht.</p></div>
+    
+    <div><img src="../b/empf/chaosradio.png" class="chaosradio" alt="Altes Logo Chaosradio">
+         <p><a href="https://chaosradio.de" title="Externer Link"><b>Chaosradio</b></a><br>
+               Eines meiner Lieblingsmedien des CCC ist das monatlich im Podcastformat erscheinende Chaosradio. Technische Probleme und Lösungen sowie deren gesellschaftliche Auswirkungen werden auf verständlicher Ebene erklärt.</p></div>
+    
+    <div><img src="../b/empf/pentaradio.png" class="pentaradio" alt="Logo des Pentaradios">
+         <p><a href="https://c3d2.de/radio.html" title="Externer Link"><b>Pentaradio</b></a><br>
+               Hat man einmal alle Folgen des Chaosradios durch, kann einem nur noch das technisch nochmals intensivere Pentaradio des Dresdner Ablegers des CCC, dem C3D2, aushelfen.</p></div>
+    
+    <div><img src="../b/empf/kuketz.png" alt="Logo des Kuketz">
+         <p><a href="https://www.kuketz-blog.de/empfehlungsecke/" title="Externer Link"><b>Kuketz Empfehlungsecke</b></a><br> 
+               Namensgeber dieser Subseite ist die Empfehlungsecke des Kuketz-Blog, einer kritischen Übersicht aus Sicht der IT-Security zu Alltagstech und deren Alternativen. Autor ist Mike Kuketz, erfahrener Informatiker als „Pentester und Sicherheitsforscher [sowie] Lehrbeauftragter“.</p></div>
+    
+    <div><img src="../b/feder.png" class="dark-switch fremde-federn" alt="Symbol einer Feder">
+         <p><a href="fremde-federn.html"><b>Fremde Federn</b></a><br>
+               Ein besonderes Augenmerk gilt den Gastbeiträgen. Sowohl Autoren als auch Leser werden herzlich eingeladen, die Kategorie der Fremden Federn zu besuchen.</p></div>               
+    
+    <!--<div><img src="../b/empf/.png" alt="">
+         <p><a href=""><b></b></a>
+               </p></div>-->
+               
+    <p>~Jeremias</p>
+</main>
+
+<footer>
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="../index.html">Root | Startseite</a></li>
+                    <li><a href="zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="kategorien.html">Kategorien</a></li>
+                    <li><a href="auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="ueber.html">Über</a></li>
+                    <li><a href="rechtliches.html">Rechtliches</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>    
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js"></script>
+
+</body>
+</html>

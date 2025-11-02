@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Upload</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            background-color: #15202a;
+            color: white;            
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+
+        input, textarea {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid white;
+            color: white;
+            border-radius: 10px;
+            padding-left: 10px;
+        }
+
+        input:focus, textarea:focus {
+            border: 1px dashed white;
+            outline: none;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: grey;
+        }
+
+        input {
+            width: 20%;
+            height: 40px;
+        }
+
+        textarea {
+            width: 80%;
+            padding-top: 10px;
+        }
+
+        #uploaded_at {
+            color: white;
+        }
+
+        #uploadForm > div {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        #uploadForm > div div:nth-of-type(1) {
+            width: 30%;
+        }
+
+        #uploadForm > div div:nth-of-type(1) input {
+            width: 100%;
+        }
+
+        #uploadForm > div div:nth-of-type(2) {
+            margin-left: 120px;
+            width: 40%;
+        }
+
+        #signatures {
+            width: 80% !important;
+        }
+
+        #signatures button {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 15px;
+            padding: 5px 8px 5px 8px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        #signatures button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        #submitBtn, #logoutBtn {
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 1px solid white;
+            padding: 5px;
+            color: white;
+            width: 100px;
+            border-radius: 10px;
+        }
+
+        #submitBtn:hover, #logoutBtn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px dashed white;
+        }
+
+        #submitBtn img {
+            width: 28px;
+            height: auto;
+        }
+
+        #logoutBtn img {
+            width: 30px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload</h1>
+
+    <p id="permissionMessage"></p>
+
+    <form id="uploadForm">
+        <div>
+            <div><input type="text" id="title" placeholder="Titel" required><br><br>
+                 <input type="text" id="author" placeholder="Autor"><br><br>
+                 <input type="text" id="uploaded_at"></div>
+
+            <div><div id="signatures"></div>
+                 <input type="hidden" id="signature"></div>
+        </div>
+
+        <textarea id="preview" rows="8" placeholder="Preview"></textarea><br><br>
+        <textarea id="content" rows="20" placeholder="Content"></textarea><br><br>
+
+        <button type="submit" id="submitBtn"><img src="../b/upload.png"></button>
+        <button type="button" id="logoutBtn" title="Logout"><img src="../b/dark/login-dark.png"></button>
+    </form>
+
+    <p id="message"></p>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+const SUPABASE_URL = 'https://ngtujvgsbymtxphwncuj.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ndHVqdmdzYnltdHhwaHduY3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc3NzE4ODAsImV4cCI6MjA3MzM0Nzg4MH0.g9Cmgrua00pJpr6T0uO5FGRIjtgU7TTnGvOw9NHVAr0';
+const client = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false } });
+
+const EDGE_TRIGGER_URL = `${SUPABASE_URL}/functions/v1/trigger-github`;
+
+const selectedSignatures = new Set();
+
+async function init() {
+const savedSession = sessionStorage.getItem('sb-session');
+if (savedSession) {
+    const parsed = JSON.parse(savedSession);
+    await client.auth.setSession(parsed);
+}
+
+const { data } = await client.auth.getSession();
+const session = data.session;
+
+if (!session || !session.user) {
+    const currentUrl = window.location.href;
+    window.location.href = `auth.html?redirect=${encodeURIComponent(currentUrl)}`;
+    return;
+}
+
+const user = session.user;
+
+// Prüfen, ob User upload Rechte hat
+const { data: perm, error } = await client
+    .from("users2")
+    .select("upload")
+    .eq("user_id", user.id)
+    .single();
+
+const permissionMessage = document.getElementById("permissionMessage");
+const form = document.getElementById("uploadForm");
+const greyLogout = document.getElementById("")
+
+if (error || !perm || !perm.upload) {
+    permissionMessage.textContent = "Fehlende Berechtigung zum Upload ❌";
+
+    form.querySelectorAll("input, textarea, button[type='submit']").forEach(el => el.disabled = true);
+    form.querySelectorAll("input, textarea, #submitBtn").forEach(el => {
+        el.style.border = "1px solid grey";
+        el.style.borderRadius = "10px";
+        el.style.backgroundColor = "rgba(255, 255, 255, 0.1";
+        el.style.color = "grey";
+    });
+
+} else {
+    permissionMessage.textContent = "Zum Upload verifiziert ✓";
+}
+
+// Datum eintragen
+const date = new Date();
+const yy = String(date.getFullYear()).slice(2);
+const mm = String(date.getMonth() + 1).padStart(2, '0');
+const dd = String(date.getDate()).padStart(2, '0');
+document.getElementById("uploaded_at").value = `${yy}/${mm}/${dd}`;
+
+loadSignatures();
+}
+
+async function loadSignatures() {
+    try {
+        const res = await fetch("https://honest-entropy.github.io/signatures.json");
+        const signatures = await res.json();
+        const container = document.getElementById("signatures");
+
+        signatures.forEach(sig => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.textContent = sig;
+            btn.style.margin = "2px";
+            btn.addEventListener("click", () => toggleSignature(sig, btn));
+            container.appendChild(btn);
+        });
+    } catch (err) {
+        console.error("Fehler beim Laden der Signaturen:", err);
+    }
+}
+
+function toggleSignature(sig, btn) {
+    if (selectedSignatures.has(sig)) {
+          selectedSignatures.delete(sig);
+          btn.style.backgroundColor = "";
+          btn.style.color = "";
+    } else {
+          selectedSignatures.add(sig);
+          btn.style.backgroundColor = "#d0ffd0";
+          btn.style.color = "black";
+    }
+    document.getElementById("signature").value = Array.from(selectedSignatures).join(", ");
+}
+
+async function handleUpload(e) {
+    e.preventDefault();
+    const title = document.getElementById("title").value.trim();
+    const author = document.getElementById("author").value.trim();
+    const uploaded_at = document.getElementById("uploaded_at").value;
+    const signature = document.getElementById("signature").value;
+    const preview = document.getElementById("preview").value.trim();
+    const content = document.getElementById("content").value.trim();
+    const msg = document.getElementById("message");
+
+    if (!title || !author || !preview || !content) {
+        msg.textContent = "Bitte alle Felder ausfüllen.";
+        return;
+    }
+
+    const articleData = { title, author, uploaded_at, signature, preview, content };
+    const fileName = `${title.replace(/\s+/g, "_")}.json`;
+    const fileBlob = new Blob([JSON.stringify(articleData, null, 2)], { type: "application/json" });
+
+    msg.textContent = "Wird hochgeladen...";
+
+    const { error } = await client.storage.from("articles").upload(fileName, fileBlob, { upsert: true });
+
+    if (error) {
+        msg.textContent = "Fehler beim Hochladen: " + error.message;
+        return;
+    }
+
+    msg.textContent = "Artikel erfolgreich hochgeladen. Trigger wird ausgeführt...";
+
+    try {
+        const triggerResp = await fetch(EDGE_TRIGGER_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${session.access_token}`
+            },
+            body: JSON.stringify({ filename: fileName })
+        });
+
+        if (triggerResp.ok) {
+            const text = await triggerResp.text();
+            msg.textContent = `Upload & Trigger erfolgreich: ${text}`;
+        } else {
+            const errText = await triggerResp.text();
+            msg.textContent = `Upload ok, aber Trigger-Fehler: ${errText}`;
+        }
+        } catch (err) {
+          msg.textContent = `Upload ok, aber Trigger-Request fehlgeschlagen: ${err}`;
+    }
+
+    document.getElementById("uploadForm").reset();
+    selectedSignatures.clear();
+    document.getElementById("signatures").querySelectorAll("button").forEach(b => b.style.backgroundColor = "");
+}
+
+    async function handleLogout() {
+        await client.auth.signOut();
+        sessionStorage.removeItem('sb-session');
+        localStorage.removeItem('sb-session');
+        const currentUrl = window.location.href;
+        window.location.href = `auth.html?redirect=${encodeURIComponent(currentUrl)}`;
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("uploadForm").addEventListener("submit", handleUpload);
+        document.getElementById("logoutBtn").addEventListener("click", handleLogout);
+        init();
+    });
+</script>
+
+</body>
+</html>

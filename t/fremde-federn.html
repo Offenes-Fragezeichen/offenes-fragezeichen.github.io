@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Fremde Federn</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <style>
+        h1 {
+            font-family: PerfectoCalligraphy; 
+            font-size: 80px;
+        }
+           
+        h1:nth-of-type(2) {
+            display: none;
+        }
+
+        p:nth-of-type(2) {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        span {
+            margin-left: 40%;
+        }
+
+        p:nth-of-type(3) {
+            border-bottom: 1px solid black;
+            padding-bottom: 20px;
+        }
+
+        #article-list {
+            margin-top: 50px;
+        }
+
+        #article-list li {
+            padding-top: 0px;
+        }
+    </style>
+</head>
+<body class="fremde-federn">
+
+<div class="darkModeToggle-safe"><input type="checkbox" id="darkModeToggle" checked style="--s:25px"></div>
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<div style="display: none;" class="werkzeuge"><img class="toggleTrigger dark-switch" data="false flex left" src="../b/b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge"><div class="toggleContent" data-direction="left"><button id="fontToggle"><img class="dark-switch" src="../b/b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button><button id="fullscreenBtn"><img class="dark-switch" src="../b/b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button><div id="audioPlayer"><button id="speakerBtn"><img src="../b/b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button><button id="playBtn"><img src="../b/b/play.png" class="dark-switch" alt="Play"></button><button id="pauseBtn"><img src="../b/b/pause.png" class="dark-switch" alt="Pause"></button><button id="backBtn"><img src="../b/b/10sec-back.png" class="dark-switch" alt="10 sec back"></button></div><audio id="myAudio" src="../b/m/ex.mp3"></audio></div></div>
+
+<main>
+    <h1>Fremde Federn</h1><h1>Fremde <span>Federn</span></h1>
+    <p>Das Fragezeichen ist keinenfalls ein Satzschluss, welcher sich im Repertoire des Autoren dieser Seite und 
+    dafür in dem eines keinen anderen findet oder zumindest finden sollte. Dieses Medium dient nicht nur zum bloßen
+    Publizieren der Gedanken einer einzigen Person, sondern denen all jener, die das möchten - ohne thematische Eingrenzung, 
+    Anforderungen an Eloquenz und vor allem: Sinnhaftigkeit. Worte sind wertvoll und in einer Welt, in der wir meinen,
+    von Daten und Informationen regiert zu werden, dabei den eigentlichen Konsens des Lebens - uns - vergessen, 
+    sollten wir jedem noch so kurzen Gedanken den Raum geben, sich in nötiger Größe zu entfalten. Die einzige 
+    Bedingung ist, selbst der Meinung zu sein, dass einen dieser Gedanke bewegt oder jemand anders bewegen könnte. 
+    <br><br>
+    Lediglich in äußeren formalen Bedingungen bestehen Einschränkungen: Es gelten die Grundwerte unserer Verfassung (;
+    (Kapitalistenbashing ausgenommen)</p>
+
+    <p>Ich würde mich sehr freuen einen Beitrag von Text oder Bild, Hauptsache von dir, empfangen zu können. Melde 
+    dich einfach bei mir. Dies ist auch anonym über das <a href="kontakt.html"><u>Kontaktformular</u></a> möglich.<span>~Jeremias</span></p>
+    
+    <p>Folgend bereits geschriebene und auch gelistete Gastbeiträge:</p>
+</main>
+
+<ul id="article-list"></ul>
+
+<footer>
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="../index.html">Root | Startseite</a></li>
+                    <li><a href="zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="kategorien.html">Kategorien</a></li>
+                    <li><a href="auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="ueber.html">Über</a></li>
+                    <li><a href="rechtliches.html">Rechtliches</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js"></script>
+<script>
+const jsonUrl = "https://honest-entropy.github.io/articles.json";
+const filterSignature = "sigtest1";
+
+fetch(jsonUrl)
+  .then(res => {
+    if (!res.ok) throw new Error("Fehler beim Laden der JSON-Datei");
+    return res.json();
+  })
+  .then(files => {
+    const list = document.getElementById("article-list");
+
+    files
+      .filter(file => file.signature && file.signature.includes(filterSignature))
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 10)
+      .forEach(file => {
+        const li = document.createElement("li");
+
+        const a = document.createElement("a");
+        a.href = `../beitrag/${file.title}.html`;
+        a.target = "_blank";
+        a.textContent = file.title;
+        li.appendChild(a);
+
+        if (file.preview) {
+          const previewDiv = document.createElement("div");
+          previewDiv.className = "preview";
+          previewDiv.textContent = file.preview;
+          li.appendChild(previewDiv);
+        }
+
+        list.appendChild(li);
+      });
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("article-list").textContent =
+      "Artikel konnten nicht geladen werden.";
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toggle Maps Test</title>
+<link rel="stylesheet" href="../stylesheet.css" type="text/css">
+ 
+<style>
+    body {
+        background-color: black; 
+    }
+
+    .toggleContentAlt {
+        display: none;
+        margin-bottom: 20px;
+    }
+    .toggleContentAlt.active {
+      display: block;
+    }
+  
+/* Karten */
+    .map {
+        border-radius: 10px;
+        height: 300px;
+    }
+
+    .maps {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0px auto 70px auto;
+        font-size: 20px;
+        max-width: 100%;
+        justify-content: center;
+    }
+    .maps > div {
+        width: 100%;
+        height: 30px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        color: white;
+        text-align: center;
+        border: 1px solid transparent;
+    }
+
+    .maps > div:hover{
+        border: 1px dashed white;
+    }
+
+    .maps > div:nth-of-type(1) { background-color: rgba(255, 0, 0, 0.4); }
+    .maps > div:nth-of-type(2) { background-color: rgba(255, 165, 0, 0.4); }
+    .maps > div:nth-of-type(3) { background-color: rgba(255, 255, 0, 0.4); }
+    .maps > div:nth-of-type(4) { background-color: rgba(0, 128, 0, 0.4); }
+    .maps > div:nth-of-type(5) { background-color: rgba(0, 0, 255, 0.4); }
+    .maps > div:nth-of-type(6) { background-color: rgba(128, 0, 128, 0.4); }
+
+    #buehnen img, #kultur img, #sanitaer img, #jammjamm img, #cocktail img, #bier img {
+        width: 50px;
+        height: auto;
+    }
+
+</style>
+</head>
+<body style="background-color: black;">
+
+<div style ="display: none; ">
+<div class="maps">
+  <div><div class="toggleTriggerAlt default-open" data-target="#buehnen"><img src="../b/buenen.png" alt="Bühnen">Bühnen</div></div>
+  <div><div class="toggleTriggerAlt" data-target="#kultur"><img src="../b/kultur.png" alt="Kultur">Kultur</div></div>
+  <div><div class="toggleTriggerAlt" data-target="#jammjamm"><img src="../b/jammjamm.png" alt="JammJamm">JammJamm</div></div>
+  <div><div class="toggleTriggerAlt" data-target="#cocktail"><img src="../b/cocktail.png" alt="Cocktail">Cocktails</div></div>
+  <div><div class="toggleTriggerAlt" data-target="#bier"><img src="../b/bier.png" alt="Bier">Bier</div></div>
+  <div><div class="toggleTriggerAlt" data-target="#sanitaer"><img src="../b/sanitaer.png" alt="Sanitär">Sanitär</div></div>
+</div>
+
+<div id="buehnen" class="toggleContentAlt">
+  <h2>Bühnen</h2>
+  <iframe style="border: 2.5px solid red;" class="map" width="100%" frameborder="0" allowfullscreen src="https://umap.openstreetmap.de/de/map/louisenfest-dresden-2025_92999"></iframe>
+</div>
+
+<div id="kultur" class="toggleContentAlt">
+  <h2>Kultur</h2>
+  <iframe style="border: 2.5px solid orange;" class="map" width="100%" frameborder="0" allowfullscreen src="https://umap.openstreetmap.de/de/map/kultur-louisenfest-dresden-2025-louisenfes_97537"></iframe>
+</div>
+
+<div id="jammjamm" class="toggleContentAlt">
+  <h2>JammJamm</h2>
+  <iframe style="border: 2.5px solid yellow;" class="map" width="100%" frameborder="0" allowfullscreen src="https://umap.openstreetmap.de/de/map/jammjamm-louisenfest-dresden-2025-louisenfestco_96862"></iframe>
+</div>
+
+<div id="cocktail" class="toggleContentAlt">
+  <h2>Cocktails</h2>
+  <iframe style="border: 2.5px solid green;" class="map" width="100%" frameborder="0" allowfullscreen src="https://umap.openstreetmap.de/de/map/cocktail-louisenfest-dresden-2025-louisenfestcom_97536"></iframe>
+</div>
+
+<div id="bier" class="toggleContentAlt">
+  <h2>Bier</h2>
+  <iframe style="border: 2.5px solid blue;" class="map" width="100%" frameborder="0" allowfullscreen src="https://umap.openstreetmap.de/de/map/bierstande-louisenfest-dresden-2025-louisenfestcom_96863"></iframe>
+</div>
+
+<div id="sanitaer" class="toggleContentAlt">
+  <h2>Sanitär</h2>
+  <iframe style="border: 2.5px solid purple;" class="map" width="100%" frameborder="0" allowfullscreen src="https://umap.openstreetmap.de/de/map/sanitar. Brauchd-louisenfest-dresden-2025-louisenfestbrauchdcom_96864"></iframe>
+</div>
+</div>
+
+<div class="uc"><img src="../b/under-construction.png" alt="Baustelle mit Absperrband - Seite im Bau"><img src="../b/under-construction-m.png" alt="Baustelle mit Absperrband - Seite im Bau"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const triggers = document.querySelectorAll(".toggleTriggerAlt");
+    const contents = document.querySelectorAll(".toggleContentAlt");
+
+    // initial open
+    triggers.forEach(trigger => {
+      const target = document.querySelector(trigger.dataset.target);
+      if (trigger.classList.contains("default-open") && target) {
+        target.classList.add("active");
+      }
+    });
+
+    triggers.forEach(trigger => {
+      trigger.addEventListener("click", () => {
+        const target = document.querySelector(trigger.dataset.target);
+        if (!target) return;
+
+        // alle anderen schließen
+        contents.forEach(c => c.classList.remove("active"));
+        // nur das aktuelle öffnen
+        target.classList.add("active");
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

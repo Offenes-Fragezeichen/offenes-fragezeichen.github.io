@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.ico">
+
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+</head>
+<body class="fancy-bg">
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <h1>Kategorie 1</h1>
+    <ul id="article-list"></ul>
+</main>
+
+<footer>
+<div class="quellen" style="display: none;">
+    <p>Quellenverweise:</p>
+    <ol>
+        <li>sbdbd</li>
+        <li>dndhd</li>
+    </ol>
+</div>
+
+<div class="sitemap">
+    <p>Sitemap</p>
+    <div class="sitemap-strich"></div>
+    <div>
+        <div>
+            <ul>
+                <li><a href="index.html">Root | Startseite</a></li>
+                <li><a href="t/zufall.html">Einfach mal irgendwo starten</a></li>
+                <li><a href="t/fremde-federn.html">Fremde Federn</a></li>
+                <li><a href="t/kategorien.html">Kategorien</a></li>
+                <li><a href="auth.html">Login</a></li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li><a href="t/upload.html">Aktualisierung</a></li>
+                <li><a href="t/rechtliches.html">Rechtliches</a></li>
+                <li><a href="t/kontakt.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</footer>
+
+<div class="uc"><img src="b/under-construction.png" alt="Absperrband und Baustelle - Diese Seite ist noch im Bau."><img src="b/under-construction-m.png" alt="Absperrband und Baustelle - Diese Seite ist noch im Bau."></div>
+
+<script src="script.js"></script>
+<script src="fancy-bg.js"></script> 
+<script>
+const jsonUrl = "https://honest-entropy.github.io/articles.json";
+
+fetch(jsonUrl)
+  .then(res => {
+    if (!res.ok) throw new Error("Fehler beim Laden der JSON-Datei");
+    return res.json();
+  })
+  .then(files => {
+    const list = document.getElementById("article-list");
+    const filtered = files.filter(f => f.signature === "sigtest1");
+
+    filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    if (filtered.length === 0) {
+      list.innerHTML = "<li>Es wurden eine Artikel dieser Signatur (Kategorie) gefunden. Bitte kontaktiere den mächtigen Guru (Jeremias/Jerry)</li>";
+      return;
+    }
+
+    filtered.forEach(file => {
+      const li = document.createElement("li");
+
+      const a = document.createElement("a");
+      a.href = `public/${file.title}.html`;
+      a.target = "_blank";
+      a.textContent = file.title;
+
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("article-list").textContent =
+      "Artikel konnten nicht geladen werden.";
+  });
+</script>
+
+</body>
+</html>

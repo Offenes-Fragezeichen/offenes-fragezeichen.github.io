@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Rechtliches</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        h1:nth-of-type(2) {
+            margin-top: 10%;
+        }
+
+        h3 {
+            margin-bottom: 0;
+        }
+
+        h3:nth-of-type(2) {
+            margin-top: 50px;
+        }
+
+        p:nth-of-type(1), p:nth-of-type(2) {
+            margin-top: 10px;
+        }
+
+        /* Quiz */
+            .rotated {
+                animation: rotate361 1s linear forwards;
+                overflow-y: auto !important;
+            }
+
+            @keyframes rotate361 {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(361deg); }
+            }
+
+            @keyframes bounce {
+                0%, 100% { transform: translateY(-10px); }
+                50% { transform: translateY(0); }
+            }
+
+            .useless-darkmode * {
+                background-color: #111 !important;
+                color: #fffff !important;
+                background-image: none !important;
+                z-index: 1;
+            }
+
+            .cat {
+                position: fixed;
+                font-size: 2rem;
+                animation-name: floatDown;
+                animation-timing-function: ease-in;
+                animation-fill-mode: forwards;
+                left: calc(10% + 80% * var(--x));
+                top: -2rem;
+                pointer-events: none;
+                user-select: none;
+                z-index: 100000;
+            }
+
+            @keyframes floatDown {
+                to {
+                    top: 110%;
+                    opacity: 0;
+                }
+            }
+
+            #quiz-overlay {
+                display: none;
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 100001;
+            }
+
+            #quiz-modal {
+                display: none;
+                position: fixed;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+                background: #fff;
+                padding: 2rem;
+                border-radius: 10px;
+                z-index: 100002;
+                max-width: 90vw;
+                text-align: center;
+            }
+
+            #fun-buttons {
+                display: none;
+                gap: 10px;
+            }
+
+            button {
+                background-color: rgba(255, 255, 255, 0.2);
+                color: white;
+            }
+
+            button:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .arrow {
+                text-align: center;
+                font-size: 40px;
+                color: #ffffff;
+                animation: bounce 1.5s infinite;
+                padding: 1rem 0;
+                padding-left: 167px;
+                text-align: left;
+                display: none;
+            }
+
+            #nicht-druecken {
+                margin-left: 110px; 
+                margin-top: -15px;
+                display:block;
+            }
+
+            #reparieren {
+                margin-left: 110px; 
+                margin-top: -15px;
+                display:none;
+            }
+
+            @media (max-width: 768px) {
+                h1:nth-of-type(2) {
+                    margin-top: 25%;
+                }
+            }
+    </style>
+</head>
+<body class="body">
+
+<div class="darkModeToggle-safe">
+    <input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+</div>
+
+<div style="display: none;" class="werkzeuge"><img class="toggleTrigger dark-switch" data="false flex left" src="../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge"><div class="toggleContent" data-direction="left"><button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button><button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button><div id="audioPlayer"><button id="speakerBtn"><img src="../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button><button id="playBtn"><img src="../b/play.png" class="dark-switch" alt="Play"></button><button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button><button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button></div><audio id="myAudio" src="m/ex.mp3"></audio></div></div>
+
+<svg viewBox="0 0 500 500" class="menu" style="display: block;">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="../b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <h1>Impressum</h1>
+
+    <h3>Angaben so halb gemäß § 5 DDG</h3>
+    <p>Inhaltlich Verantwortlich:<br>
+    Jeremias Ruff<br>
+    ********* Straße *<br>
+    ***** *******<br></p>
+
+    <a href="kontakt.html"><u>Zum Kontaktformular</u></a>
+
+    <h3>Urheberrecht</h3>
+    <p>Wir behalten uns alle Rechte vor.<br>
+    Die Inhalte dieser Website, einschließlich Texte, Bilder und Grafiken, sind urheberrechtlich geschützt. 
+    Jegliche Nutzung, Reproduktion oder Verbreitung der Inhalte ohne ausdrückliche Genehmigung des Urhebers 
+    ist untersagt.
+    <br><br>
+    Für Inhalte externer Links übernehmen wir keine Haftung. Vom Inhalt der verlinkten Seiten distanzieren 
+    wir uns ausdrücklich, für diesen sind ausschließlich deren Betreiber verantwortlich. Es gilt wie im gesamten 
+    Web der Grundsatz <b>minimalen Vertrauens</b>, der Autor dieser Seite ist <b>nicht in der Lage</b>, alle 
+    verlinkten Seiten regelmäßig auf Rechtmäßigkeit zu überprüfen.</p>
+
+
+    <h1>Datenschutzerklärung</h1>
+
+    <h3 style="text-align: center;">- Github -</h3>
+    <p>Unser Hoster erhebt in sog. Logfiles folgende Daten, die Ihr Browser übermittelt: IP-Adresse, die Adresse der vorher besuchten Website (Referer Anfrage-Header), Datum und Uhrzeit der Anfrage, Zeitzonendifferenz zur Greenwich Mean Time, Inhalt der Anforderung, HTTP-Statuscode, übertragene Datenmenge, Website, von der die Anforderung kommt und Informationen zu Browser und Betriebssystem.</p>
+    <p>Das ist erforderlich, um unsere Website anzuzeigen und die Stabilität und Sicherheit zu gewährleisten. Wir haben auf diese Daten keinen direkten Zugriff.</p>
+    <p>Wir setzen für die Zurverfügungstellung unserer Website folgenden Hoster ein:
+       <ul><li>GitHub Inc.</li>
+           <li>88 Colin P Kelly Jr St</li>
+           <li>San Francisco, CA 94107</li>
+           <li>United States</li></ul></p>
+    <p>Weitere Informationen zu Widerspruchs- und Beseitigungsmöglichkeiten gegenüber GitHub finden Sie unter: <a class="extern-a" title="Externer Link" href="https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-privacy-statement#github-pages">https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-privacy-statement#github-pages</a>.</p>
+    <p>Sie haben das Recht der Verarbeitung zu widersprechen. Ob der Widerspruch erfolgreich ist, ist im Rahmen einer Interessenabwägung zu ermitteln. Die Daten werden gelöscht, sobald der Zweck der Verarbeitung entfällt.</p>
+    <p>GitHub hat Compliance-Maßnahmen für internationale Datenübermittlungen umgesetzt. Diese gelten für alle weltweiten Aktivitäten, bei denen GitHub personenbezogene Daten von natürlichen Personen in der EU verarbeitet. Diese Maßnahmen basieren auf den EU-Standardvertragsklauseln (SCCs). Weitere Informationen finden Sie unter: <a class="extern-a" title="Externer Link" href="https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-data-protection-addendum#attachment-1–the-standard-contractual-clauses-processors">https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-data-protection-addendum#attachment-1–the-standard-contractual-clauses-processors</a>.</p>
+
+    <p style="text-align: right; font-style: italic;">Mustererklärung von <a class="extern-a" title="Externer Link" href="https://opr.vc/docs/hosting/github_pages/">privacy.docs</a></p>
+
+    <h3 style="margin-top: 100px; text-align: center;">- Supabase -</h3>
+    <p>Für bestimmte Funktionen unserer Website verwenden wir den Dienst Supabase. Anbieter ist die 
+    <ul><li>Supabase Inc.</li>
+        <li>970 Toa Payoh North</li>
+        <li>#07-04</li>
+        <li>Singapore, 318992</li></ul></p>
+    <p>Supabase stellt die technische Infrastruktur für Authentifizierung und Datenspeicherung bereit. Dabei werden die Daten verarbeitet, die Sie selbst eingeben sowie technisch erforderliche Protokolldaten (zB. IP-Adresse, Zeitpunkt des Zugriffs, Browser-Informationen).</p>
+    <p>Die Verarbeitung erfolgt, um die Funktionen der Website bereitzustellen und deren Sicherheit zu gewährleisten (Art. 6 Abs. 1 lit. f DSGVO). Wir haben Zugriff auf Logdaten.</p>
+    <p>Supabase speichert und verarbeitet Daten innerhalb der jeweils gewählten Region. Eine Übermittlung in Drittländer kann jedoch nicht ausgeschlossen werden. Weitere Informationen finden Sie unter: <a class="extern-a" title="Externer Link" href="https://supabase.com/legal/dpa">https://supabase.com/legal/dpa</a>.</p>
+    <p>Die gespeicherten Daten werden gelöscht, sobald sie für den genannten Zweck nicht mehr erforderlich sind. Sie haben das Recht, Auskunft über die zu Ihrer Person gespeicherten Daten zu verlangen, unrichtige Daten berichtigen zu lassen oder die Löschung Ihrer Daten zu beantragen.</p>
+
+
+    <br><p>-<br>Sieht gut aus? War Absicht. <br>~&Eacute;mile Jeremias Ruff.
+    <span onclick="throwConfetti(event)" style="cursor: pointer;"><u>[Konfetti]</u></span></p>
+
+    <div id="fun-buttons">
+        <button onclick="toggleCatRain()">🐱</button>
+        <button onclick="toggleMoreCatRain()">🐱🐱</button>
+        <button onclick="toggleUselessDarkMode()" title="Alternativer Darkmode">🌙</button>
+        <button id="repair-btn" style="display:none;" onclick="showQuiz()">🔧</button>
+        <button onclick="triggerChaos()">🚫</button>
+    </div>
+        
+    <div id="arrow" class="arrow" style="margin-left: -10px; display:none;">↑</div>
+    <p id="reparieren">Reparieren</p>
+
+    <div id="quiz-overlay"></div>
+    <div id="quiz-modal">
+        <h3>Reparaturmodus</h3>
+        <p id="quiz-question"></p>
+        <input type="text" id="quiz-answer" placeholder="Antwort eingeben"><br><br>
+        <button onclick="checkQuizAnswer()" style="color: black;">Antwort prüfen</button>
+    </div>
+</main>
+ 
+<footer>
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="../index.html">Root | Startseite</a></li>
+                    <li><a href="zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="kategorien.html">Kategorien</a></li>
+                    <li><a href="auth.html">Login</a></li></ul></div>
+            <div><ul><li><a href="upload.html">Aktualisierung</a></li>
+                    <li><a href="rechtliches.html">Rechtliches</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js"></script>
+
+<script>
+let quizData = [
+    { frage: "Was ist der Standardport für HTTPS?", antwort: "443" },
+    { frage: "Welche Programmiersprache läuft direkt im Browser?", antwort: "JavaScript" },
+    { frage: "Welche Programmiersprache verwendet Schlüsselwörter wie „def“ und „lambda“?", antwort: "Python" },
+    { frage: "Wie heißt das Versionsverwaltungssystem mit dem Befehl „git commit“?", antwort: "Git" },
+    { frage: "Welche Zahl stellt die IPv4-Maske 255.255.255.0 in CIDR-Notation dar?", antwort: "/24" },
+    { frage: "Welche Sprache wird hauptsächlich für das Styling von Webseiten verwendet (Abkürzung)?", antwort: "CSS" }
+];
+
+let quizIndex = 0;
+let catRainInterval;
+let specialModeActive = false;
+
+function toggleUselessDarkMode() {
+    document.documentElement.style.setProperty("background-color", "black", "important");
+    document.documentElement.style.setProperty("color", "white", "important");
+    document.body.style.setProperty("background-color", "black", "important");
+    document.body.style.setProperty("color", "black", "important");
+
+    document.querySelector(".menu").style.display = "none";
+    document.querySelector(".sitemap").style.display = "none";
+    document.querySelector("#fun-buttons").style.display = "none";
+
+    // alle sichtbaren Elemente umstellen
+    document.querySelectorAll("*").forEach(el => {
+        el.style.setProperty("background-color", "black", "important");
+        el.style.setProperty("color", "black", "important");
+    });
+}
+
+
+function toggleCatRain(amount = 50, delay = 50) {
+    let count = 0;
+    catRainInterval = setInterval(() => {
+        if (count >= amount) {
+            clearInterval(catRainInterval);
+            return;
+        }
+        const cat = document.createElement("div");
+        cat.className = "cat";
+        cat.style.setProperty('--x', Math.random());
+        cat.style.animationDuration = (2 + Math.random() * 2) + "s";
+        cat.textContent = Math.random() < 0.5 ? "🐱" : "😺";
+        document.body.appendChild(cat);
+        setTimeout(() => cat.remove(), 4000);
+        count++;
+    }, delay);
+}
+
+function toggleMoreCatRain(amount = 3000, delay = 10) {
+    let count = 0;
+    catRainInterval = setInterval(() => {
+        if (count >= amount) {
+            clearInterval(catRainInterval);
+            return;
+        }
+        const cat = document.createElement("div");
+        cat.className = "cat";
+        cat.style.setProperty('--x', Math.random());
+        cat.style.animationDuration = (2 + Math.random() * 2) + "s";
+        cat.textContent = Math.random() < 0.5 ? "🐱" : "😺";
+        document.body.appendChild(cat);
+        setTimeout(() => cat.remove(), 4000);
+        count++;
+    }, delay);
+}
+
+function triggerChaos() {
+    if (specialModeActive) return;
+    specialModeActive = true;
+    localStorage.setItem("chaos", "true");
+    document.body.classList.add("rotated");
+    setTimeout(() => {
+        alert("Oops! We broke the matrix. Someone not call Neo!");
+        document.getElementById("repair-btn").style.display = "inline-block";
+        document.getElementById("reparieren").style.display = "block";
+        document.getElementById("arrow").style.display = "block";
+    }, 1000);
+}
+
+function showQuiz() {
+    const randomIndex = Math.floor(Math.random() * quizData.length);
+    quizIndex = randomIndex;
+    document.getElementById("quiz-question").textContent = quizData[quizIndex].frage;
+    document.getElementById("quiz-question").style.color = "black";
+    document.getElementById("quiz-answer").value = "";
+    document.getElementById("quiz-modal").style.display = "block";
+    document.getElementById("quiz-overlay").style.display = "block";
+}
+
+function checkQuizAnswer() {
+    const input = document.getElementById("quiz-answer").value.trim().toLowerCase();
+    const correct = quizData[quizIndex].antwort.toLowerCase();
+    if (input === correct) {
+        alert("Systemzustand wiederhergestellt.");
+        document.body.classList.remove("rotated");
+        document.getElementById("quiz-modal").style.display = "none";
+        document.getElementById("quiz-overlay").style.display = "none";
+        document.getElementById("repair-btn").style.display = "none";
+        document.getElementById("reparieren").style.display = "none";
+        document.getElementById("arrow").style.display = "none";
+        specialModeActive = false;
+        localStorage.removeItem("chaos");
+    } else {
+        alert("Leider falsch. Versuch's nochmal!");
+    }
+}
+
+function throwConfetti(event) {
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: {
+          x: event.clientX / window.innerWidth,
+          y: event.clientY / window.innerHeight
+        }
+    });
+
+    const funButtons = document.getElementById("fun-buttons");
+    if (funButtons) {
+        funButtons.style.display = "flex";
+        funButtons.style.justifyContent = "left";
+        funButtons.style.marginTop = "1rem";
+    }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("chaos") === "true") {
+        document.body.classList.add("rotated");
+        specialModeActive = true;
+        document.getElementById("repair-btn").style.display = "inline-block";
+        const reparieren = document.getElementById("reparieren");
+        if (reparieren) reparieren.style.display = "block";
+        const arrow = document.getElementById("arrow");
+        if (arrow) arrow.style.display = "block";
+    }
+});
+</script>
+
+</body>
+</html>

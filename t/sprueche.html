@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Artikel</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <style>
+        main li {
+            list-style-type: none;
+            text-align: center;
+            min-height: 50px;
+            width: 70%;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            margin-left: 10%;
+            font-family: AnnieUseYourTelescope; 
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        main li span {
+            font-family: Lora;
+            font-size: 17px;
+        }
+
+        main li span:nth-of-type(2) {
+            display: none;
+        }
+            
+        main img {
+            width: 30vw;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .font-large main li {
+            font-size: 38px;
+            width: 90%;
+            margin-left: 2%;
+        }
+
+        .font-large main li span {
+            font-size: 25px;
+        }
+
+        .topDrei {
+            background-color: rgba(255, 165, 0, 0.2);
+            border-radius: 15px;
+        }
+
+        .topDrei p {
+            text-align: center;
+            font-size: 40px;
+            font-family: PerfectoCalligraphy;
+            padding-top: 30px;
+        }
+
+        .topDrei ul li {
+            border-top: 1px solid black;
+        }
+
+        .dark-mode .topDrei ul li {
+            border-top: 1px solid white;
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding-left: 0;
+            }
+            
+            main li {
+                width: 100%;
+                margin-left: 0;
+                line-height: 1.1;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            #sprueche-ul {
+                padding-left: 0px;
+            }
+            
+            .topDrei ul {
+                padding: 0 20px 0 20px;
+            }
+
+            #sprueche-ul img, #topDreiListe img {
+                width: 80vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
+            <div style="display: none" id="audioPlayer">
+                <button id="speakerBtn"><img src="../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button>
+                <button id="playBtn"><img src="../b/play.png" class="dark-switch" alt="Play"></button>
+                <button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button>
+                <button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
+            </div>
+            <audio id="myAudio" src="m/.mp3"></audio>
+        </div>
+    </div>
+
+<h1>Sprüche</h1>
+
+<!--<div class="topDrei">
+    <p>Zufällige drei</p>
+    <ul id="topDreiListe"></ul>
+</div>-->
+
+<ul id="sprueche-ul">
+    <li>„Wir sind zwei Enden eines schlechten Extremas.“    <br>
+        <span>- M.</span>                                   <br>
+        <span>Kontext: Zu viel und zu wenig essen, geht es einem schlecht</span></li>
+    
+    <li>„Es ist Wasser. Und es ist sauer.“ &#x1F6A9;        <br>
+        <span>- Frau H.</span>                              <br>
+        <span>Kontext: Chemieunterricht</span></li>
+    
+    <li>„Was darf Satire? - was darf Realität?“             <br>
+        <span>- Jan Böhmermann</span>                       <br>
+        <span>Magazin Royale, 25/10/24</span></li>
+    
+    <li>„Entschuldigung, ich hab verschlafen“ - 14:37h im Unterricht                            <br>
+        <span>- A.</span></li>
+    
+    <li>„Ein Stück Erde, um den Himmel liegend betrachten zu können“                            <br>
+        <span>- Jerry</span>                                <br>
+        <span>Kontext: Schwebendes Stück Land am Freundewochenende                              <br><br>
+        <img src="../b/ab/sprueche-1.png" alt="Foto vom Freunde-We, das „Kliff“ zeigend"><br>
+        <img src="../b/ab/sprueche-2.png" alt="Foto vom Freunde-We, den Sternenhimmel zeigend"></span></li>
+    
+    <li>„Wenn man sich so vorkommt, als würde einen das ganze Leben mit Klammern umschließen“   <br>
+        <span>- Jerry</span></li>
+    
+    <li>„Artificial reality“                                <br>
+        <span>- Eevee</span>                                <br>
+        <span>Kontext: <a href="https://eev.ee/blog/2025/07/03/the-rise-of-whatever/">‚The rise of whatever‘</a>, Blogpost</span></li>
+
+    <li>„Wie war Schule heute?“ - [genervtes] „Schrecklich“ - „Was war denn am schlimmsten?“ - „Ich“
+        <span>- M, Jerry</span></li>
+</ul>
+
+</main>
+
+<footer>
+    <div class="komments">
+        <p>Kommentare</p>
+        <div id="commentRead">Lade Kommentare...</div>
+
+        <form id="commentWrite">
+            <textarea id="commentText" placeholder="POST /comments {body: …} | Eigenen Gedanken Platz verschaffen (öffentlich)" required></textarea>
+            <div><div id="loginDiv">
+                    <div id="loginForm">
+                        <input id="email" placeholder="Benutzername" required>
+                        <input type="password" id="password" placeholder="Passwort" required>
+                        <button type="button" id="loginBtn"><img src="../b/login.png" class="dark-switch" alt="Einloggen"></button>
+                    </div>
+                    <button type="button" id="logoutBtn" style="display:none;">Logout</button></div>
+
+                 <div id="sendDiv">
+                    <label><input type="checkbox" id="anonymousCheck"> anonym posten</label>
+                    <button type="submit">Absenden <img src="../b/send.png" class="dark-switch" alt="Abschicken"></button></div>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="index.html">Root | Startseite</a></li>
+                    <li><a href="zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="kategorien.html">Kategorien</a></li>
+                    <li><a href="auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="ueber.html">Über</a></li>
+                    <li><a href="rechtliches.html">Rechtliches</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js"></script>
+<script>
+function zeigeZufaelligeTopDrei() {
+    const originalListe = Array.from(document.querySelectorAll('#sprueche-ul li'));
+    const topContainer = document.getElementById('topDreiListe');
+    topContainer.innerHTML = '';
+
+    const zufaelligeDrei = [];
+    while (zufaelligeDrei.length < 3) {
+        const zufaellig = originalListe[Math.floor(Math.random() * originalListe.length)];
+        if (!zufaelligeDrei.includes(zufaellig)) {
+            zufaelligeDrei.push(zufaellig);
+        }
+    }
+
+    zufaelligeDrei.forEach(li => {
+        const clone = li.cloneNode(true);
+        topContainer.appendChild(clone);
+    });
+}
+
+window.onload = zeigeZufaelligeTopDrei;
+
+document.addEventListener('mouseover', e => {
+    const li = e.target.closest('#sprueche-ul li, #topDreiListe li');
+    if (!li) return;
+    const span = li.querySelector('span:nth-of-type(2)');
+    if (span) span.style.display = 'block';
+});
+
+document.addEventListener('mouseout', e => {
+    const li = e.target.closest('#sprueche-ul li, #topDreiListe li');
+    if (!li) return;
+    const span = li.querySelector('span:nth-of-type(2)');
+    if (span) span.style.display = 'none';
+});
+
+document.addEventListener('click', e => {
+    const li = e.target.closest('#sprueche-ul li, #topDreiListe li');
+    if (!li) return;
+    e.preventDefault();
+    const span = li.querySelector('span:nth-of-type(2)');
+    if (span) {
+        span.style.display = (span.style.display === 'block') ? 'none' : 'block';
+    }
+});
+</script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@ name: Generate Article Index
 on:
   push:
     paths:
-      - 'beitrag/**'
+      - 'public/**'
   workflow_dispatch:
 
 jobs:
@@ -18,19 +18,22 @@ jobs:
 
       - name: Generate articles.json with title + date (+preview for latest 3)
         run: |
+          set -e
           SERVICE_KEY="${{ secrets.SUPABASE_SERVICE_KEY }}"
           SUPABASE_URL="https://ngtujvgsbymtxphwncuj.supabase.co"
 
-          # leeres Array starten
           all="[]"
 
           for f in beitrag/*.html; do
             base=$(basename "$f" .html)
             json_file="${base}.json"
 
-            # JSON von Supabase laden
+            echo "Fetching $json_file from Supabase..."
             data=$(curl -s -H "Authorization: Bearer $SERVICE_KEY" \
               "$SUPABASE_URL/storage/v1/object/articles/${json_file}")
+
+            # Debug: Ausgabe des JSON
+            echo "Raw data: $data"
 
             title=$(echo "$data" | jq -r '.title // empty')
             date=$(echo "$data" | jq -r '.uploaded_at // empty')
@@ -45,14 +48,23 @@ jobs:
                 --arg s "$signature" \
                 '{title:$t, date:$d, preview:$p, signature:$s}')
               all=$(echo "$all" | jq ". + [$obj]")
+            else
+              echo "Skipping $json_file: missing title or date"
             fi
           done
 
-          # sortieren + nur bei den ersten 3 preview behalten
-          echo "$all" | jq 'sort_by(.date) | reverse
-              | to_entries
-              | map(if .key < 3 then .value else (.value | del(.preview)) end)' > articles.json
+          echo "All articles before sorting:"
+          echo "$all" | jq .
 
+          # Sortieren und Preview nur bei den ersten 3 behalten
+          sorted=$(echo "$all" | jq 'sort_by(.date) | reverse
+            | to_entries
+            | map(if .key < 3 then .value else (.value | del(.preview)) end)')
+
+          echo "Final sorted articles.json:"
+          echo "$sorted" | jq .
+
+          echo "$sorted" > articles.json
 
       - name: Commit and push articles.json
         run: |

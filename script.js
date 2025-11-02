@@ -25,7 +25,7 @@
 const SUPABASE_URL = 'https://ngtujvgsbymtxphwncuj.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ndHVqdmdzYnltdHhwaHduY3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc3NzE4ODAsImV4cCI6MjA3MzM0Nzg4MH0.g9Cmgrua00pJpr6T0uO5FGRIjtgU7TTnGvOw9NHVAr0';
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: { persistSession: false }
+  auth: { persistSession: true }
 });
 
 const komments = document.querySelector(".komments");
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Komments + zugehöriger Login ---
 document.addEventListener("DOMContentLoaded", () => {
   const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-    auth: { persistSession: false }
+    auth: { persistSession: true }
   });
 
   const loginBtn = document.getElementById("loginBtn");

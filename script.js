@@ -481,11 +481,7 @@ const svg = document.querySelector("svg.menu");
 
 const segments = 6;
 const labels = [
-<<<<<<< HEAD
   { image: "/b/dark/root-dark.png", text: "Root", size: 50, link: "/index.html" },
-=======
-  { image: "/b/dark/root-dark.png", text: "Root", size: 50, link: "/t/index.html" },
->>>>>>> e967d187b49d8b132087b9be48d985059615e686
   { image: "/b/dark/feder-dark.png", text: "Fremde Federn", size: 50, link: "/t/fremde-federn.html" },
   { image: "/b/dark/kategorien-dark.png", text: "Kategorien", size: 50, link: "/t/kategorien.html" },
   { image: "/b/dark/login-dark.png", text: "Login", size: 58, link: "/t/auth.html" },

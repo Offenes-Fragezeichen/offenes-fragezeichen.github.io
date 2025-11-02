@@ -40,7 +40,7 @@ jobs:
           content=$(jq -r '.content // empty' work/article.json)
           preview=$(jq -r '.preview // empty' work/article.json)
           slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')
-          filename="public/${slug}.html"
+          filename="beitrag/${slug}.html"
           sed "s/{{TITLE}}/$title/g; s/{{CONTENT}}/$content/g; s/{{PREVIEW}}/$preview/g" template.html > "$filename"
           echo "HTML gebaut: $filename"
 

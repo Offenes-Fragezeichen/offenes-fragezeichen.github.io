@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Artikel</title>
+    <meta name="author" content="Émile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Lora', serif;
+        }
+
+        body {
+            background-image: url('b/category-tree-m.png');
+            background-size: 370px auto;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        a {
+            text-decoration: none;
+            color: black;
+            font-size: 17px !important;
+        }
+
+        .m {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .m div {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            font-size: 1em;
+        }
+
+        /* Marker-Pixel auf 10% der Originalwerte, optisch angepasst */
+        .m div:nth-of-type(1) { top: 100px; left: 150px; text-align: center; }
+        .m div:nth-of-type(2) { top: 330px; left: 120px; }
+        .m div:nth-of-type(3) { top: 240px; left: 150px; text-align: right; line-height: 1.2; }
+        .m div:nth-of-type(4) { top: 130px; left: 250px; }
+        .m div:nth-of-type(5) { top: 415px; left: 250px; }
+        .m div:nth-of-type(6) { top: 540px; left: 280px; }
+        .m div:nth-of-type(7) { top: 475px; left: 85px; }
+        .m div:nth-of-type(8) { top: 565px; left: 50px; }
+        .m div:nth-of-type(9) { top: 605px; left: 220px; }
+
+        /* Responsive für kleinere Bildschirme */
+        @media (max-width: 480px) {
+            .m div a {
+                font-size: 0.8em;
+                padding: 1px 4px;
+            }
+        }
+
+    </style>
+</head>
+<body class="kategorien">
+
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg style="display: none;" viewBox="0 0 500 500" class="menu"><g id="menu" transform="translate(200, 200)"></g><circle id="center" class="center-circle" cx="200" cy="200" r="60"/><image id="centerImage" href="b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/></svg>
+<div style="display: none;" class="werkzeuge"><img class="toggleTrigger dark-switch" data="false flex left" src="b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge"><div class="toggleContent" data-direction="left"><button id="fontToggle"><img class="dark-switch" src="b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button><button id="fullscreenBtn"><img class="dark-switch" src="b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button><div id="audioPlayer"><button id="speakerBtn"><img src="b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button><button id="playBtn"><img class="dark-switch" src="b/play.png" alt="Play"></button><button id="pauseBtn"><img class="dark-switch" src="b/pause.png" alt="Pause"></button><button id="backBtn"><img class="dark-switch" src="b/10sec-back.png" alt="10 sec back"></button></div><audio id="myAudio" src="m/ex.mp3"></audio></div></div>
+
+<div class="m">
+    <div><a href="dinge-die-ich-nicht-mag.html">Dinge, <br>die ich<br> nicht mag</a></div>
+    <div><a href="emotionen">Emotionen</a></div>
+    <div><a href="einfach-mal-so.html">Einfach<br>mal so</a></div>
+    <div><a href="index.html">Root | Startseite</a></div>
+    <div><a href="empfehlungsecke.html">Empfehlungsecke</a></div>
+    <div><a href="archiv.html">Archiv</a></div>
+    <div><a href="kapitalistenbashing.html">Kapitalisten-<br>bashing</a></div>
+    <div><a href="">acht</a></div>
+    <div><a href="sprueche.html">Sprüche</a></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Radialmenü 360°</title>
+  <link rel="stylesheet" href="stylesheet.css" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<footer>
+<div class="quellen">
+    <p>Quellenverweise:</p>
+    <ol><li>sbdbd</li>
+        <li>dndhd</li></ol>
+</div>
+
+<div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+    <div><div><ul><li><a href="index.html">Root | Startseite</a></li>
+                <li><a href="t/zufall.html">Einfach mal irgendwo starten</a></li>
+                <li><a href="t/fremde-federn.html">Fremde Federn</a></li>
+                <li><a href="t/kategorien.html">Kategorien</a></li>
+                <li><a href="auth.html">Login</a></li></ul></div>
+        <div><ul><li><a href="t/uplaod.html">Aktualisierung</a></li>
+                <li><a href="t/rechtliches.html">Rechtliches</a></li>
+                <li><a href="t/kontakt.html">Kontakt</a></li></ul></div>
+    </div>
+</div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

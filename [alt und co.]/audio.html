@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Custom Audio Player</title>
+<style>
+  #audioPlayer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  button img {
+    width: 40px;
+    height: 40px;
+  }
+
+  #playBtn, #pauseBtn, #backBtn {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="audioPlayer">
+    <button id="speakerBtn"><img src="b/speaker.png" alt="Speaker"></button>
+    <button id="playBtn"><img src="b/play.png" alt="Play"></button>
+    <button id="pauseBtn"><img src="b/pause.png" alt="Pause"></button>
+    <button id="backBtn"><img src="b/10sec-back.png" alt="10 sec back"></button>
+</div>
+<audio id="myAudio" src="m/ex.mp3"></audio>
+
+<script>
+const audio = document.getElementById('myAudio');
+const speakerBtn = document.getElementById('speakerBtn');
+const playBtn = document.getElementById('playBtn');
+const pauseBtn = document.getElementById('pauseBtn');
+const backBtn = document.getElementById('backBtn');
+
+// Lautsprecher gedrückt → Buttons sichtbar
+speakerBtn.addEventListener('click', () => {
+audio.play();
+  pauseBtn.style.display = 'inline-block';
+  backBtn.style.display = 'inline-block';
+  speakerBtn.style.display = 'none';
+});
+
+// Play Button
+playBtn.addEventListener('click', () => {
+  audio.play();
+  playBtn.style.display = 'none';
+  pauseBtn.style.display = 'inline-block';
+});
+
+// Pause Button
+pauseBtn.addEventListener('click', () => {
+  audio.pause();
+  pauseBtn.style.display = 'none';
+  playBtn.style.display = 'inline-block';
+});
+
+// 10 Sekunden zurück
+backBtn.addEventListener('click', () => {
+  audio.currentTime = Math.max(0, audio.currentTime - 10);
+});
+
+// Optional: wenn Audio automatisch endet, Play wieder sichtbar
+audio.addEventListener('ended', () => {
+  pauseBtn.style.display = 'none';
+  playBtn.style.display = 'inline-block';
+});
+</script>
+
+</body>
+</html>

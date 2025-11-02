@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>DarkMode Toggle</title>
+  <style>
+    body {
+      margin: 2rem;
+      transition: background 0.5s ease;
+    }
+
+    body.dark-mode {
+      background: #111;
+      color: white;
+    }
+
+    input[type="checkbox"] {
+      --s: 30px;
+      appearance: none;
+      width: var(--s);
+      height: var(--s);
+      border-radius: 50%;
+      background: #444;
+      transition: none;
+    }
+
+    input[type="checkbox"].ready {
+      transition: transform 0.5s ease, background 0.3s ease-in;
+    }
+
+    input[type="checkbox"]:checked {
+      background: orange;
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body>
+
+  <input type="checkbox" id="darkModeToggle" checked>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkbox = document.getElementById("darkModeToggle");
+
+      // Zustand wiederherstellen
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark-mode");
+        checkbox.checked = true;
+      } else {
+        document.body.classList.remove("dark-mode");
+        checkbox.checked = false;
+      }
+
+      // Klasse für Transition nachträglich setzen
+      setTimeout(() => checkbox.classList.add("ready"), 50);
+
+      // Beim Umschalten
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          document.body.classList.add("dark-mode");
+          localStorage.setItem("darkMode", "true");
+        } else {
+          document.body.classList.remove("dark-mode");
+          localStorage.setItem("darkMode", "false");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Minimal Test</title>
+
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+</head>
+
+<body>
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="b/textsize.png" alt="Textgröße umschalten"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="b/maximize.png" alt="Vollbildschirm"></button>
+            <div id="audioPlayer">
+                <button id="speakerBtn"><img src="b/speaker.png" alt="Speaker"></button>
+                <button id="playBtn"><img src="b/play.png" alt="Play"></button>
+                <button id="pauseBtn"><img src="b/pause.png" alt="Pause"></button>
+                <button id="backBtn"><img src="b/10sec-back.png" alt="10 sec back"></button>
+            </div>
+            <audio id="myAudio" src="m/ex.mp3"></audio>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>

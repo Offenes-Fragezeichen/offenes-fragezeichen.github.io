@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Artikel-Kommentare</title>
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<div id="loginDiv">
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="E-Mail" required>
+    <input type="password" id="password" placeholder="Passwort" required>
+    <button type="submit">Login</button>
+  </form>
+  <button id="logoutBtn" style="display:none;">Logout</button>
+</div>
+
+<div id="commentRead">Lade Kommentare...</div>
+
+<form id="commentWrite">
+  <textarea id="commentText" placeholder="Dein Kommentar..." required></textarea>
+  <label><input type="checkbox" id="anonymousCheck"> anonym posten</label>
+  <button type="submit">Absenden</button>
+</form>
+
+<div id="result"></div>
+
+<script src="https://unpkg.com/@supabase/supabase-js"></script>
+<script>
+const supabaseUrl = 'https://ngtujvgsbymtxphwncuj.supabase.co'; // ersetzen
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ndHVqdmdzYnltdHhwaHduY3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc3NzE4ODAsImV4cCI6MjA3MzM0Nzg4MH0.g9Cmgrua00pJpr6T0uO5FGRIjtgU7TTnGvOw9NHVAr0'; // ersetzen
+const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+const loginForm = document.getElementById("loginForm");
+const logoutBtn = document.getElementById("logoutBtn");
+const commentRead = document.getElementById("commentRead");
+const commentWrite = document.getElementById("commentWrite");
+const commentText = document.getElementById("commentText");
+const anonymousCheck = document.getElementById("anonymousCheck");
+const resultDiv = document.getElementById("result");
+
+const path = window.location.pathname;
+const articleName = path.split("/").pop().replace(".html","");
+
+// Login
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const { data, error } = await client.auth.signInWithPassword({ email, password });
+  if (error) { resultDiv.innerText = "❌ Login fehlgeschlagen: " + error.message; }
+  else { resultDiv.innerText = "✅ Eingeloggt!"; updateUI(); }
+});
+
+logoutBtn.addEventListener("click", async () => {
+  await client.auth.signOut();
+  updateUI();
+});
+
+async function updateUI() {
+  const { data } = await client.auth.getUser();
+  const user = data.user;
+  if (user) { loginForm.style.display = 'none'; logoutBtn.style.display = 'block'; }
+  else { loginForm.style.display = 'block'; logoutBtn.style.display = 'none'; }
+  loadComments();
+}
+
+async function loadComments() {
+  const { data: comments, error } = await client
+    .from("Komments")
+    .select("comment, user_id, created_at")
+    .eq("article", articleName)
+    .order("created_at", { ascending: true });
+
+  if (error) { 
+    console.error(error); 
+    commentRead.innerText = "Fehler beim Laden der Kommentare."; 
+    return; 
+  }
+
+  commentRead.innerHTML = "";
+  if (!comments || comments.length === 0) { 
+    commentRead.innerHTML = "<p>Keine Kommentare bisher.</p>"; 
+    return; 
+  }
+
+  for (const c of comments) {
+    let nameSpan = document.createElement("span");
+    nameSpan.className = "comment-name";
+
+    if (c.user_id && !anonymousCheck.checked) {
+      const { data: userData, error: userError } = await client
+        .from("users2")
+        .select("b_name")
+        .eq("user_id", c.user_id)
+        .single();
+      if (!userError && userData && userData.b_name) {
+        nameSpan.textContent = userData.b_name + ", ";
+      } else { + ", "
+        nameSpan.innerHTML = "<em>Anonym</em>, ";
+      }
+    } else {
+      nameSpan.innerHTML = "<em>Anonym</em>, ";
+    }
+
+    const date = new Date(c.created_at);
+    const formattedDate = date.getFullYear().toString().slice(-2) + '/' +
+                          String(date.getMonth()+1).padStart(2,'0') + '/' +
+                          String(date.getDate()).padStart(2,'0');
+    const dateSpan = document.createElement("span");
+    dateSpan.className = "comment-date";
+    dateSpan.textContent = formattedDate;
+
+    const commentDiv = document.createElement("div");
+    const p1 = document.createElement("p");
+    p1.textContent = c.comment;
+    const p2 = document.createElement("p");
+    p2.appendChild(nameSpan);
+    p2.appendChild(dateSpan);
+
+    commentDiv.appendChild(p1);
+    commentDiv.appendChild(p2);
+    commentRead.appendChild(commentDiv);
+  }
+}
+
+commentWrite.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const text = commentText.value.trim();
+  if (!text) {
+    resultDiv.innerText = "Bitte einen Kommentar eingeben!";
+    return;
+  }
+
+  const { data: userData } = await client.auth.getUser();
+  const userId = anonymousCheck.checked ? null : userData?.user?.id || null;
+
+  const { error } = await client.from("Komments").insert([
+    { article: articleName, comment: text, user_id: userId }
+  ]);
+
+  if (error) {
+    resultDiv.innerText = "❌ Fehler: " + error.message;
+  } else {
+    resultDiv.innerText = "✅ Kommentar hinzugefügt!";
+    commentText.value = "";
+    loadComments();
+  }
+});
+
+updateUI();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Supabase Test Upload</title>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <h1>Supabase Test Upload</h1>
+  <button id="btnTestUpload">Test JSON hochladen</button>
+  <p id="status"></p>
+
+  <script>
+    const SUPABASE_URL = "https://ngtujvgsbymtxphwncuj.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ndHVqdmdzYnltdHhwaHduY3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc3NzE4ODAsImV4cCI6MjA3MzM0Nzg4MH0.g9Cmgrua00pJpr6T0uO5FGRIjtgU7TTnGvOw9NHVAr0";
+
+    const { createClient } = window.supabase;
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const statusEl = document.getElementById("status");
+
+    document.getElementById("btnTestUpload").onclick = async () => {
+      statusEl.textContent = "Upload läuft…";
+
+      const obj = {
+        test: "Dies ist ein Test",
+        uploaded_at: new Date().toISOString()
+      };
+
+      const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
+
+      try {
+        const { error } = await supabase.storage
+          .from("articles")
+          .upload("test.json", blob, { upsert: true });
+
+        if (error) throw error;
+
+        statusEl.textContent = "Test-JSON erfolgreich hochgeladen!";
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Fehler: " + (err.message || err);
+      }
+    };
+  </script>
+</body>
+</html>

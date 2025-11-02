@@ -1,0 +1,65 @@
+:root {
+    --comment-bg: #E5E4E2;
+}
+
+
+#commentRead div {
+    background-color: var(--comment-bg);
+    color: black;
+    padding: 5px 20px 5px 20px;
+    border-radius: 30px;
+    min-width: 40px;
+    width: fit-content;
+    min-height: 40px;
+    margin: 20px;
+    margin-bottom: 35px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#commentRead div p:nth-of-type(2) {
+    font-size: 14px;
+}
+
+.comment-date {
+    color: grey;
+}
+
+#commentRead div:nth-of-type(2n) {
+    margin-left: 100px;
+}
+
+#commentRead div:nth-of-type(4n) {
+    margin-left: 400px;
+}
+
+#commentRead div:before,
+#commentRead div:after {
+    content: "";
+    background-color: var(--comment-bg);
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    z-index: -1;
+}
+
+#commentRead div:before {
+    width: 44px;
+    height: 44px;
+    top: -12px;
+    left: 28px;
+    box-shadow: -50px 30px 0 -12px var(--comment-bg);
+}
+
+#commentRead div:after {
+    bottom: -10px;
+    right: 26px;
+    width: 30px;
+    height: 30px;
+    box-shadow: 40px -34px 0 0 var(--comment-bg),
+                -28px -6px 0 -2px var(--comment-bg),
+                -24px 17px 0 -6px var(--comment-bg),
+                -5px 25px 0 -10px var(--comment-bg);
+}

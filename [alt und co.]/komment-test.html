@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login & Kommentar</title>
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
+    form { margin-bottom: 20px; }
+    input, textarea, button { display: block; width: 100%; margin: 5px 0 15px; padding: 8px; }
+    #logoutBtn { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2 id="welcome">Bitte einloggen</h2>
+
+  <!-- Login-Formular -->
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="E-Mail" required />
+    <input type="password" id="password" placeholder="Passwort" required />
+    <button type="submit">Login</button>
+  </form>
+
+  <button id="logoutBtn" style="display: none;">Logout</button>
+
+  <!-- Kommentar-Formular -->
+  <form id="commentForm" style="display: none;">
+    <input type="text" id="article" placeholder="Artikel (z. B. mein-artikel)" required />
+    <textarea id="commentText" placeholder="Dein Kommentar..." required></textarea>
+    <button type="submit">Kommentar absenden</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const supabaseUrl = 'https://ngtujvgsbymtxphwncuj.supabase.co'; // ← Ersetzen
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ndHVqdmdzYnltdHhwaHduY3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc3NzE4ODAsImV4cCI6MjA3MzM0Nzg4MH0.g9Cmgrua00pJpr6T0uO5FGRIjtgU7TTnGvOw9NHVAr0'; // ← Ersetzen
+    const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+    const loginForm = document.getElementById('loginForm');
+    const commentForm = document.getElementById('commentForm');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const resultDiv = document.getElementById('result');
+    const welcome = document.getElementById('welcome');
+
+    // Login
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const { data, error } = await client.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        resultDiv.innerText = "❌ Login fehlgeschlagen: " + error.message;
+      } else {
+        resultDiv.innerText = "✅ Eingeloggt!";
+        updateUI();
+      }
+    });
+
+    // Logout
+    logoutBtn.addEventListener('click', async () => {
+      await client.auth.signOut();
+      updateUI();
+    });
+
+    // Kommentar absenden
+    commentForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const article = document.getElementById('article').value.trim();
+      const commentText = document.getElementById('commentText').value.trim();
+
+      const { data: userData } = await client.auth.getUser();
+
+      if (!userData?.user) {
+        resultDiv.innerText = "❌ Nicht eingeloggt!";
+        return;
+      }
+
+      const { error } = await client.from("Komments").insert([
+        {
+          article: article,
+          comment: commentText,
+          user_id: userData.user.id // ← falls du das speicherst
+        }
+      ]);
+
+      if (error) {
+        resultDiv.innerText = "❌ Fehler beim Absenden: " + error.message;
+      } else {
+        resultDiv.innerText = "✅ Kommentar gespeichert!";
+        commentForm.reset();
+      }
+    });
+
+    // UI aktualisieren
+    async function updateUI() {
+      const { data } = await client.auth.getUser();
+      const user = data.user;
+
+      if (user) {
+        loginForm.style.display = 'none';
+        commentForm.style.display = 'block';
+        logoutBtn.style.display = 'block';
+        welcome.innerText = "Willkommen, " + user.email;
+      } else {
+        loginForm.style.display = 'block';
+        commentForm.style.display = 'none';
+        logoutBtn.style.display = 'none';
+        welcome.innerText = "Bitte einloggen";
+      }
+
+      resultDiv.innerText = "";
+    }
+
+    updateUI(); // Beim Laden prüfen
+  </script>
+
+</body>
+</html>

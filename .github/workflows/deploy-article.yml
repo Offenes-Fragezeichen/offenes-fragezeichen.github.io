@@ -26,8 +26,9 @@ jobs:
           mkdir -p work
           filename="${{ github.event.inputs.filename }}"
           echo "Downloading $filename ..."
-          curl -s -H "Authorization: Bearer $SUPABASE_KEY" \
-            "$SUPABASE_URL/storage/v1/object/articles/$filename" -o work/article.json
+          curl -s -o work/article.json -w "%{http_code}\n" \
+            -H "Authorization: Bearer $SUPABASE_KEY" \
+            "$SUPABASE_URL/storage/v1/object/articles/$filename"
           if [ ! -s work/article.json ]; then
             echo "JSON fehlt oder leer. Abbruch."
             exit 1
@@ -53,4 +54,5 @@ jobs:
           git config user.email "${GIT_AUTHOR_EMAIL}"
           git add public/
           git commit -m "Deploy article: $filename" || echo "Nothing to commit"
+
           git push

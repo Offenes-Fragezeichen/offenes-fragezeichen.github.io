@@ -94,7 +94,7 @@ let articles = [];
 async function loadArticles() {
     const statusEl = document.getElementById("status");
     try {
-        const response = await fetch("https://honest-entropy.github.io/articles.json?nocache=" + Date.now(), {
+        const response = await fetch("https://offenes-fragezeichen.github.io/articles.json?nocache=" + Date.now(), {
             cache: "no-store"
         });
 

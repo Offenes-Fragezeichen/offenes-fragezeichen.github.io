@@ -43,7 +43,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
 <script>
-const jsonUrl = "https://honest-entropy.github.io/articles.json";
+const jsonUrl = "https://offenes-fragezeichen.github.io/articles.json?nocache=" + Date.now();
 
 fetch(jsonUrl)
   .then(res => {
@@ -55,7 +55,7 @@ fetch(jsonUrl)
 
     files
   .sort((a, b) => new Date(b.date) - new Date(a.date))
-  .slice(0, 10)   // Nur die ersten 10 Elemente nehmen
+  .slice(0, 10)
   .forEach(file => {
     const li = document.createElement("li");
 

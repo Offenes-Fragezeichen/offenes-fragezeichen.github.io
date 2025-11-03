@@ -43,7 +43,7 @@ jobs:
           slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')
           filename="beitrag/${slug}.html"
           mkdir -p beitrag
-          sed "s/{{TITLE}}/$title/g; s/{{CONTENT}}/$content/g; s/{{DATUM}}/$datum/g", s/{{AUTOR}}/$autor/g" template.html > "$filename"
+          sed "s/{{TITLE}}/$title/g; s/{{CONTENT}}/$content/g; s/{{DATUM}}/$datum/g"; s/{{AUTOR}}/$autor/g" template.html > "$filename"
           echo "HTML gebaut: $filename"
 
       - name: Commit & Push

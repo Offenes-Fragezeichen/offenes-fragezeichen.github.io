@@ -18,7 +18,7 @@ jobs:
       - name: Install Tools
         run: sudo apt-get update && sudo apt-get install -y curl jq
 
-      - name: Download Article JSON from Supabase
+      - name: Download Article JSON from Supabase (Debug)
         env:
           SUPABASE_URL: https://ngtujvgsbymtxphwncuj.supabase.co
           SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
@@ -26,14 +26,16 @@ jobs:
           mkdir -p work
           filename="${{ github.event.inputs.filename }}"
           echo "Downloading $filename ..."
-          curl -s -o work/article.json -w "%{http_code}\n" \
-            -H "Authorization: Bearer $SUPABASE_KEY" \
-            "$SUPABASE_URL/storage/v1/object/articles/$filename"
+          curl -v -H "Authorization: Bearer $SUPABASE_KEY" \
+            "$SUPABASE_URL/storage/v1/object/articles/$filename" -o work/article.json
+          echo "---- Dateiinhalt ----"
+          cat work/article.json
+          echo "---------------------"
           if [ ! -s work/article.json ]; then
             echo "JSON fehlt oder leer. Abbruch."
             exit 1
           fi
-          cat work/article.json | jq .
+          jq . work/article.json
 
       - name: Build HTML from template
         run: |
@@ -56,3 +58,4 @@ jobs:
           git commit -m "Deploy article: $filename" || echo "Nothing to commit"
 
           git push
+

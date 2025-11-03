@@ -39,7 +39,7 @@ jobs:
           title=$(jq -r '.title // empty' work/article.json)
           content=$(jq -r '.content // empty' work/article.json)
           datum=$(jq -r '.datum // empty' work/article.json)
-          autor=$(jq -r '.autor // empty' work/article.json)
+          autor=$(jq -r '.author // empty' work/article.json)
           slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')
           filename="beitrag/${slug}.html"
           mkdir -p beitrag

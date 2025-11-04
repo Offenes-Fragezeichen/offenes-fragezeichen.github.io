@@ -37,6 +37,7 @@ jobs:
       - name: Build HTML from template
         run: |
           title=$(jq -r '.title // empty' work/article.json)
+          id=$(jq -r '.id // empty' work/article.json)
           content=$(jq -r '.content // empty' work/article.json)
           datum=$(jq -r '.datum // empty' work/article.json)
           autor=$(jq -r '.author // empty' work/article.json)
@@ -51,7 +52,7 @@ jobs:
           esc_datum=$(escape_sed "$datum")
           esc_autor=$(escape_sed "$autor")
 
-          slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')
+          slug=$(echo "$id" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')
           filename="beitrag/${slug}.html"
           mkdir -p beitrag
 

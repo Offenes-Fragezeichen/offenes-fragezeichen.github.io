@@ -36,6 +36,7 @@ jobs:
             echo "Raw data: $data"
 
             title=$(echo "$data" | jq -r '.title // empty')
+            id=$(echo "$data" | jq -r '.id // empty')
             date=$(echo "$data" | jq -r '.uploaded_at // empty')
             preview=$(echo "$data" | jq -r '.preview // empty')
             signature=$(echo "$data" | jq -r '.signature // empty')
@@ -43,10 +44,11 @@ jobs:
             if [ -n "$title" ] && [ -n "$date" ]; then
               obj=$(jq -n \
                 --arg t "$title" \
+                --arg i "$id" \
                 --arg d "$date" \
                 --arg p "$preview" \
                 --arg s "$signature" \
-                '{title:$t, date:$d, preview:$p, signature:$s}')
+                '{title:$t, id:$i, date:$d, preview:$p, signature:$s}')
               all=$(echo "$all" | jq ". + [$obj]")
             else
               echo "Skipping $json_file: missing title or date"

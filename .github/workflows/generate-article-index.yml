@@ -3,13 +3,8 @@ name: Generate Article Index
 on:
   push:
     paths:
-      - 'beitrag/**'
+      - 'public/**'
   workflow_dispatch:
-    inputs:
-      rebuild:
-        description: 'Optional: Erzwingt Neuaufbau, auch ohne Änderungen'
-        required: false
-        default: 'true'
 
 jobs:
   generate-index:

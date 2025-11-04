@@ -296,7 +296,7 @@ async function handleUpload(e) {
   }
 
   const articleData = { title, author, datum, uploaded_at, signature, preview, content };
-  const fileName = `${title.replace(/\s+/g, "_")}.json`;
+  const fileName = `${title.replace(/\s+/g, "_").toLowerCase()}.json`;
   const fileBlob = new Blob([JSON.stringify(articleData, null, 2)], { type: "application/json" });
 
   msg.textContent = "Wird hochgeladen...";

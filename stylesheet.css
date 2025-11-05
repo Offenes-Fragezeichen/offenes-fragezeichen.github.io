@@ -26,6 +26,10 @@ a::after {
     transition: transform 0.4s ease-out;
 }
 
+.quellen a {
+    text-decoration: none;
+}
+
 .extern-a {
     text-decoration: underline;
 }

@@ -59,7 +59,7 @@ jobs:
           echo "$all" | jq .
 
           # Sortieren und Preview bei allen anzeigen
-          sorted=$(echo "$all" | jq 'sort_by(.date) | reverse)
+          sorted=$(echo "$all" | jq 'sort_by(.date) | reverse')
 
           echo "Final sorted articles.json:"
           echo "$sorted" | jq .
@@ -74,3 +74,4 @@ jobs:
           git commit -m "Update articles.json with titles, dates and previews" || echo "No changes"
 
           git push
+

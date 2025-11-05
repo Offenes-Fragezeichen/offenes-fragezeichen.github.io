@@ -13,11 +13,26 @@
     <style>
         h1 {
             line-height: 1.1;
+            margin-top: 30px;
         }
         
         img {
-            width: 100vw;
+            width: 100%;
             height: auto;
+        }
+
+        img:nth-of-type(2) {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            img:nth-of-type(1) {
+                display: none;
+            }
+
+            img:nth-of-type(2) {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -50,19 +65,13 @@
     <h1>Wir machen ein großes Feuer und dann sind alle glücklich</h1>
 
     <article>
-        <img class="dark-switch" style="display: none;" src="../b/ab/grossesFeuer.png">
+        <img class="dark-switch" src="../b/ab/grossesFeuer.png">
         <img class="dark-switch" src="../b/ab/grossesFeuer-m.png">
     </article>
     <p class="verfasst">Jeremias <br><span class="datum">{Datum}</span></p>
 </main>
 
 <footer>
-    <div class="quellen">
-        <p>Quellenverweise:</p>
-        <ol><li>sbdbd</li>
-            <li>dndhd</li></ol>
-    </div>
-
     <div class="komments">
         <p>Kommentare</p>
         <div id="commentRead">Lade Kommentare...</div>

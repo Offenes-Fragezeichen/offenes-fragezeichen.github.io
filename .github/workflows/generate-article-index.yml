@@ -58,10 +58,8 @@ jobs:
           echo "All articles before sorting:"
           echo "$all" | jq .
 
-          # Sortieren und Preview nur bei den ersten 3 behalten
-          sorted=$(echo "$all" | jq 'sort_by(.date) | reverse
-            | to_entries
-            | map(if .key < 3 then .value else (.value | del(.preview)) end)')
+          # Sortieren und Preview bei allen anzeigen
+          sorted=$(echo "$all" | jq 'sort_by(.date) | reverse)
 
           echo "Final sorted articles.json:"
           echo "$sorted" | jq .
@@ -74,4 +72,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add articles.json
           git commit -m "Update articles.json with titles, dates and previews" || echo "No changes"
+
           git push

@@ -48,6 +48,7 @@ jobs:
           }
 
           esc_title=$(escape_sed "$title")
+          esc_id=$(escape_sed "$id")
           esc_content=$(escape_sed "$content")
           esc_datum=$(escape_sed "$datum")
           esc_autor=$(escape_sed "$autor")
@@ -56,7 +57,7 @@ jobs:
           filename="beitrag/${slug}.html"
           mkdir -p beitrag
 
-          sed "s/{{TITLE}}/$esc_title/g; s/{{CONTENT}}/$esc_content/g; s/{{DATUM}}/$esc_datum/g; s/{{AUTOR}}/$esc_autor/g" template.html > "$filename"
+          sed "s/{{TITLE}}/$esc_title/g; s/{{ID}}/$esc_id/g; s/{{CONTENT}}/$esc_content/g; s/{{DATUM}}/$esc_datum/g; s/{{AUTOR}}/$esc_autor/g" template.html > "$filename"
 
           echo "HTML gebaut: $filename"
 
@@ -71,3 +72,4 @@ jobs:
           git commit -m "Deploy article: $filename" || echo "Nothing to commit"
           git push
           
+

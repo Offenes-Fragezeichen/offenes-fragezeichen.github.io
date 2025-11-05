@@ -34,36 +34,36 @@ jobs:
           fi
           cat work/article.json | jq .
 
-- name: Build HTML from template
-  run: |
-    title=$(jq -r '.title // empty' work/article.json)
-    id=$(jq -r '.id // empty' work/article.json)
-    content=$(jq -r '.content // empty' work/article.json)
-    datum=$(jq -r '.datum // empty' work/article.json)
-    autor=$(jq -r '.author // empty' work/article.json)
+      - name: Build HTML from template
+        run: |
+          title=$(jq -r '.title // empty' work/article.json)
+          id=$(jq -r '.id // empty' work/article.json)
+          content=$(jq -r '.content // empty' work/article.json)
+          datum=$(jq -r '.datum // empty' work/article.json)
+          autor=$(jq -r '.author // empty' work/article.json)
 
-    # Escape-Funktion für sed mit anderem Delimiter (|)
-    escape_sed() {
-      printf '%s' "$1" | sed -e 's/[|&]/\\&/g'
-    }
+          # Escape-Funktion für sed mit anderem Delimiter (|)
+          escape_sed() {
+            printf '%s' "$1" | sed -e 's/[|&]/\\&/g'
+          }
 
-    esc_title=$(escape_sed "$title")
-    esc_content=$(escape_sed "$content")
-    esc_datum=$(escape_sed "$datum")
-    esc_autor=$(escape_sed "$autor")
+          esc_title=$(escape_sed "$title")
+          esc_content=$(escape_sed "$content")
+          esc_datum=$(escape_sed "$datum")
+          esc_autor=$(escape_sed "$autor")
 
-    slug=$(echo "$id" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')
-    filename="beitrag/${slug}.html"
-    mkdir -p beitrag
+          slug=$(echo "$id" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')
+          filename="beitrag/${slug}.html"
+          mkdir -p beitrag
 
-    sed -e "s|{{TITLE}}|$esc_title|g" \
-        -e "s|{{CONTENT}}|$esc_content|g" \
-        -e "s|{{DATUM}}|$esc_datum|g" \
-        -e "s|{{AUTOR}}|$esc_autor|g" \
-        template.html > "$filename"
+          sed -e "s|{{TITLE}}|$esc_title|g" \
+              -e "s|{{CONTENT}}|$esc_content|g" \
+              -e "s|{{DATUM}}|$esc_datum|g" \
+              -e "s|{{AUTOR}}|$esc_autor|g" \
+              template.html > "$filename"
 
-    echo "HTML gebaut: $filename"
-      
+          echo "HTML gebaut: $filename"
+
       - name: Commit & Push
         env:
           GIT_AUTHOR_NAME: github-actions[bot]
@@ -74,4 +74,3 @@ jobs:
           git add beitrag/
           git commit -m "Deploy article: $filename" || echo "Nothing to commit"
           git push
-

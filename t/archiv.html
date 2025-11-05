@@ -67,8 +67,7 @@ fetch(jsonUrl)
     const li = document.createElement("li");
 
     const a = document.createElement("a");
-    const safeFileName = file.title.replace(/\s+/g, "-");
-    a.href = "../beitrag/" + safeFileName + ".html";
+    a.href = "../beitrag/" + file.id + ".html";
     a.target = "_blank";
     a.textContent = file.title;
     li.appendChild(a);

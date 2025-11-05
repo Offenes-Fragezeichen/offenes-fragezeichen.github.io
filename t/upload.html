@@ -155,6 +155,7 @@
     <form id="uploadForm">
         <div>
             <div><input type="text" id="title" placeholder="Titel" required><br><br>
+                 <input type="text" id="id" placeholder="ID" required><br><br>
                  <input type="text" id="author" placeholder="Autor"><br><br>
                  <input type="text" id="datum" placeholder="Datum"><br><br>
                  <input type="text" id="uploaded_at" style="display: none;"></div>
@@ -184,7 +185,7 @@ const client = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession
 const EDGE_TRIGGER_URL = `${SUPABASE_URL}/functions/v1/trigger-github`;
 
 const selectedSignatures = new Set();
-let session = null; // ✅ global definieren
+let session = null;
 
 async function init() {
   const savedSession = sessionStorage.getItem('sb-session');
@@ -194,7 +195,7 @@ async function init() {
   }
 
   const { data } = await client.auth.getSession();
-  session = data.session; // ✅ global speichern
+  session = data.session;
 
   if (!session || !session.user) {
     const currentUrl = window.location.href;
@@ -203,8 +204,6 @@ async function init() {
   }
 
   const user = session.user;
-
-  // Prüfen, ob User Upload-Rechte hat
   const { data: perm, error } = await client
     .from("users2")
     .select("upload")
@@ -231,7 +230,6 @@ async function init() {
   
   document.getElementById("uploaded_at").value = new Date().toISOString();
 
-  // Datum eintragen
   const date = new Date();
   const yy = String(date.getFullYear()).slice(2);
   const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -283,6 +281,7 @@ async function handleUpload(e) {
   }
 
   const title = document.getElementById("title").value.trim();
+  const id = document.getElementById("id").value.trim().toLowerCase();
   const author = document.getElementById("author").value.trim();
   const datum = document.getElementById("datum").value;
   const uploaded_at = document.getElementById("uploaded_at").value;
@@ -295,18 +294,35 @@ async function handleUpload(e) {
     return;
   }
 
-  const articleData = { title, author, datum, uploaded_at, signature, preview, content };
-  const fileName = `${title.replace(/\s+/g, "_").toLowerCase()}.json`;
+  const articleData = { title, id, author, datum, uploaded_at, signature, preview, content };
   const fileBlob = new Blob([JSON.stringify(articleData, null, 2)], { type: "application/json" });
 
   msg.textContent = "Wird hochgeladen...";
 
-  const { error } = await client.storage.from("articles").upload(fileName, fileBlob, { upsert: true });
+  const { error } = await client.storage.from("articles").upload(`${id}.json`, fileBlob, { upsert: true });
 
   if (error) {
     msg.textContent = "Fehler beim Hochladen: " + error.message;
     return;
   }
+
+// Tabelleneintrag
+const { error: insertError } = await client
+  .from("articles")
+  .insert([
+    {
+      id: id,
+      title: title,
+      datum: datum,
+      created_at: new Date().toISOString()
+    }
+  ]);
+
+if (insertError) {
+  console.error("Fehler beim Eintrag in Tabelle:", insertError);
+  msg.textContent = "Upload ok, aber Fehler beim Tabelleneintrag: " + insertError.message;
+  return;
+}
 
   msg.textContent = "Artikel erfolgreich hochgeladen. Trigger wird ausgeführt...";
 
@@ -315,9 +331,9 @@ async function handleUpload(e) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${session.access_token}` // ✅ funktioniert jetzt
+        "Authorization": `Bearer ${session.access_token}`
       },
-      body: JSON.stringify({ filename: fileName })
+      body: JSON.stringify({ filename: id + ".json" })
     });
 
     if (triggerResp.ok) {

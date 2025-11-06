@@ -48,10 +48,36 @@
         }
 
         main img {
-            width: 13%;
+            width: 50px;
             height: auto;
             margin-left: -40px;
             z-index: 2;
+        }
+        
+        .dark-mode #zufallsBtn {
+                border: 1px solid white;
+                color: white;
+         }
+
+        .dark-mode #zufallsBtn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px dashed white;
+        }
+        
+        
+        @media (max-width: 768px) {
+            main button {
+                width: 30%;
+                margin-top: 35%;
+            }
+            
+            main p:nth-of-type(2) {
+                margin-top: 50%;
+            }
+            
+            main img {
+                width: 70px;
+            }
         }
     </style>
 </head>
@@ -84,6 +110,8 @@
     diesem, mag man meinen, den Emotionen aus dem Weg zu gehen, sich vor dem Leid 
     schützen zu können. Das funktioniert aber nicht.
     </p>
+    
+    <button id="quitBtn">Quit</button><img src="../b/out-of-order.png" alt="Out of order">
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -120,10 +148,8 @@ document.getElementById("zufallsBtn").addEventListener("click", () => {
     }
 
     const randomArticle = articles[Math.floor(Math.random() * articles.length)];
-    const title = randomArticle.title || "unbekannt";
-    const safeFileName = title.replace(/\s+/g, "-") + ".html";
-
-    window.location.href = `../beitrag/${safeFileName}`;
+    const id = randomArticle.id || "unbekannt";
+    window.location.href = `../beitrag/${id}.html`;
 });
 
 loadArticles();

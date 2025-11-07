@@ -851,3 +851,21 @@ document.addEventListener("DOMContentLoaded", () => {
     link.appendChild(icon);
   });
 });
+
+// --- Tooltip ---
+document.addEventListener("DOMContentLoaded", () => {
+  const tooltips = document.querySelectorAll(".tooltip");
+
+  tooltips.forEach(tooltip => tooltip.classList.add("hidden-text"));
+
+  tooltips.forEach(tooltip => {
+    tooltip.addEventListener("click", (e) => {
+      e.stopPropagation();
+      tooltip.classList.toggle("hidden-text");
+    });
+  });
+
+  document.addEventListener("click", () => {
+    tooltips.forEach(t => t.classList.add("hidden-text"));
+  });
+});

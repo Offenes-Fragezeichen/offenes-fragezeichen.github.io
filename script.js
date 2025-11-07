@@ -112,7 +112,7 @@ async function loadProtectedArticles() {
           article.innerHTML = `
             <div class="geschuetzt" id="geschuetzt-pos">
               <img src="/b/schloss-pos.png" alt="Bild eines Schlosses">
-              <p>Dieser Beitrag erfordert einen erweiterten Lesezugriff. Das Verbreiten des Textes ist nur über Verbreiten der URL gestattet. Es wird darum gebeten, keinen Personen ohne Zugriff Einsicht zu gewährleisten.</p>
+              <p>Dieser Beitrag erfordert einen erweiterten Lesezugriff. Das Verbreiten des Textes ist nur über Teilen der URL gestattet. Es wird darum gebeten, keinen Personen ohne Zugriff Einsicht zu gewährleisten.</p>
               <p>Der Account, mit dem du momentan eingeloggt bist, verfügt über nötigen Zugriff.</p>
             </div>
             <h1>${json.title}</h1>

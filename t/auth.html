@@ -322,7 +322,7 @@ async function checkSession() {
     const { data } = await client.auth.getSession();
     const session = data.session;
     if (session && session.user) {
-        username = session.user.email;
+        username = session.user.email.replace("@example.com", " ";
         await typeLine("Willkommen zurück, " + username + "!");
         askLogout();
     } else {
@@ -349,3 +349,4 @@ bootSequence();
 
 </body>
 </html>
+

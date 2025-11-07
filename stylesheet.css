@@ -117,6 +117,36 @@ body.font-large button img {
     display: none;
 }
 
+tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: grey;
+}
+
+.tooltip::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    background: url("b/tooltip.png") center/contain no-repeat;
+    flex-shrink: 0;
+}
+
+body.dark-mode .tooltip::before {
+    background-image: url("b/dark/tooltip-dark.png");
+}
+
+.tooltip.hidden-text {
+    color: transparent;
+    user-select: none;
+}
+
+.tooltip.hidden-text::before {
+    margin-right: 0;
+}
+
 
 /* ================
          Main

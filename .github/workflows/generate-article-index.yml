@@ -28,30 +28,35 @@ jobs:
             base=$(basename "$f" .html)
             json_file="${base}.json"
 
-            echo "Fetching $json_file from Supabase..."
-            data=$(curl -s -H "Authorization: Bearer $SERVICE_KEY" \
-              "$SUPABASE_URL/storage/v1/object/articles/${json_file}")
+            for bucket in articles lz2; do
+              echo "Fetching $json_file from Supabase bucket '$bucket'..."
+              data=$(curl -s -H "Authorization: Bearer $SERVICE_KEY" \
+                "$SUPABASE_URL/storage/v1/object/$bucket/${json_file}")
 
-            # Debug: Ausgabe des JSON
-            echo "Raw data: $data"
+              # Debug: Ausgabe des JSON
+              echo "Raw data from $bucket: $data"
 
-            title=$(echo "$data" | jq -r '.title // empty')
-            id=$(echo "$data" | jq -r '.id // empty')
-            date=$(echo "$data" | jq -r '.uploaded_at // empty')
-            preview=$(echo "$data" | jq -r '.preview // empty')
-            signature=$(echo "$data" | jq -r '.signature // empty')
+              title=$(echo "$data" | jq -r '.title // empty')
+              id=$(echo "$data" | jq -r '.id // empty')
+              date=$(echo "$data" | jq -r '.uploaded_at // empty')
+              preview=$(echo "$data" | jq -r '.preview // empty')
+              signature=$(echo "$data" | jq -r '.signature // empty')
 
-            if [ -n "$title" ] && [ -n "$date" ]; then
-              obj=$(jq -n \
-                --arg t "$title" \
-                --arg i "$id" \
-                --arg d "$date" \
-                --arg p "$preview" \
-                --arg s "$signature" \
-                '{title:$t, id:$i, date:$d, preview:$p, signature:$s}')
-              all=$(echo "$all" | jq ". + [$obj]")
-            else
-              echo "Skipping $json_file: missing title or date"
+              if [ -n "$title" ] && [ -n "$date" ]; then
+                obj=$(jq -n \
+                  --arg t "$title" \
+                  --arg i "$id" \
+                  --arg d "$date" \
+                  --arg p "$preview" \
+                  --arg s "$signature" \
+                  '{title:$t, id:$i, date:$d, preview:$p, signature:$s}')
+                all=$(echo "$all" | jq ". + [$obj]")
+                break  # wenn gefunden, nicht im nächsten Bucket suchen
+              fi
+            done
+
+            if [ -z "$title" ] || [ -z "$date" ]; then
+              echo "Skipping $json_file: missing title or date in all buckets"
             fi
           done
 
@@ -74,4 +79,3 @@ jobs:
           git commit -m "Update articles.json with titles, dates and previews" || echo "No changes"
 
           git push
-

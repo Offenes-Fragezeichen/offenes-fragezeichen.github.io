@@ -128,12 +128,12 @@ body.font-large button img {
   display: inline-block;
   width: 18px;
   height: 18px;
-  background: url("tooltip.png") center/contain no-repeat;
+  background: url("b/tooltip.png") center/contain no-repeat;
   vertical-align: middle;
 }
 
 body.dark-mode .tooltip::before {
-  background-image: url("dark/tooltip-dark.png");
+  background-image: url("b/dark/tooltip-dark.png");
 }
 
 .tooltip::after {

@@ -33,14 +33,18 @@ jobs:
               data=$(curl -s -H "Authorization: Bearer $SERVICE_KEY" \
                 "$SUPABASE_URL/storage/v1/object/$bucket/${json_file}")
 
-              # Debug: Ausgabe des JSON
               echo "Raw data from $bucket: $data"
 
-              title=$(echo "$data" | jq -r '.title // empty')
               id=$(echo "$data" | jq -r '.id // empty')
               date=$(echo "$data" | jq -r '.uploaded_at // empty')
               preview=$(echo "$data" | jq -r '.preview // empty')
               signature=$(echo "$data" | jq -r '.signature // empty')
+
+              if [ "$bucket" = "lz2" ]; then
+                title="$id"
+              else
+                title=$(echo "$data" | jq -r '.title // empty')
+              fi
 
               if [ -n "$title" ] && [ -n "$date" ]; then
                 obj=$(jq -n \
@@ -51,7 +55,7 @@ jobs:
                   --arg s "$signature" \
                   '{title:$t, id:$i, date:$d, preview:$p, signature:$s}')
                 all=$(echo "$all" | jq ". + [$obj]")
-                break  # wenn gefunden, nicht im nächsten Bucket suchen
+                break
               fi
             done
 
@@ -63,7 +67,6 @@ jobs:
           echo "All articles before sorting:"
           echo "$all" | jq .
 
-          # Sortieren und Preview bei allen anzeigen
           sorted=$(echo "$all" | jq 'sort_by(.date) | reverse')
 
           echo "Final sorted articles.json:"

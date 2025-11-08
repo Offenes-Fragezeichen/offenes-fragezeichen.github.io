@@ -290,9 +290,12 @@ document.addEventListener('DOMContentLoaded', () => {
         playBtn.style.display = 'inline-block';
       });
 
-      backBtn.addEventListener('click', () => {
-        audio.currentTime = Math.max(0, audio.currentTime - 10);
-      });
+      backBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  audio.currentTime = Math.max(0, audio.currentTime - 10);
+});
+
 
       audio.addEventListener('ended', () => {
         pauseBtn.style.display = 'none';

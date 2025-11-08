@@ -138,6 +138,7 @@ body.dark-mode .tooltip::before {
 
 .tooltip::after {
   content: attr(data-tooltip);
+  color: grey;
   display: none;
   margin-left: 6px;
 }

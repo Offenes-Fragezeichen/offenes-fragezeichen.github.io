@@ -1,4 +1,4 @@
-// --- Auth Redirect ---
+/* --- Auth Redirect ---
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
     const backBtn = document.getElementById('backBtn');
@@ -19,7 +19,7 @@
     });
   });
 })();
-
+*/
 
 // --- Geschützte Artikel ---
 const SUPABASE_URL = 'https://ngtujvgsbymtxphwncuj.supabase.co';

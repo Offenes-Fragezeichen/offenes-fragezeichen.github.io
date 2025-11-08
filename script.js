@@ -854,18 +854,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- Tooltip ---
 document.addEventListener("DOMContentLoaded", () => {
-  const tooltips = document.querySelectorAll(".tooltip");
+  document.querySelectorAll(".tooltip").forEach(t => t.classList.add("hidden-text"));
 
-  tooltips.forEach(tooltip => tooltip.classList.add("hidden-text"));
+  document.body.addEventListener("click", (e) => {
+    const tooltip = e.target.closest(".tooltip");
+    const allTooltips = document.querySelectorAll(".tooltip");
 
-  tooltips.forEach(tooltip => {
-    tooltip.addEventListener("click", (e) => {
-      e.stopPropagation();
-      tooltip.classList.toggle("hidden-text");
-    });
-  });
+    if (!tooltip) {
+      allTooltips.forEach(t => t.classList.add("hidden-text"));
+      return;
+    }
 
-  document.addEventListener("click", () => {
-    tooltips.forEach(t => t.classList.add("hidden-text"));
+    tooltip.classList.toggle("hidden-text");
   });
 });

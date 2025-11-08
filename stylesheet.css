@@ -118,33 +118,32 @@ body.font-large button img {
 }
 
 .tooltip {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    color: grey;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .tooltip::before {
-    content: "";
-    width: 18px;
-    height: 18px;
-    background: url("/b/tooltip.png") center/contain no-repeat;
-    flex-shrink: 0;
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: url("tooltip.png") center/contain no-repeat;
+  vertical-align: middle;
 }
 
 body.dark-mode .tooltip::before {
-    background-image: url("/b/dark/tooltip-dark.png");
+  background-image: url("dark/tooltip-dark.png");
 }
 
-.tooltip.hidden-text {
-    color: transparent;
-    user-select: none;
+.tooltip::after {
+  content: attr(data-tooltip);
+  display: none;
+  margin-left: 6px;
 }
 
-.tooltip.hidden-text::before {
-    margin-right: 0;
+.tooltip.show::after {
+  display: inline;
 }
 
 

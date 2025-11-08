@@ -854,6 +854,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- Tooltip ---
 document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".tooltip").forEach(tooltip => {
+    tooltip.setAttribute("title", "Tooltip anzeigen");
+  });
+
   document.body.addEventListener("click", (e) => {
     const tooltip = e.target.closest(".tooltip");
     const all = document.querySelectorAll(".tooltip");

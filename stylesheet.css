@@ -117,7 +117,7 @@ body.font-large button img {
     display: none;
 }
 
-tooltip {
+.tooltip {
     position: relative;
     display: inline-flex;
     align-items: center;

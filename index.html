@@ -12,10 +12,10 @@
 </head>
 <body>
 
-<div class="darkModeToggle-safe">
+<div clas="darkModeToggle-safe">
     <input type="checkbox" id="darkModeToggle" checked style="--s:25px">
 </div>
-
+s
 <div style="display: none;" class="werkzeuge"><img class="toggleTrigger dark-switch" data="false flex left" src="b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge"><div class="toggleContent" data-direction="left"><button id="fontToggle"><img class="dark-switch" src="b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button><button id="fullscreenBtn"><img class="dark-switch" src="b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button><div id="audioPlayer"><button id="speakerBtn"><img src="b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button><button id="playBtn"><img src="b/play.png" class="dark-switch" alt="Play"></button><button id="pauseBtn"><img src="b/pause.png" class="dark-switch" alt="Pause"></button><button id="backBtn"><img src="b/10sec-back.png" class="dark-switch" alt="10 sec back"></button></div><audio id="myAudio" src="m/ex.mp3"></audio></div></div>
 
 <svg viewBox="0 0 500 500" class="menu">
@@ -41,7 +41,13 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+<script src="config.js"></script>
+<script>
+  const version = window.APP_VERSION || 1;
+  const script = document.createElement('script');
+  script.src = `script.js?v=${version}`;
+  document.body.appendChild(script);
+</script>
 <script>
 const jsonUrl = "https://offenes-fragezeichen.github.io/articles.json?nocache=" + Date.now();
 console.log(jsonUrl);

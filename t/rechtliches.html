@@ -242,7 +242,13 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../script.js"></script>
+<script src="../config.js"></script>
+<script>
+  const version = window.APP_VERSION || 1;
+  const script = document.createElement('script');
+  script.src = `../script.js?v=${version}`;
+  document.body.appendChild(script);
+</script>
 
 <script>
 let quizData = [

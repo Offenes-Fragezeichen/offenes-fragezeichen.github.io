@@ -63,8 +63,7 @@ fetch(jsonUrl)
         const li = document.createElement("li");
 
         const a = document.createElement("a");
-        a.href = "../../beitrag/" + file.id + ".html";
-        a.target = "_blank";
+        a.href = "../../beitrag/" + file.id + ".html";     
         a.textContent = file.title;
         li.appendChild(a);
         list.appendChild(li);

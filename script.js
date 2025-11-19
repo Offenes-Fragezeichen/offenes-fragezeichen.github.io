@@ -578,20 +578,20 @@ for (let i = 0; i < segments; i++) {
   hoverText.setAttribute("alignment-baseline", "middle");
   hoverText.setAttribute("fill", "white");
 
-const bboxDummy = document.createElementNS("http://www.w3.org/2000/svg", "text");
-bboxDummy.textContent = labels[i].text;
-bboxDummy.setAttribute("font-size", "16");
-bboxDummy.setAttribute("font-family", "Lora, sans-serif");
-menu.appendChild(bboxDummy);
-const bbox = bboxDummy.getBBox();
-menu.removeChild(bboxDummy);
+  const bboxDummy = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  bboxDummy.textContent = labels[i].text;
+  bboxDummy.setAttribute("font-size", "16");
+  bboxDummy.setAttribute("font-family", "Lora, sans-serif");
+  menu.appendChild(bboxDummy);
+  const bbox = bboxDummy.getBBox();
+  menu.removeChild(bboxDummy);
 
   const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
   rect.setAttribute("y", hy - bbox.height / 2 - 3);
-const paddingLeft = 20;
-const paddingRight = 30;
-rect.setAttribute("x", hx - bbox.width / 2 - paddingLeft);
-rect.setAttribute("width", bbox.width + paddingLeft + paddingRight);
+  const paddingLeft = 20;
+  const paddingRight = 30;
+  rect.setAttribute("x", hx - bbox.width / 2 - paddingLeft);
+  rect.setAttribute("width", bbox.width + paddingLeft + paddingRight);
   rect.setAttribute("height", bbox.height + 6);
   rect.setAttribute("rx", 5);
   rect.setAttribute("ry", 5);
@@ -671,13 +671,15 @@ function setIconHovered(index, isHovered) {
   recalcTargets();
 }
 
-function handleMove(x, y) {
+function handlePointerMove(x, y) {
   if (!menuOpen) return;
-  const point = menu.ownerSVGElement.createSVGPoint();
+
+  const point = svg.createSVGPoint();
   point.x = x;
   point.y = y;
   const svgPoint = point.matrixTransform(menu.getScreenCTM().inverse());
   const dx = svgPoint.x, dy = svgPoint.y;
+
   const distance = Math.sqrt(dx*dx + dy*dy);
 
   if (distance < hitInnerRadius) {
@@ -691,6 +693,7 @@ function handleMove(x, y) {
 
   let angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
   if (angle < 0) angle += 360;
+
   const index = Math.floor(angle / anglePerSegment);
   const hovered = segmentElements[index];
 
@@ -706,7 +709,7 @@ function handleMove(x, y) {
   }
 }
 
-function handleEnd(x, y) {
+function handlePointerEnd(x, y) {
   if (!menuOpen) return;
   if (currentHovered) {
     const link = currentHovered.dataset.link;
@@ -717,30 +720,25 @@ function handleEnd(x, y) {
   closeMenu();
 }
 
-svg.addEventListener("mouseenter", openMenu);
-svg.addEventListener("mouseleave", closeMenu);
-document.addEventListener("mousemove", e => handleMove(e.clientX, e.clientY));
-document.addEventListener("mouseup", e => handleEnd(e.clientX, e.clientY));
+// --- Pointer Event Handling ---
+svg.addEventListener("pointerenter", () => openMenu());
+svg.addEventListener("pointerleave", () => closeMenu());
 
-svg.addEventListener("touchstart", e => {
-  if (e.touches.length > 0) {
-    openMenu();
-    handleMove(e.touches[0].clientX, e.touches[0].clientY);
-  }
-}, { passive: true });
-
-svg.addEventListener("touchmove", e => {
-  if (menuOpen && e.touches.length > 0) {
-    e.preventDefault();
-    handleMove(e.touches[0].clientX, e.touches[0].clientY);
-  }
-}, { passive: false });
-
-svg.addEventListener("touchend", e => {
-  if (e.changedTouches.length > 0) {
-    handleEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-  }
+svg.addEventListener("pointerdown", e => {
+  openMenu();
+  handlePointerMove(e.clientX, e.clientY);
 });
+
+svg.addEventListener("pointermove", e => {
+  if (menuOpen) handlePointerMove(e.clientX, e.clientY);
+});
+
+svg.addEventListener("pointerup", e => {
+  handlePointerEnd(e.clientX, e.clientY);
+});
+
+svg.addEventListener("pointercancel", closeMenu);
+
 
 // --- Light/Darkmode ---
 const bgColors = ["#FAFAF0", "#F5F7FA", "#FFF9F0", "#F0FAF5", "#F5F0FF"];

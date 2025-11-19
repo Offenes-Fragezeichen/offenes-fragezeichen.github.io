@@ -104,13 +104,18 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../config.js"></script>
 <script>
-  const version = window.APP_VERSION || 1;
-  const script = document.createElement('script');
-  script.src = `../script.js?v=${version}`;
-  document.body.appendChild(script);
+  const configScript = document.createElement('script');
+  configScript.src = "../config.js?nocache=" + Date.now();
+  configScript.onload = () => {
+    const version = window.APP_VERSION || 1;
+    const script = document.createElement('script');
+    script.src = `../script.js?v=${version}`;
+    document.body.appendChild(script);
+  };
+  document.body.appendChild(configScript);
 </script>
+
 <script>
 const jsonUrl = "https://offenes-fragezeichen.github.io/articles.json?nocache=" + Date.now();
 const filterSignature = "fremde-federn";

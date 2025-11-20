@@ -640,7 +640,7 @@ main {
         dominant-baseline: middle;
         pointer-events: none;
     }
-
+/*
 svg.menu,
 svg.menu * {
     -webkit-user-select: none;
@@ -648,7 +648,7 @@ svg.menu * {
     -webkit-touch-callout: none;
     touch-action: none;
 }
-
+*/
 /* Quellen */  
 .quellen {
     border-top: 1px solid black;

@@ -741,122 +741,101 @@ svg.addEventListener("pointercancel", closeMenu);
 
 
 // --- Light/Darkmode ---
+const bgColors = ["#FAFAF0", "#F5F7FA", "#FFF9F0", "#F0FAF5", "#F5F0FF"];
+
+function setRandomBackgroundColor() {
+  if (!document.body.classList.contains("dark-mode")) {
+    const randomIndex = Math.floor(Math.random() * bgColors.length);
+    document.body.style.backgroundColor = bgColors[randomIndex];
+  }
+}
+
+// Entfernt vorhandene "/dark/" und "-dark" um wieder auf die helle Basis zu kommen
+function normalizeToLight(src) {
+  if (!src) return src;
+  let s = src.replace(/\/dark\//g, '/');
+  s = s.replace(/-dark(?=\.[^/.]+$)/, '');
+  return s;
+}
+
+// Baut aus der hellen Version die dunkle Variante: ordner/dark/dateiname-dark.ext
+function makeDarkFromLight(lightSrc) {
+  if (!lightSrc) return lightSrc;
+  const lastDot = lightSrc.lastIndexOf(".");
+  if (lastDot === -1) return lightSrc;
+
+  const ext = lightSrc.slice(lastDot);
+  const base = lightSrc.slice(0, lastDot);
+
+  const parts = base.split("/");
+  const fileName = parts.pop();
+  parts.push("dark");
+  parts.push(`${fileName}-dark${ext}`);
+
+  return parts.join("/");
+}
+
+function updateDarkSwitchImages(isDarkMode) {
+  document.querySelectorAll("img.dark-switch").forEach((img) => {
+    // Helle Basis sichern
+    const originalSrc = img.getAttribute("data-original") || img.src;
+    const lightBase = normalizeToLight(originalSrc);
+
+    if (!img.hasAttribute("data-original")) {
+      img.setAttribute("data-original", lightBase);
+    }
+
+    // Je nach Modus setzen
+    img.src = isDarkMode
+      ? makeDarkFromLight(img.getAttribute("data-original"))
+      : img.getAttribute("data-original");
+  });
+}
+
+function toggleDarkMode() {
+  const currentBg = getComputedStyle(document.body).getPropertyValue("--bg-image");
+  const isDarkMode = document.body.classList.toggle("dark-mode");
+
+  if (!isDarkMode) {
+    setRandomBackgroundColor();
+  } else {
+    document.body.style.backgroundColor = "";
+  }
+
+  localStorage.setItem("darkMode", isDarkMode);
+
+  let themeColor = document.querySelector("meta[name='theme-color']");
+  if (!themeColor) {
+    themeColor = document.createElement("meta");
+    themeColor.setAttribute("name", "theme-color");
+    document.head.appendChild(themeColor);
+  }
+  themeColor.setAttribute("content", isDarkMode ? "#121212" : "#ffffff");
+
+  updateDarkSwitchImages(isDarkMode);
+  requestAnimationFrame(() => {
+    document.body.style.setProperty("--bg-image", currentBg);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  // ----------------------
-  // Darkmode
-  // ----------------------
   const checkbox = document.getElementById("darkModeToggle");
-  const bgColors = ["#FAFAF0", "#F5F7FA", "#FFF9F0", "#F0FAF5", "#F5F0FF"];
-
-  function normalizeToLight(src) {
-    if (!src) return src;
-    let s = src.replace(/\/dark\//g, '/');
-    s = s.replace(/-dark(?=\.[^/.]+$)/, '');
-    return s;
-  }
-
-  function makeDarkFromLight(lightSrc) {
-    if (!lightSrc) return lightSrc;
-    const lastDot = lightSrc.lastIndexOf(".");
-    if (lastDot === -1) return lightSrc;
-    const ext = lightSrc.slice(lastDot);
-    const base = lightSrc.slice(0, lastDot);
-    const parts = base.split("/");
-    const fileName = parts.pop();
-    parts.push("dark");
-    parts.push(`${fileName}-dark${ext}`);
-    return parts.join("/");
-  }
-
-  function updateDarkSwitchImages(isDarkMode) {
-    document.querySelectorAll("img.dark-switch").forEach((img) => {
-      const originalSrc = img.getAttribute("data-original") || img.src;
-      const lightBase = normalizeToLight(originalSrc);
-      if (!img.hasAttribute("data-original")) img.setAttribute("data-original", lightBase);
-      img.src = isDarkMode ? makeDarkFromLight(img.getAttribute("data-original")) : img.getAttribute("data-original");
-    });
-  }
-
-  function setRandomBackgroundColor() {
-    if (!document.body.classList.contains("dark-mode")) {
-      const randomIndex = Math.floor(Math.random() * bgColors.length);
-      document.body.style.backgroundColor = bgColors[randomIndex];
-    }
-  }
-
-  function toggleDarkMode() {
-    const currentBg = getComputedStyle(document.body).getPropertyValue("--bg-image");
-    const isDarkMode = document.body.classList.toggle("dark-mode");
-
-    if (!isDarkMode) setRandomBackgroundColor();
-    else document.body.style.backgroundColor = "";
-
-    localStorage.setItem("darkMode", isDarkMode);
-
-    let themeColor = document.querySelector("meta[name='theme-color']");
-    if (!themeColor) {
-      themeColor = document.createElement("meta");
-      themeColor.setAttribute("name", "theme-color");
-      document.head.appendChild(themeColor);
-    }
-    themeColor.setAttribute("content", isDarkMode ? "#121212" : "#ffffff");
-
-    updateDarkSwitchImages(isDarkMode);
-
-    requestAnimationFrame(() => {
-      document.body.style.setProperty("--bg-image", currentBg);
-    });
-  }
-
-  // Initialisierung Darkmode
   const isDark = localStorage.getItem("darkMode") === "true";
-  if (isDark) document.body.classList.add("dark-mode");
-  else setRandomBackgroundColor();
 
-  if (checkbox) {
-    checkbox.checked = isDark;
-    setTimeout(() => checkbox.classList.add("ready"), 50);
-    checkbox.addEventListener("change", toggleDarkMode);
+  if (isDark) {
+    document.body.classList.add("dark-mode");
+    if (checkbox) checkbox.checked = true;
+    updateDarkSwitchImages(true);
+  } else {
+    if (checkbox) checkbox.checked = false;
+    setRandomBackgroundColor();
+    updateDarkSwitchImages(false);
   }
 
-  // ----------------------
-  // Menü
-  // ----------------------
-  const menu = document.getElementById("menu");
-  const svg = document.querySelector("svg.menu");
-  if (svg) svg.style.touchAction = "manipulation"; // bessere mobile Pointer-Unterstützung
-
-  // Segment-Logik (dein bestehender Menücode hier, unverändert) ...
-  // segmentElements, labelElements etc. initialisieren wie vorher
-
-  // Pointer-Events auf Touch/Pointer vereinheitlichen
-  svg.addEventListener("pointerenter", () => openMenu());
-  svg.addEventListener("pointerleave", () => closeMenu());
-  svg.addEventListener("pointerdown", e => { openMenu(); handlePointerMove(e.clientX, e.clientY); });
-  svg.addEventListener("pointermove", e => { if (menuOpen) handlePointerMove(e.clientX, e.clientY); });
-  svg.addEventListener("pointerup", e => { handlePointerEnd(e.clientX, e.clientY); });
-  svg.addEventListener("pointercancel", closeMenu);
-
-  // ----------------------
-  // Optional: Externe Links / Tooltips
-  // ----------------------
-  const externLinks = document.querySelectorAll("a.extern-a");
-  externLinks.forEach(link => {
-    link.title = "Externer Link";
-    const icon = document.createElement("img");
-    icon.src = isDark ? "/b/dark/extern-dark.png" : "/b/extern.png";
-    icon.alt = "";
-    icon.className = "extern-icon";
-    link.appendChild(icon);
-  });
-
-  document.querySelectorAll(".tooltip").forEach(t => t.setAttribute("title", "Tooltip anzeigen"));
-  document.body.addEventListener("click", e => {
-    const tooltip = e.target.closest(".tooltip");
-    document.querySelectorAll(".tooltip").forEach(t => t.classList.remove("show"));
-    if (tooltip) tooltip.classList.add("show");
-  });
+  setTimeout(() => checkbox?.classList.add("ready"), 50);
+  checkbox?.addEventListener("change", toggleDarkMode);
 });
+
 
 // --- Externe Links ---
 document.addEventListener("DOMContentLoaded", () => {

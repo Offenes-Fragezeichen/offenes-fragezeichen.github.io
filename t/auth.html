@@ -17,7 +17,7 @@
             font-family: 'Courier New', monospace;
             padding: 20px;
             margin: 0;
-            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
             overflow: hidden;
             position: relative;
         }
@@ -88,6 +88,14 @@
 </div>
 
 <script type="module">
+function fixMobileVH() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+fixMobileVH();
+window.addEventListener('resize', fixMobileVH);
+
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 const supabaseUrl = 'https://ngtujvgsbymtxphwncuj.supabase.co';
@@ -349,3 +357,4 @@ bootSequence();
 
 </body>
 </html>
+

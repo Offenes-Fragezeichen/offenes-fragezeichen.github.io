@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Fragezeichen | Forum</title>
+    <title>Fragezeichen | Forum Romanum</title>
     <meta name="author" content="&Eacute;mile Jeremias Ruff">        
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../favicon.ico">
@@ -12,7 +12,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <style>        
+    <style>   
+        main > p:nth-of-type(1) {
+            border-left: 1px solid black;
+            padding-left: 15px;
+        }
+                .dark-mode main > p:nth-of-type(1) {
+                    border-left: 1px solid white;
+                }
+
+        main > p:nth-of-type(2) {
+            text-align: right;
+            font-style: italic;
+        }
+
+        main > p:nth-of-type(1) span {
+            font-style: italic;
+        }
+
         .new-q {
             margin: 50px 0 25px 10px;
             width: 85%;
@@ -33,6 +50,10 @@
             overflow-wrap: break-word;
             word-wrap: break-word; /* für ältere Browser */
         }
+                .dark-mode .new-q textarea, .dark-mode #answer-text {
+                    border-bottom: 1px solid white;
+                    color: white;
+                }
 
         .new-q textarea::placeholder, #answer-text::placeholder {
             font-size: 15px;
@@ -42,17 +63,7 @@
             outline: none;
         }
 
-        #answer-text:hover {
-            animation: partyColors 2s infinite linear;
-            border-radius: 10px;
-        }
-
-        #answer-text:focus {
-            animation: none;
-            border-radius: 0px;
-        }
-
-        .new-q button, #answer-input button {
+        .new-q button, #answer-input button:nth-of-type(2) {
             background-color: transparent;
             border: 1px solid black;
             border-radius: 8px;
@@ -61,18 +72,32 @@
             position: absolute;
             top: 0;
         }
+                .dark-mode .new-q button, .dark-mode #answer-input button:nth-of-type(2) {
+                    border: 1px solid white;
+                    color: white;
+                }
 
-        .new-q button:hover, #answer-input button:hover {
+        .new-q button:hover, #answer-input button:nth-of-type(2):hover {
             border: 1px dashed black;
             background-color: rgba(159, 43, 104, 0.1);
             animation: partyColors 0.5s infinite linear;
         }
+                .dark-mode .new-q button:hover, .dark-mode #answer-input button:nth-of-type(2):hover {
+                    border: 1px dashed white;
+                    background-color: rgba(159, 43, 104, 0.1);
+                    animation: partyColorsDark 0.5s infinite linear;
+                }
 
-        .new-q button:focus, #answer-input button:focus {
+        .new-q button:focus, #answer-input button:nth-of-type(2):focus {
             border: 1px solid black;
             background-color: black;
             color: white;
         }
+                .dark-mode .new-q button:focus, .dark-mode #answer-input button:nth-of-type(2):focus {
+                    border: 1px solid white;
+                    background-color: white;
+                    color: black;
+                }
 
         @keyframes partyColors {
             0%   { background-color: rgba(11, 142, 244, 0.3); }
@@ -93,9 +118,13 @@
             border-radius: 15px;
             padding: 10px 15px 10px 15px;
             margin-bottom: 20px; 
-            background-image: url(../b/comment-bg.png);
+            background-image: url("../b/comment-bg.png");
             background-size: cover;
         }
+                .dark-mode .question-container {
+                    border: 1px solid white;
+                    background-image: url("../b/dark/comment-bg-dark.png");
+                }
 
         .question-header {
             margin-bottom: 20px;
@@ -117,8 +146,53 @@
             position: relative;
         }
 
+        #answer-input button:nth-of-type(1) {
+            border-radius: 30px;
+            border: none;
+            width: 35px;
+            height: 35px;
+            background-color: transparent;
+            background-image: url("../b/pseudonym.png");
+            background-size: 25px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+                .dark-mode #answer-input button:nth-of-type(1) {
+                    border: 1px solid white;
+                    color: transparent;
+                    background-image: url("../b/dark/pseudonym-dark.png");
+                }
+
+        #answer-input button:nth-of-type(1):hover {
+            border: 1px dashed black;
+        }
+                .dark-mode #answer-input button:nth-of-type(1):hover {
+                    border: 1px dashed white;
+                }
+
+        #answer-input button:nth-of-type(1):focus {
+            border: 1px solid black;
+        }
+                .dark-mode #answer-input button:nth-of-type(1):focus {
+                    border: 1px solid white;
+                }
+
         #answers-area { 
             margin-top: 25px; 
+        }
+
+        #answer-text {
+            height: 24px;
+        }
+
+        #answer-text:hover {
+            animation: partyColorsDark 2s infinite linear;
+            border-radius: 10px;
+        }
+
+        #answer-text:focus {
+            animation: none;
+            border-radius: 0px;
         }
 
         .mine { 
@@ -128,32 +202,6 @@
 
         .theirs { 
             margin-right: auto; 
-        }
-
-        .dark-mode .new-q textarea, .dark.mode #answer-text {
-            border-bottom: 1px solid white;
-            color: white;
-        }
-
-        .dark-mode .new-q button, .dark-mode #answer-input button {
-            border: 1px solid white;
-            color: white;
-        }
-
-        .dark-mode .question-container {
-            border: 1px solid white;
-        }
-
-        .dark-mode .new-q button:focus, .dark-mode #answer-input button:focus {
-            border: 1px solid white;
-            background-color: white;
-            color: black;
-        }
-
-        .dark-mode .new-q button:hover, .dark-mode #answer-input button:hover {
-            border: 1px dashed white;
-            background-color: rgba(159, 43, 104, 0.1);
-            animation: partyColorsDark 0.5s infinite linear;
         }
 
         @keyframes partyColorsDark {
@@ -177,12 +225,45 @@
             }
             
             .new-q button {
-                height: 60px;
+                height: 50px;
                 color: transparent;
                 background-image: url("../b/send-2.png");
                 background-size: 40px;
                 background-position: center;
                 background-repeat: no-repeat;
+            }
+                    .dark-mode .new-q button {
+                        color: transparent;
+                    }
+            
+            #answer-text {
+                width: 95%;
+            }
+
+            #answer-input button:nth-of-type(1) {
+                color: black;
+                background-image: none;
+            }
+                    .dark-mode #answer-input button:nth-of-type(1) {
+                        color: white;
+                        background-image: none;
+                    }
+            
+            #answer-input button:nth-of-type(1):hover {
+                border: 1px dashed black;
+            }
+            
+            #answer-input button:nth-of-type(1), #answer-input button:nth-of-type(2) {
+                border: 1px solid black;
+                border-radius: 8px;
+                padding: 6px 20px 6px 20px;
+                background-image: none;
+                height: auto;
+                width: auto;
+            }
+            
+            #answer-input button:nth-of-type(2) {
+                position: relative;
             }
         }
     </style>    
@@ -215,8 +296,33 @@
 
     <h1>Forum Romanum</h1>
 
+    <p>Kennt ihr das? Nachts um drei und man philosophiert über was auch 
+    immer? Und dann stellt man die Frage an das Reddit-Forum und andere 
+    philosophieren plötzlich mit einem mit? <br>
+    Das wäre meine Idee für dieses Forum gewesen. Ein Reddit unter Freunden
+    /Bekannten oder zumindest kennen wir uns alle übers Eck durch Jerry 
+    &#128517; Nachrichten/Fragen, die man nicht oder nie beantworten/
+    stellen muss, aber sehr gerne dazu eingeladen ist. 
+    <br><br>
+    Am Anfang aber erstmal eine Testphase, ob sich so ein Forum wirklich 
+    etabliert oder ob‘s vielleicht doch nen anderen Namen haben soll oder 
+    überhaupt existieren. Dafür gibt‘s 20 Testfragen/Themenbereiche und 
+    ihr könnt einfach alles loswerden, was ihr dazu loswerden *wollt*. 
+    Erst wenn die letzte Frage mit 20 Antworten geschlossen wurde, kann 
+    eine neue eröffnet werden. Das Wollen ist sehr wichtig. Ihr seid hier 
+    zu nichts verpflichtet. Geht‘s entspannt an &#x1F60A; und genießt es 
+    einfach, wie gleich und unterschiedlich Perspektiven sein können (und 
+    das man halt nicht die einzige Person ist, die sich damit 
+    auseinandersetzt). 
+    <br><br>
+    Damit man aufeinander reagieren kann, könnt ihr ja vielleicht ein 
+    Akronym <span>[Anmerkung Jerrys: gemeint ist ein Pseudonym]</span> 
+    (Katze, irwol72, etc.) verwenden &#x1F60A;</p>
+
+    <p>~Leni, 25/12/03</p>
+
     <div class="new-q">
-        <textarea id="new-question" rows="1" placeholder="Neue Frage stellen..."></textarea>
+        <textarea id="new-question"></textarea>
         <button onclick="createQuestion()">Frage stellen</button>
     </div>
 
@@ -224,9 +330,9 @@
 
     <div id="answer-input">
         <textarea id="answer-text" rows="1" placeholder="Antwort schreiben..."></textarea>
+        <button id="acroBtn">Pseudonym wählen</button>
         <button onclick="sendAnswer()">Senden</button>
     </div>
-
 </main>
 
 <footer>
@@ -261,29 +367,36 @@ textareas.forEach(el => {
 });
 </script>
 <script src="../script.js?nocache=1"></script>
+
 <script>
 let currentQuestion = null;
 let colorS = {};
 let questionStatus = {};
 
 const PALETTE = [
-    "#FF7F50", // Coral
-    "#6A5ACD", // SlateBlue
-    "#2E8B57", // SeaGreen
-    "#FF6347", // Tomato
-    "#708090", // SlateGray
-    "#8A2BE2", // BlueViolet
-    "#20B2AA", // LightSeaGreen
+    "rgba(143, 173, 136, 0.8)", "rgba(137, 167, 167, 0.8)",
+    "rgba(141, 59, 114, 0.8)",  "rgba(196, 35, 72, 0.8)",
+    "rgba(42, 72, 73, 0.8)",    "rgba(39, 33, 60, 0.8)",
+    "rgba(224, 142, 69, 0.8)",  "rgba(153, 70, 54, 0.8)",
+    "rgba(72, 169, 166, 0.8)",  "rgba(1, 32, 15, 0.8)",
+    "rgba(39, 76, 119, 0.8)",   "rgba(79, 36, 60, 0.8)",
+    "rgba(105, 153, 93, 0.8)",  "rgba(108, 128, 154, 0.8)",
+    "rgba(58, 1, 92, 0.8)",     "rgba(166, 28, 60, 0.8)",
+    "rgba(39, 16, 51, 0.8)",    "rgba(53, 88, 52, 0.8)",
+    "rgba(181, 131, 141, 0.8)", "rgba(129, 178, 154, 0.8)",
 ];
 
 const PALETTE_DARK = [
-    "#CC653F",
-    "#5448A1",
-    "#216946",
-    "#CC4F38",
-    "#5A626A",
-    "#6C2390",
-    "#1A877F",
+    "rgba(143, 173, 136, 0.7)", "rgba(137, 167, 167, 0.7)",
+    "rgba(141, 59, 114, 0.7)",  "rgba(196, 35, 72, 0.7)",
+    "rgba(42, 72, 73, 0.7)",    "rgba(39, 33, 60, 0.7)",
+    "rgba(224, 142, 69, 0.7)",  "rgba(153, 70, 54, 0.7)",
+    "rgba(72, 169, 166, 0.7)",  "rgba(1, 32, 15, 0.7)",
+    "rgba(39, 76, 119, 0.7)",   "rgba(79, 36, 60, 0.7)",
+    "rgba(105, 153, 93, 0.7)",  "rgba(108, 128, 154, 0.7)",
+    "rgba(58, 1, 92, 0.7)",     "rgba(166, 28, 60, 0.7)",
+    "rgba(39, 16, 51, 0.7)",    "rgba(53, 88, 52, 0.7)",
+    "rgba(181, 131, 141, 0.7)", "rgba(129, 178, 154, 0.7)",
 ];
 
 function pickColorForUser(userId) {
@@ -306,12 +419,17 @@ async function checkLoginState() {
         newQ.placeholder = "Einloggen erforderlich, um Fragen zu stellen";
         newQ.disabled = true;
         aText.placeholder = "Einloggen erforderlich, um zu antworten";
-    } else {
-        newQ.placeholder = "Neue Frage stellen...";
-        newQ.disabled = false;
-        aText.placeholder = "Antwort schreiben...";
+        return;
     }
+    
+    if (newQ.disabled) {
+        return;
+    }
+    
+    newQ.disabled = false;
+    aText.placeholder = "Antwort schreiben...";
 }
+
 
 async function loadQuestions() {
     const { data, error } = await client
@@ -386,6 +504,23 @@ async function loadQuestions() {
 
         box.appendChild(qDiv);
     });
+    
+    // NewQ Placeholder
+    const newQ = document.getElementById("new-question");
+    const { data: lastQ } = await client
+        .from('questions')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+
+    if (lastQ && lastQ.status !== "closed") {
+        newQ.placeholder = "Vorherige Frage muss erst abgeschlossen werden";
+        newQ.disabled = true;
+    } else {
+        newQ.placeholder = "Neue Frage stellen...";
+        newQ.disabled = false;
+    }
 }
 
 async function loadAnswers(questionId, containerDiv) {
@@ -421,19 +556,25 @@ async function loadAnswers(questionId, containerDiv) {
         contentDiv.textContent = a.content;
         div.appendChild(contentDiv);
 
-        const { data: userData } = await client
-            .from('users2')
-            .select('b_name')
-            .eq('user_id', a.user_id)
-            .single();
+        let displayName = null;
 
-        if (userData) {
-            const nameDiv = document.createElement('div');
-            nameDiv.textContent = userData.b_name;
-            nameDiv.style.fontSize = '12px';
-            nameDiv.style.opacity = '0.7';
-            div.appendChild(nameDiv);
+        if (a.user_id.length > 20) {
+            const { data: userData } = await client
+                .from('users2')
+                .select('b_name')
+                .eq('user_id', a.user_id)
+                .single();
+
+            if (userData) displayName = userData.b_name;
+        } else {
+            displayName = a.user_id;
         }
+
+        const nameDiv = document.createElement('div');
+        nameDiv.textContent = displayName;
+        nameDiv.style.fontSize = '12px';
+        nameDiv.style.opacity = '0.7';
+        div.appendChild(nameDiv);
 
         containerDiv.appendChild(div);
     }
@@ -458,7 +599,7 @@ async function sendAnswer() {
         aText.placeholder = "Bitte zuerst einloggen";
         return;
     }
-    const userId = data.user.id;
+    const userId = overrideUserId ?? data.user.id;
 
     if (!colorS[userId]) {
         const picked = pickColorForUser(userId);
@@ -490,6 +631,7 @@ async function sendAnswer() {
         `.question-container[data-id='${currentQuestion}'] .answers`
     );
     loadAnswers(currentQuestion, containerDiv);
+    overrideUserId = null; // einmalige Gültigkeit pro Pseud.
 }
 
 async function createQuestion() {
@@ -501,19 +643,6 @@ async function createQuestion() {
     if (!data.user) {
         newQ.placeholder = "Bitte zuerst einloggen";
         newQ.value = "";
-        return;
-    }
-
-    const { data: lastQ } = await client
-        .from('questions')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
-
-    if (lastQ && lastQ.status !== "closed") {
-        newQ.placeholder = "Erst antworten, dann neue Frage erstellen";
-        newQ.style.border = "1px solid red";
         return;
     }
 
@@ -529,6 +658,26 @@ async function createQuestion() {
 loadQuestions().then(checkLoginState);
 
 /* Enter sendet Frage */
+let overrideUserId = null;
+
+document.getElementById("acroBtn").onclick = () => {
+    let a = prompt("Pseudonym eingeben (max. 20 Zeichen)");
+
+    if (!a) return;
+
+    a = a.trim();
+
+    if (a.length > 20) {
+        alert("Das Pseudonym darf maximal 20 Zeichen haben.");
+        return;
+    }
+
+    if (a.length === 0) return;
+
+    overrideUserId = a;
+};
+
+
 document.getElementById("new-question").addEventListener("keydown", e => {
     if (e.key === "Enter") {
         e.preventDefault();
@@ -544,7 +693,6 @@ document.getElementById("answer-text").addEventListener("keydown", e => {
     }
 });
 </script>
-
 
 </body>
 </html>

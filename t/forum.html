@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Forum</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>        
+        .new-q {
+            margin: 50px 0 25px 10px;
+            width: 85%;
+            position: relative;
+        }
+
+        .new-q textarea {
+            padding-left: 5px;
+        }
+
+        .new-q textarea, #answer-text {
+            font-size: 15px;
+            border: none;
+            border-bottom: 1px solid black;
+            width: 75%;
+            min-height: 18px;
+            background-color: transparent;
+            overflow-wrap: break-word;
+            word-wrap: break-word; /* für ältere Browser */
+        }
+
+        .new-q textarea::placeholder, #answer-text::placeholder {
+            font-size: 15px;
+        }
+
+        .new-q textarea:focus, #answer-text:focus {
+            outline: none;
+        }
+
+        #answer-text:hover {
+            animation: partyColors 2s infinite linear;
+            border-radius: 10px;
+        }
+
+        #answer-text:focus {
+            animation: none;
+            border-radius: 0px;
+        }
+
+        .new-q button, #answer-input button {
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 6px 15px 6px 15px;
+            margin-left: 10px;
+            position: absolute;
+            top: 0;
+        }
+
+        .new-q button:hover, #answer-input button:hover {
+            border: 1px dashed black;
+            background-color: rgba(159, 43, 104, 0.1);
+            animation: partyColors 0.5s infinite linear;
+        }
+
+        .new-q button:focus, #answer-input button:focus {
+            border: 1px solid black;
+            background-color: black;
+            color: white;
+        }
+
+        @keyframes partyColors {
+            0%   { background-color: rgba(11, 142, 244, 0.3); }
+            10%  { background-color: rgba(255, 165, 0, 0.3); }
+            20%  { background-color: rgba(255, 255, 0, 0.3); }
+            30%  { background-color: rgba(0, 128, 0, 0.3); }
+            40%  { background-color: rgba(0, 255, 255, 0.3); }
+            50%  { background-color: rgba(0, 0, 255, 0.3); }
+            60%  { background-color: rgba(128, 0, 128,0.3); }
+            70%  { background-color: rgba(255, 192, 203, 0.3); }
+            80%  { background-color: rgba(255, 105, 180, 0.3); }
+            90%  { background-color: rgba(255, 20, 147, 0.3); }
+            100% { background-color: rgba(255, 0, 0, 0.3); }
+        }
+
+        .question-container {
+            border: 1px solid black;
+            border-radius: 15px;
+            padding: 10px 15px 10px 15px;
+            margin-bottom: 20px; 
+            background-image: url(../b/comment-bg.png);
+            background-size: cover;
+        }
+
+        .question-header {
+            margin-bottom: 20px;
+        }
+
+        .answer {    
+            width: fit-content; 
+            word-wrap: break-word;    
+            max-width: 70%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 12px;
+            color: white;
+        }
+
+        #answer-input {
+            display: none; 
+            margin-top: 20px;
+            position: relative;
+        }
+
+        #answers-area { 
+            margin-top: 25px; 
+        }
+
+        .mine { 
+            margin-left: auto; 
+            text-align: right; 
+        }
+
+        .theirs { 
+            margin-right: auto; 
+        }
+
+        .dark-mode .new-q textarea, #answer-text {
+            border-bottom: 1px solid white;
+            color: white;
+        }
+
+        .dark-mode .new-q button, .dark-mode #answer-input button {
+            border: 1px solid white;
+            color: white;
+        }
+
+        .dark-mode .question-container {
+            border: 1px solid white;
+        }
+
+        .dark-mode .new-q button:focus, .dark-mode #answer-input button:focus {
+            border: 1px solid white;
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode .new-q button:hover, .dark-mode #answer-input button:hover {
+            border: 1px dashed white;
+            background-color: rgba(159, 43, 104, 0.1);
+            animation: partyColorsDark 0.5s infinite linear;
+        }
+
+        @keyframes partyColorsDark {
+            0%   { background-color: rgba(11, 142, 244, 1); }
+            10%  { background-color: rgba(255, 165, 0, 1); }
+            20%  { background-color: rgba(255, 255, 0, 1); }
+            30%  { background-color: rgba(0, 128, 0, 1); }
+            40%  { background-color: rgba(0, 255, 255, 1); }
+            50%  { background-color: rgba(0, 0, 255, 1); }
+            60%  { background-color: rgba(128, 0, 128,1); }
+            70%  { background-color: rgba(255, 192, 203, 1); }
+            80%  { background-color: rgba(255, 105, 180, 1); }
+            90%  { background-color: rgba(255, 20, 147, 1); }
+            100% { background-color: rgba(255, 0, 0, 1); }
+        }
+
+
+        @media (max-width: 768px) {
+            .new-q textarea {
+                min-height: 40px;
+                width: 85%;
+            }
+            
+            .new-q button {
+                height: 60px;
+                color: transparent;
+                background-image: url("../b/send-2.png");
+                background-size: 40px;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+            
+            .question-container {
+            }
+        }
+    </style>    
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="../b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
+            <div style="display: none;" id="audioPlayer">
+                <button id="speakerBtn"><img src="../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button>
+                <button id="playBtn"><img src="../b/play.png" class="dark-switch" alt="Play"></button>
+                <button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button>
+                <button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
+            </div>
+            <audio style="display: none;" id="myAudio" src="../m/"></audio>
+        </div>
+    </div>
+
+    <h1>Forum Romanum</h1>
+
+    <div class="new-q">
+        <textarea id="new-question" rows="1" placeholder="Neue Frage stellen..."></textarea>
+        <button onclick="createQuestion()">Frage stellen</button>
+    </div>
+
+    <div id="questions"></div>
+
+    <div id="answer-input">
+        <textarea id="answer-text" rows="1" placeholder="Antwort schreiben..."></textarea>
+        <button onclick="sendAnswer()">Senden</button>
+    </div>
+
+</main>
+
+<footer>
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="../index.html">Root | Startseite</a></li>
+                    <li><a href="../t/zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="../t/fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="../t/kategorien.html">Kategorien</a></li>
+                    <li><a href="../t/auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="../t/ueber.html">Über</a></li>
+                    <li><a href="../t/rechtliches.html">Rechtliches</a></li>
+                    <li><a href="../t/kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script>
+const textareas = [
+    document.getElementById("new-question"),
+    document.getElementById("answer-text"),
+];
+
+function autoResizeTextarea(el) {
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+}
+
+textareas.forEach(el => {
+    if (!el) return;           // falls ein Element nicht existiert
+    el.addEventListener("input", () => autoResizeTextarea(el));
+    autoResizeTextarea(el);    // beim Laden direkt anwenden
+});
+</script>
+<script src="../script.js?nocache=1"></script>
+<script>
+let currentQuestion = null;
+let colorS = {};
+let questionStatus = {};
+
+const PALETTE = [
+    "#FF7F50", // Coral
+    "#6A5ACD", // SlateBlue
+    "#2E8B57", // SeaGreen
+    "#FF6347", // Tomato
+    "#708090", // SlateGray
+    "#8A2BE2", // BlueViolet
+    "#20B2AA", // LightSeaGreen
+];
+
+const PALETTE_DARK = [
+    "#CC653F",
+    "#5448A1",
+    "#216946",
+    "#CC4F38",
+    "#5A626A",
+    "#6C2390",
+    "#1A877F",
+];
+
+function pickColorForUser(userId) {
+    let hash = 0;
+    for (let i = 0; i < userId.length; i++) hash = (hash + userId.charCodeAt(i)) % 1000;
+    return {
+        normal: PALETTE[hash % PALETTE.length],
+        dark: PALETTE_DARK[hash % PALETTE_DARK.length]
+    };
+}
+
+async function checkLoginState() {
+    const { data } = await client.auth.getUser();
+    const user = data.user;
+
+    const newQ = document.getElementById("new-question");
+    const aText = document.getElementById("answer-text");
+
+    if (!user) {
+        newQ.placeholder = "Einloggen erforderlich, um Fragen zu stellen";
+        newQ.disabled = true;
+        aText.placeholder = "Einloggen erforderlich, um zu antworten";
+    } else {
+        newQ.placeholder = "Neue Frage stellen...";
+        newQ.disabled = false;
+        aText.placeholder = "Antwort schreiben...";
+    }
+}
+
+async function loadQuestions() {
+    const { data, error } = await client
+        .from('questions')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+    const box = document.getElementById('questions');
+    box.innerHTML = '';
+
+    let firstOpenSet = false; 
+
+    data.forEach(q => {
+        questionStatus[q.question_id] = q.status;
+
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question-container';
+        qDiv.dataset.id = q.question_id;
+
+        const header = document.createElement('div');
+        header.className = 'question-header';
+        header.textContent = q.title + " (" + q.answer_count + "/" + q.max_answers + ")";
+        header.style.cursor = "pointer";
+
+        const answersDiv = document.createElement('div');
+        answersDiv.className = 'answers';
+        answersDiv.style.display = 'none';
+
+        qDiv.appendChild(header);
+        qDiv.appendChild(answersDiv);
+
+        header.onclick = async () => {
+            const isOpen = answersDiv.style.display === 'block';
+
+            document.querySelectorAll('.answers').forEach(ad => ad.style.display = 'none');
+            document.querySelectorAll('.question-header').forEach(h => h.style.fontWeight = 'normal');
+
+            const answerInput = document.getElementById('answer-input');
+
+            if (!isOpen) {
+                answersDiv.style.display = 'block';
+                header.style.fontWeight = 'bold';
+                currentQuestion = q.question_id;
+
+                loadAnswers(q.question_id, answersDiv);
+
+                if (q.status === 'closed') {
+                    answerInput.style.display = 'none';
+                } else {
+                    qDiv.appendChild(answerInput);
+                    answerInput.style.display = 'block';
+                }
+            } else {
+                answersDiv.style.display = 'none';
+                document.getElementById('answer-input').style.display = 'none';
+            }
+        };
+
+        if (!firstOpenSet && q.status !== 'closed') {
+            answersDiv.style.display = 'block';
+            header.style.fontWeight = 'bold';
+            currentQuestion = q.question_id;
+
+            loadAnswers(q.question_id, answersDiv);
+
+            const answerInput = document.getElementById('answer-input');
+            qDiv.appendChild(answerInput);
+            answerInput.style.display = 'block';
+
+            firstOpenSet = true;
+        }
+
+        box.appendChild(qDiv);
+    });
+}
+
+async function loadAnswers(questionId, containerDiv) {
+    const { data } = await client.auth.getUser();
+    const myId = data.user?.id ?? null;
+
+    const { data: answers } = await client
+        .from('answers')
+        .select('*')
+        .eq('question_id', questionId)
+        .order('created_at');
+
+    const { data: colorData } = await client
+        .from('question_user_color')
+        .select('*')
+        .eq('question_id', questionId);
+
+    colorS = {};
+    colorData.forEach(c => colorS[c.user_id] = c);
+
+    containerDiv.innerHTML = '';
+
+    const dark = document.body.classList.contains("darkmode");
+
+    for (const a of answers) {
+        const div = document.createElement('div');
+        div.className = 'answer' + (myId === a.user_id ? ' mine' : ' theirs');
+
+        const c = colorS[a.user_id];
+        div.style.background = dark ? c.color_darkmode : c.color;
+
+        const contentDiv = document.createElement('div');
+        contentDiv.textContent = a.content;
+        div.appendChild(contentDiv);
+
+        const { data: userData } = await client
+            .from('users2')
+            .select('b_name')
+            .eq('user_id', a.user_id)
+            .single();
+
+        if (userData) {
+            const nameDiv = document.createElement('div');
+            nameDiv.textContent = userData.b_name;
+            nameDiv.style.fontSize = '12px';
+            nameDiv.style.opacity = '0.7';
+            div.appendChild(nameDiv);
+        }
+
+        containerDiv.appendChild(div);
+    }
+}
+
+async function sendAnswer() {
+    if (!currentQuestion) return;
+
+    if (questionStatus[currentQuestion] === 'closed') {
+        const aText = document.getElementById("answer-text");
+        aText.value = "";
+        aText.placeholder = "Diese Frage ist geschlossen";
+        return;
+    }
+
+    const aText = document.getElementById("answer-text");
+    const txt = aText.value.trim();
+    if (!txt) return;
+
+    const { data } = await client.auth.getUser();
+    if (!data.user) {
+        aText.placeholder = "Bitte zuerst einloggen";
+        return;
+    }
+    const userId = data.user.id;
+
+    if (!colorS[userId]) {
+        const picked = pickColorForUser(userId);
+
+        await client.from("question_user_color").insert({
+            question_id: currentQuestion,
+            user_id: userId,
+            color: picked.normal,
+            color_darkmode: picked.dark
+        });
+
+        colorS[userId] = {
+            color: picked.normal,
+            color_darkmode: picked.dark
+        };
+    }
+
+    await client.from("answers").insert({
+        question_id: currentQuestion,
+        user_id: userId,
+        content: txt
+    });
+
+    await client.rpc("increment_answer_count", { q_id: currentQuestion });
+
+    aText.value = "";
+
+    const containerDiv = document.querySelector(
+        `.question-container[data-id='${currentQuestion}'] .answers`
+    );
+    loadAnswers(currentQuestion, containerDiv);
+}
+
+async function createQuestion() {
+    const newQ = document.getElementById("new-question");
+    const title = newQ.value.trim();
+    if (!title) return;
+
+    const { data } = await client.auth.getUser();
+    if (!data.user) {
+        newQ.placeholder = "Bitte zuerst einloggen";
+        newQ.value = "";
+        return;
+    }
+
+    const { data: lastQ } = await client
+        .from('questions')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+
+    if (lastQ && lastQ.status !== "closed") {
+        newQ.placeholder = "Erst antworten, dann neue Frage erstellen";
+        newQ.style.border = "1px solid red";
+        return;
+    }
+
+    await client.from('questions').insert({
+        user_id: data.user.id,
+        title: title
+    });
+
+    newQ.value = "";
+    loadQuestions();
+}
+
+loadQuestions().then(checkLoginState);
+
+/* Enter sendet Frage */
+document.getElementById("new-question").addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        createQuestion();
+    }
+});
+
+/* Enter sendet Antwort */
+document.getElementById("answer-text").addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        sendAnswer();
+    }
+});
+</script>
+
+
+</body>
+</html>

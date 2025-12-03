@@ -488,7 +488,7 @@ const labels = [
   { image: "/b/dark/feder-dark.png", text: "Fremde Federn", size: 50, link: "/t/fremde-federn.html" },
   { image: "/b/dark/kategorien-dark.png", text: "Kategorien", size: 50, link: "/t/kategorien.html" },
   { image: "/b/dark/login-dark.png", text: "Login", size: 58, link: "/t/auth.html" },
-  { image: "/p/symbol.png", text: "Symbol", size: 50, link: "https://example.com/symbol" },
+  { image: "/b/forum.png", text: "Forum", size: 50, link: "/t/forum.html" },
   { image: "/b/dark/zufall-dark.png", text: "Einfach mal irgendwo starten", size: 50, link: "/t/zufall.html" }
 ];
 
@@ -649,6 +649,14 @@ function recalcTargets() {
 function openMenu() {
   if (menuOpen) return;
   menuOpen = true;
+
+  const loginSeg = segmentElements.find(s => s.dataset.label === "Login");
+  if (loginSeg) {
+    const base = labels[3].link;
+    const red = encodeURIComponent(window.location.href);
+    loginSeg.dataset.link = `${base}?redirect=${red}`;
+  }
+
   segmentElements.forEach(el => el.classList.add("active"));
   hitElements.forEach(el => el.style.pointerEvents = "auto");
   recalcTargets();
@@ -714,7 +722,7 @@ function handlePointerEnd(x, y) {
   if (currentHovered) {
     const link = currentHovered.dataset.link;
     if (link) {
-      window.open(link);
+      window.location.href = link;
     }
   }
   closeMenu();

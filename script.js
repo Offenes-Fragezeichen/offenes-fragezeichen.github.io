@@ -117,9 +117,20 @@ async function loadProtectedArticles() {
             </div>
             <h1>${json.title}</h1>
             <p>${json.content}</p>
-            <p class="verfasst">${json.autor} <br><span class="datum">${json.datum}</span></p>`;
-          json.title = json.title.replaceAll(" ", "_");
-          audio.src = '../m/' + json.title + '.mp3';
+            <p class="verfasst">${json.author} <br><span class="datum">${json.datum}</span></p>`;
+            
+            const safeTitle = json.id.replaceAll(" ", "_") + ".mp3";
+            const { data: audioFile, error: audioErr } = await client.storage
+              .from('m')
+              .download(safeTitle);
+
+            if (audioErr) {
+              console.warn("Kein Audio gefunden:", safeTitle);
+            } else {
+              const blobUrl = URL.createObjectURL(audioFile);
+              audio.src = blobUrl;
+            }
+
         } catch (err) {
           article.innerHTML = '<p>Fehler [LOL] - Frage doch den mächtigen Guru (Jerry/Jeremias)</p>[' + err.message + ']';
         }

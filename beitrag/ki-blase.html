@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | KI-Blase - was das ist und ob es eitern könnte</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <style>
+        h3 {
+            margin-top: 50px;
+        }
+
+        article p:nth-of-type(1) {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+        }
+                .dark-mode article p:nth-of-type(1) {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+
+        article p:nth-of-type(2) span:nth-of-type(2),
+        article p:nth-of-type(3) span:nth-of-type(1) {
+            font-style: italic;
+        }
+        
+        article p:nth-of-type(4) a {
+            text-decoration: underline;
+        }
+        
+        .fliessschema {
+            display: flex;
+            height: 500px;
+        }
+        
+        .fliessschema img {
+            height: 100%;
+            width: auto;
+        }
+        
+        .fliessschema div {
+            display: block;
+        }
+        
+        .fliessschema ul {
+            padding-left: 15px;
+        } 
+    </style>
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="../b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
+            <div id="audioPlayer">
+                <button id="speakerBtn"><img src="../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button>
+                <button id="playBtn"><img src="../b/play.png" class="dark-switch" alt="Play"></button>
+                <button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button>
+                <button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
+            </div>
+            <audio id="myAudio" src="../m/ki-blase.mp3"></audio>
+        </div>
+    </div>
+
+    <h1>KI-Blase - was das ist und ob es eitern könnte</h1>
+
+    <article>
+    <p>Vorweg: Neben Aktien gibt es noch andere beteiligte Finanzprodukte, 
+    der Einfachheit halber ist im Beitrag jedoch nur von diesem einen Begriff
+    die Rede.</p>
+
+    <p>Ein Begriff, der in letzter Zeit immer mal wieder durch die 
+    Nachrichten geistert ist der, der „KI-Blase“, auf englisch „AI-Bubble“. 
+    Gerade bei den das Klischee erfüllenden Money-Money-Money- <span 
+    class="tooltip" data-tooltip="Alles eine Frage des Mindset, komm' in
+    die Gruppe, kauf mein Buch-"></span>Investment<span>beratern</span>
+    tauchen da auch gerne Worte auf wie: Zukunftswette, S&P 500, Fundamentaldaten, 
+    Fehlallokation und KGV. Es ist nicht schwer, KI-Krise zu googlen,
+    doch eine verständliche Antwort zu finden, kann ein Weilchen dauern, kennt
+    man sich nicht damit aus. Und wenn selbst die <a class="extern-a" 
+    href="https://www.tagesschau.de/wirtschaft/finanzen/ki-blase-100.html">
+    Tagesschau von einer möglichen Überbewertung berichtet</a>, denke ich, 
+    kann es nicht schaden, sich das befürchtete Risiko mal genauer anzuschauen
+    - und keine Sorge: Fachbegriffe, die neu eingebracht werden, gilt es zu
+    erklären.</p>
+
+    <h3>Zuerst einmal: Was ist mit dem Begriff der KI-Blase gemeint?</h3>
+    <p>KI steht als Akronym für „Künstliche Intelligenz“. Einige der Unternehmen, 
+    deren Geschäftsmodell auf
+    der Nutzung bzw. dem Ausbau von Künstlicher Intelligenz basieren, sind 
+    börsennotiert, haben also ihren eigenen schnuckeligen Platz an 
+    Börse. Man kann Aktien und Co. von ihnen erwerben, in sie investieren.<br>
+    Eine «Blase an der Börse» bezieht sich weder
+    auf obercoole Börsenmakler mit zu viel Kaugummi, noch auf mangelnde Hygienemaßnahmen. Gemeint ist eine Überbewertung des tatsächlichen Wertes eines 
+    Unternehmen. Werden die Aktien von Firma XY zusammengerechnet für zwei Milliarden
+    Dollar gehandelt, ist das Unternehmen also in der Börse mit zwei Milliarden bewertet.
+    Macht es dabei aber nur einen Gewinn von ein paar wenigen Millionen, so kann man
+    durchaus sagen, wird es überbewertet. Das ist im Finanzmarkt nicht unüblich,
+    so wettet man meist auf den zukünftigen Wert seiner Aktien und nicht darauf, 
+    wie viel Firma XY zum Zeitpunkt des Kaufes wirklich wert ist.<br>
+    Schließlich kaufe ich eine Aktie, also einen Teil der Firma XY nur deshalb, 
+    weil ich meine, sie zu einem späteren Zeitpunkt für mehr zu verkaufen - 
+    worin mein Gewinn liegt. Ich hoffe/wette also darauf, dass der Wert, 
+    d.h. der Gewinn der Firma XY zunimmt. <span class="tooltip" data-tooltip="Woher 
+    will man das wissen? Geheime Absprachen/ Gar nicht/ Marktmanipulierung/ Fieser
+    Wirtschaftskram"></span>.</p>
+
+    <h3>Ja. Ok. Ist mir doch egal</h3>
+    <p>Die Gefahr einer solchen Blase liegt darin, dass einer jeden Blase Sinn 
+    und Zweck ihres Daseins ist, irgendwann einmal zu platzen. Konkret hieße das,
+    der Wert der Aktien betroffener Unternehmen, in diesem Fall die der KI-Branche,
+    fällt. Ein solcher plötzlicher Fall zu hoch kalkulierter Wertpapiere nennt man
+    auch Börsenkorrektur. In einem gewissen Maße gehört ein solcher Fall zu den 
+    üblichen Marktmechanismen (Stichwort: „Der Markt regelt.“) und ist nicht zwingend
+    Indikator einer fundamentalen Wirtschaftskrise.<br>
+    Für die Anleger bedeutet das, dass die Aktien, die sie zuvor erworben haben,
+    an Wert verlieren - ihr investiertes Kapital ist verloren. Gemäß des <a 
+    href="../t/k/kapitalistenbashing.html">Kapitalistenbashing</a> freuen wir uns 
+    kurz' drüber und gut ist, jedoch hat dieser Wertverlust weitreichendere 
+    Konsequenzen, als man auf den ersten Blick zu ahnen vermag.
+    <br><br>
+    Ein übliches Phänomen ist, dass nach großen Wertverlusten auch die Investoren 
+    anderer, eigentlich nicht-betroffener Branchen weniger risikobereit sind. Sogenanntes
+    „Venture Capital“, also wagnisreiche Investitionen, werden dann seltener vergeben 
+    und allgemein lässt sich sagen, dass viele Kurse <span class="tooltip"
+    data-tooltip="Kurse = Verlauf eines Aktienwertes"></span> an der Börse zurückgehen. 
+    Diese Ausbreitung von Investitionsangst hat sogar einen Namen bekommen: <a class="extern-a" 
+    href="https://de.wikipedia.org/wiki/Contagion-Effekt">Contagion-Effekt</a></p>
+    
+    <br>
+    <div class="fliessschema">
+    <img src="../b/pfeil.png" class="dark-switch" alt="Grafik eines Pfeiles nach unten">
+    <div> Weniger Investitionen & seltenere Kreditvergabe<br><br>
+        Weniger Kapital für Unternehmen<br><br>
+        <ul><li>Bestehende Arbeitsprozesse sind gefährdet, da Geld benötigt wird
+                für Gehälter, Ersatzteile, Maschinenwartung, Modernisierung</li>
+            <li>Subbranchen leiden, zB. Zulieferer<br>
+                -> weniger Lohn für deren Mitarbeitenden<br>
+                -> sinkender Konsum/ Kaufverhalten<br>
+                -> Handel & Dienstleistungssektor leiden</li>
+            <li>Staat nimmt weniger Steuern ein</li>
+            <li>Weniger Fortschritt</li></ul>
+    </div>
+    </div>
+
+    <p>Die Rezession, also der wirtschaftliche Rückgang, einer einzelnen Branche an 
+    der Börse kann, wenn diese Branche einen genügend großen psychologischen Einfluss
+    hat, also zu einem branchenübergreifenden Investitionsstau führen und sich damit
+    Konsequenzen erarbeiten, die über die Zahlen der Börse hinaus, in den Alltag
+    unbeteiligter Menschen reichen.</p>
+    
+    <p>In Teil zwei ist geplant, einen genaueren Blick auf eines der führenden Unternehmen, 
+    NVIDIA, zu werfen sowie das Risiko eines solchen Blasenplatzens zu fachsimpeln - 
+    und dessen Konsequenzen womöglich ein wenig einzuschränken.</p>
+    </article>
+
+    <p class="verfasst">Jerry <br><span class="datum">{Datum}</span></p>
+</main>
+
+<footer>
+    <div class="quellen">
+        <p>Quellen:</p>
+        <ol><li><a href="https://chatgpt.com">OpenAI. ChatGPT, Version GPT-5.1</a></li>
+            <li><a href="https://newcms.trustnet.com/investing/13455818/the-aftermath-what-happens-when-bubbles-burst">Trustnet Learn, Trustnet</a></li>
+            <li><a href="https://www.tagesschau.de/wirtschaft/finanzen/ki-blase-100.html">Detlev Landmesser, Tagesschau</a></li>
+            <li><a href="https://de.wikipedia.org/wiki/Contagion-Effekt">mehrere Autoren, Wikipedia - Die freie Enzyklopädie</a></li></ol>
+    </div>
+
+    <div class="komments">
+        <p>Kommentare</p>
+        <div id="commentRead">Lade Kommentare...</div>
+
+        <form id="commentWrite">
+            <textarea id="commentText" placeholder="POST /comments {body: …} | Eigenen Gedanken Platz verschaffen (öffentlich)" required></textarea>
+            <div><div id="loginDiv">
+                    <div id="loginForm">
+                        <input id="email" placeholder="Benutzername">
+                        <input type="password" id="password" placeholder="Passwort">
+                        <button type="button" id="loginBtn"><img src="../b/login.png" class="dark-switch" alt="Einloggen"></button>
+                    </div>
+                    <button type="button" id="logoutBtn" style="display:none;">Logout</button></div>
+
+                 <div id="sendDiv">
+                    <label><input type="checkbox" id="anonymousCheck"> anonym posten</label>
+                    <button type="submit">Absenden <img src="../b/send.png" class="dark-switch" alt="Abschicken"></button></div>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="../index.html">Root | Startseite</a></li>
+                    <li><a href="../t/zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="../t/forum.html">Forum</li>
+                    <li><a href="../t/fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="../t/kategorien.html">Kategorien</a></li>
+                    <li><a href="../t/auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="../t/ueber.html">Über</a></li>
+                    <li><a href="../t/rechtliches.html">Rechtliches</a></li>
+                    <li><a href="../t/kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js?nocache=1"></script>
+
+</body>
+</html>

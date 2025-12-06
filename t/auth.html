@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../favicon.ico">
 
-    <link rel="stylesheet" href="../stylesheet.css" type="text/css">
+    <link rel="stylesheet" href="../stylesheet.css?nocache=2" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
 
@@ -52,7 +52,6 @@
             width: 300px;
         }
 
-        /* Mobile Y/N Buttons */
         #yn-buttons {
             display: none;
             position: absolute;
@@ -81,7 +80,6 @@
 
 <div id="terminal"></div>
 
-<!-- Mobile Y/N Buttons -->
 <div id="yn-buttons">
     <button id="btn-y">Y</button>
     <button id="btn-n">N</button>
@@ -104,7 +102,6 @@ const client = createClient(supabaseUrl, supabaseKey, {
     auth: { persistSession: true }
 });
 
-// Synchronisierung zwischen Tabs
 client.auth.onAuthStateChange((_event, session) => {
   if (session) {
     sessionStorage.setItem('sb-session', JSON.stringify(session));
@@ -242,13 +239,9 @@ async function login() {
 async function askReturn() {
     await typeLine("\n> System bereit.\n> Zurück zur letzten Seite kehren? [Y/N]");
     
-    // Buttons zuerst ausblenden
     hideYNButtons();
-
-    // Desktop-Tastaturlistener
     document.addEventListener("keydown", handleReturnDecision);
 
-    // Mobile Buttons nur bei Touch
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
         ynButtons.style.display = "flex";
         btnY.onclick = () => handleReturnDecision({ key: 'y' });

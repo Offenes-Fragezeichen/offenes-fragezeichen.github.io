@@ -175,12 +175,11 @@
 
     <p id="message"></p>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script type="module">
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
 const SUPABASE_URL = 'https://ngtujvgsbymtxphwncuj.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ndHVqdmdzYnltdHhwaHduY3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc3NzE4ODAsImV4cCI6MjA3MzM0Nzg4MH0.g9Cmgrua00pJpr6T0uO5FGRIjtgU7TTnGvOw9NHVAr0';
-const client = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: true } });
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: true } });
 
 const EDGE_TRIGGER_URL = `${SUPABASE_URL}/functions/v1/trigger-github`;
 
@@ -369,3 +368,4 @@ window.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+

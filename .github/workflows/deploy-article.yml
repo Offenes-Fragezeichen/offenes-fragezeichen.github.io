@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Tools
-        run: sudo apt-get update && sudo apt-get install -y curl jq
+        run: sudo apt-get update && sudo apt-get install -y curl jq gettext
 
       - name: Download Article JSON from Supabase
         env:
@@ -25,39 +25,36 @@ jobs:
         run: |
           mkdir -p work
           filename="${{ github.event.inputs.filename }}"
+
           echo "Downloading $filename ..."
+
           curl -s -H "Authorization: Bearer $SUPABASE_KEY" \
-            "$SUPABASE_URL/storage/v1/object/articles/$filename" -o work/article.json
+            "$SUPABASE_URL/storage/v1/object/articles/$filename" \
+            -o work/article.json
+
           if [ ! -s work/article.json ]; then
             echo "JSON fehlt oder leer. Abbruch."
             exit 1
           fi
+
           cat work/article.json | jq .
 
-      - name: Build HTML from template
+      - name: Build HTML using envsubst
         run: |
-          title=$(jq -r '.title // empty' work/article.json)
-          id=$(jq -r '.id // empty' work/article.json)
-          content=$(jq -r '.content // empty' work/article.json)
-          datum=$(jq -r '.datum // empty' work/article.json)
-          autor=$(jq -r '.author // empty' work/article.json)
+          TITLE=$(jq -r '.title' work/article.json)
+          ID=$(jq -r '.id' work/article.json)
+          CONTENT=$(jq -r '.content' work/article.json)
+          DATUM=$(jq -r '.datum' work/article.json)
+          AUTOR=$(jq -r '.author' work/article.json)
 
-          # Escape-Funktion, damit sed keine Sonderzeichen frisst
-          escape_sed() {
-            printf '%s' "$1" | sed -e 's/[\/&#]/\\&/g' -e 's/#/\\#/g'
-          }
+          export TITLE ID CONTENT DATUM AUTOR
 
-          esc_title=$(escape_sed "$title")
-          esc_id=$(escape_sed "$id")
-          esc_content=$(escape_sed "$content")
-          esc_datum=$(escape_sed "$datum")
-          esc_autor=$(escape_sed "$autor")
-
-          slug=$(echo "$id" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')
+          slug=$(echo "$ID" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')
           filename="beitrag/${slug}.html"
+
           mkdir -p beitrag
 
-          sed "s/{{TITLE}}/$esc_title/g; s/{{ID}}/$esc_id/g; s/{{CONTENT}}/$esc_content/g; s/{{DATUM}}/$esc_datum/g; s/{{AUTOR}}/$esc_autor/g" template.html > "$filename"
+          envsubst < template.html > "$filename"
 
           echo "HTML gebaut: $filename"
 
@@ -71,5 +68,3 @@ jobs:
           git add beitrag/
           git commit -m "Deploy article: $filename" || echo "Nothing to commit"
           git push
-          
-

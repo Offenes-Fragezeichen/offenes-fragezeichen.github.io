@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Fragezeichen | {{TITLE}}</title>
+    <title>Fragezeichen | $TITLE</title>
     <meta name="author" content="&Eacute;mile Jeremias Ruff">        
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../favicon.ico">
@@ -32,55 +32,63 @@
                 <button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button>
                 <button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
             </div>
-            <audio id="myAudio" src="../m/{{ID}}.mp3"></audio>
+            <audio id="myAudio" src="../m/$ID.mp3"></audio>
         </div>
     </div>
 
-    <h1>{{TITLE}}</h1>
+    <h1>$TITLE</h1>
 
-    <article>{{CONTENT}}</article>
-    <p class="verfasst">{{AUTOR}} <br><span class="datum">{{DATUM}}</span></p>
+    <article>$CONTENT</article>
+    <p class="verfasst">$AUTOR <br><span class="datum">$DATUM</span></p>
 </main>
 
 <footer>
-    <!--<div class="quellen">
-        <p>Quellenverweise:</p>
-        <ol><li></li>
-            <li></li></ol>
-    </div>-->
-
     <div class="komments">
         <p>Kommentare</p>
         <div id="commentRead">Lade Kommentare...</div>
 
         <form id="commentWrite">
             <textarea id="commentText" placeholder="POST /comments {body: …} | Eigenen Gedanken Platz verschaffen (öffentlich)" required></textarea>
-            <div><div id="loginDiv">
+            <div>
+                <div id="loginDiv">
                     <div id="loginForm">
                         <input id="email" placeholder="Benutzername">
                         <input type="password" id="password" placeholder="Passwort">
                         <button type="button" id="loginBtn"><img src="../b/login.png" class="dark-switch" alt="Einloggen"></button>
                     </div>
-                    <button type="button" id="logoutBtn" style="display:none;">Logout</button></div>
+                    <button type="button" id="logoutBtn" style="display:none;">Logout</button>
+                </div>
 
-                 <div id="sendDiv">
+                <div id="sendDiv">
                     <label><input type="checkbox" id="anonymousCheck"> anonym posten</label>
-                    <button type="submit">Absenden <img src="../b/send.png" class="dark-switch" alt="Abschicken"></button></div>
+                    <button type="submit">Absenden <img src="../b/send.png" class="dark-switch" alt="Abschicken"></button>
+                </div>
             </div>
         </form>
         <div id="result"></div>
     </div>
 
-    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
-        <div><div><ul><li><a href="../index.html">Root | Startseite</a></li>
+    <div class="sitemap">
+        <p>Sitemap</p>
+        <div class="sitemap-strich"></div>
+        <div>
+            <div>
+                <ul>
+                    <li><a href="../index.html">Root | Startseite</a></li>
                     <li><a href="../t/zufall.html">Einfach mal irgendwo starten</a></li>
                     <li><a href="../t/forum.html">Forum</a></li>
                     <li><a href="../t/fremde-federn.html">Fremde Federn</a></li>
                     <li><a href="../t/kategorien.html">Kategorien</a></li>
-                    <li><a href="../t/auth.html">Login</a></li></ul></div>
-             <div><ul><li><a href="../t/ueber.html">Über</a></li>
+                    <li><a href="../t/auth.html">Login</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li><a href="../t/ueber.html">Über</a></li>
                     <li><a href="../t/rechtliches.html">Rechtliches</a></li>
-                    <li><a href="../t/kontakt.html">Kontakt</a></li></ul></div>
+                    <li><a href="../t/kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </footer>

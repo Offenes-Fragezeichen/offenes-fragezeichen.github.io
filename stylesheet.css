@@ -693,6 +693,10 @@ svg.menu * {
         background-size: cover;
     }
 
+#commentRead p {
+  white-space: pre-wrap;
+}
+
     #commentRead div {
         background-color: var(--comment-bg);
         color: black;

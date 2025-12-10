@@ -286,7 +286,9 @@ async function handleUpload(e) {
   const uploaded_at = document.getElementById("uploaded_at").value;
   const signature = document.getElementById("signature").value;
   const preview = document.getElementById("preview").value.trim();
-  const content = document.getElementById("content").value.trim();
+  const raw = document.getElementById("content").value.trim();
+  const content = raw.replace(/\r?\n/g, "<br>");
+
 
   if (!title || !author || !content) {
     msg.textContent = "Bitte alle Felder ausfüllen.";
@@ -368,4 +370,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 

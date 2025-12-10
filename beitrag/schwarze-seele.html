@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | schwarze Seele</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css?nocache=2" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="../b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
+            <div id="audioPlayer">
+                <button id="speakerBtn"><img src="../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button>
+                <button id="playBtn"><img src="../b/play.png" class="dark-switch" alt="Play"></button>
+                <button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button>
+                <button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
+            </div>
+            <audio id="myAudio" src="../m/schwarze-seele.mp3"></audio>
+        </div>
+    </div>
+
+    <h1>schwarze Seele</h1>
+
+    <article>Niemals läuft es so wie man’s im Vorhinein plant... <br><br>selbst wenn der Plan den man geplant, mit all den Planern über lange Zeit, so perfekt.<br> So perfekt, dass selbst ein Machiavelli die Stirn runzelt und meint "hab sowas perfektes noch nie gesehen<br>das wird was großes, es kann gehen, und wenn die Welt zugrunde fällt - <br>dies Liebesband für immer hält“.<br><br> doch dann - wer ahnt's? - ein Untier kroch<br> ganz unvermittelt aus dem Loch <br>In das es sich zurückgezogen,<br> der Wirt<br> sich immer selbst belogen,<br> sein'n Parasiten freigelassen,<br> will nicht lieben, 's lieber lassen, will lieber fliehn statt zu erkunden, <br>obwohl er eine Welt gefunden, die sonst noch keiner hat betreten. <br><br>Die Welt, bereit ihn aufzunehmen, dem Gast Asylum zu gewähren, <br>umschließt ihn ganz mit Haut und Haar – <br>er schließt die Augen. <br>wunschlos glücklich, ganz und gar. <br><br>doch Parasiten schlafen nicht.<br><br> er regt sich, tief in seinem Bauch<br> will zerstören.<br> Doch weiß er auch das sein Wirt grad<br> die neue Welt sehr gerne hat?<br><br> Er hört nicht auf, frisst immer weiter, <br>wie'n sterbendes Reh, der Wirt, so schreit er<br> die Welt umschlingt ihn, kann ihn retten<br> will ihn in ihre Erde betten<br> ihn erlösen ganz und gar<br> mit ihm verbunden sein, mit Haut und Haar.<br><br> Doch er wehrt sich gegen sie <br>will keine Hilfe, niemals, nie,<br> will alles ganz allein durchstehn,<br> und sollt er dabei untergehn.<br><br> Er schlägt wild um sich, zerstört und verwüstet,<br> und sieht nicht, dass es ihn eigentlich dürstet, <br>nach einer Umarmung.<br><br> Erlösung. <br><br>Heilung.<br> <br>All das, ja, das könnt die Erde ihm geben.<br> könnte sein inneres Monster erlegen.<br> könnt ihn befreien, ganz und gar. <br><br>Doch er wehrt sich. <br><br>Der Parasit.<br> Er bricht aus. <br><br>Zerstört die Welt. <br><br>Alles, Alles aus.<br><br> Was bleibt von der Welt? Nur Asche. <br><br>Ein Funken<br> ist in der Dunkelheit Abgrund gesunken.<br><br> glimmt dort. <br>Tief.<br> Verloren. <br>Allein.<br><br>Und weder Feuer noch Welt<br> wird er zukünftig sein.</article>
+    <p class="verfasst">Oskar T. <br><span class="datum">25/12/10</span></p>
+</main>
+
+<footer>
+    <div class="komments">
+        <p>Kommentare</p>
+        <div id="commentRead">Lade Kommentare...</div>
+
+        <form id="commentWrite">
+            <textarea id="commentText" placeholder="POST /comments {body: …} | Eigenen Gedanken Platz verschaffen (öffentlich)" required></textarea>
+            <div>
+                <div id="loginDiv">
+                    <div id="loginForm">
+                        <input id="email" placeholder="Benutzername">
+                        <input type="password" id="password" placeholder="Passwort">
+                        <button type="button" id="loginBtn"><img src="../b/login.png" class="dark-switch" alt="Einloggen"></button>
+                    </div>
+                    <button type="button" id="logoutBtn" style="display:none;">Logout</button>
+                </div>
+
+                <div id="sendDiv">
+                    <label><input type="checkbox" id="anonymousCheck"> anonym posten</label>
+                    <button type="submit">Absenden <img src="../b/send.png" class="dark-switch" alt="Abschicken"></button>
+                </div>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <div class="sitemap">
+        <p>Sitemap</p>
+        <div class="sitemap-strich"></div>
+        <div>
+            <div>
+                <ul>
+                    <li><a href="../index.html">Root | Startseite</a></li>
+                    <li><a href="../t/zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="../t/forum.html">Forum</a></li>
+                    <li><a href="../t/fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="../t/kategorien.html">Kategorien</a></li>
+                    <li><a href="../t/auth.html">Login</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li><a href="../t/ueber.html">Über</a></li>
+                    <li><a href="../t/rechtliches.html">Rechtliches</a></li>
+                    <li><a href="../t/kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js?nocache=2"></script>
+
+</body>
+</html>

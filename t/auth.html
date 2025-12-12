@@ -186,6 +186,7 @@ function askPassword() {
 function createInput(hidden = false) {
     const input = document.createElement("input");
     input.type = hidden ? "password" : "text";
+    input.name = "username"; // für PW-Manager
     terminal.appendChild(input);
     setTimeout(() => input.focus(), 50);
     scrollToBottom();
@@ -350,4 +351,5 @@ bootSequence();
 
 </body>
 </html>
+
 

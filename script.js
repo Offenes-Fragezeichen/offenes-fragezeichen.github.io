@@ -762,6 +762,9 @@ svg.addEventListener("pointercancel", closeMenu);
 // --- Light/Darkmode ---
 const bgColors = ["#FAFAF0", "#F5F7FA", "#FFF9F0", "#F0FAF5", "#F5F0FF"];
 
+// System Darkmode erkennen
+const systemDarkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
 function setRandomBackgroundColor() {
   if (!document.body.classList.contains("dark-mode")) {
     const randomIndex = Math.floor(Math.random() * bgColors.length);
@@ -772,12 +775,12 @@ function setRandomBackgroundColor() {
 // Entfernt vorhandene "/dark/" und "-dark" um wieder auf die helle Basis zu kommen
 function normalizeToLight(src) {
   if (!src) return src;
-  let s = src.replace(/\/dark\//g, '/');
-  s = s.replace(/-dark(?=\.[^/.]+$)/, '');
+  let s = src.replace(/\/dark\//g, "/");
+  s = s.replace(/-dark(?=\.[^/.]+$)/, "");
   return s;
 }
 
-// Baut aus der hellen Version die dunkle Variante: ordner/dark/dateiname-dark.ext
+// Baut aus der hellen Version die dunkle Variante
 function makeDarkFromLight(lightSrc) {
   if (!lightSrc) return lightSrc;
   const lastDot = lightSrc.lastIndexOf(".");
@@ -796,7 +799,6 @@ function makeDarkFromLight(lightSrc) {
 
 function updateDarkSwitchImages(isDarkMode) {
   document.querySelectorAll("img.dark-switch").forEach((img) => {
-    // Helle Basis sichern
     const originalSrc = img.getAttribute("data-original") || img.src;
     const lightBase = normalizeToLight(originalSrc);
 
@@ -804,24 +806,26 @@ function updateDarkSwitchImages(isDarkMode) {
       img.setAttribute("data-original", lightBase);
     }
 
-    // Je nach Modus setzen
     img.src = isDarkMode
       ? makeDarkFromLight(img.getAttribute("data-original"))
       : img.getAttribute("data-original");
   });
 }
 
-function toggleDarkMode() {
+function applyDarkMode(isDarkMode, save = false) {
   const currentBg = getComputedStyle(document.body).getPropertyValue("--bg-image");
-  const isDarkMode = document.body.classList.toggle("dark-mode");
 
-  if (!isDarkMode) {
-    setRandomBackgroundColor();
-  } else {
+  document.body.classList.toggle("dark-mode", isDarkMode);
+
+  if (isDarkMode) {
     document.body.style.backgroundColor = "";
+  } else {
+    setRandomBackgroundColor();
   }
 
-  localStorage.setItem("darkMode", isDarkMode);
+  if (save) {
+    localStorage.setItem("darkMode", isDarkMode);
+  }
 
   let themeColor = document.querySelector("meta[name='theme-color']");
   if (!themeColor) {
@@ -832,27 +836,44 @@ function toggleDarkMode() {
   themeColor.setAttribute("content", isDarkMode ? "#121212" : "#ffffff");
 
   updateDarkSwitchImages(isDarkMode);
+
   requestAnimationFrame(() => {
     document.body.style.setProperty("--bg-image", currentBg);
   });
 }
 
+function toggleDarkMode() {
+  const isDarkMode = !document.body.classList.contains("dark-mode");
+  applyDarkMode(isDarkMode, true);
+}
+
+// --- Initialisierung ---
 document.addEventListener("DOMContentLoaded", () => {
   const checkbox = document.getElementById("darkModeToggle");
-  const isDark = localStorage.getItem("darkMode") === "true";
+  const storedPreference = localStorage.getItem("darkMode");
 
-  if (isDark) {
-    document.body.classList.add("dark-mode");
-    if (checkbox) checkbox.checked = true;
-    updateDarkSwitchImages(true);
-  } else {
-    if (checkbox) checkbox.checked = false;
-    setRandomBackgroundColor();
-    updateDarkSwitchImages(false);
+  // Priorität: User → System → Light
+  const shouldBeDark =
+    storedPreference !== null
+      ? storedPreference === "true"
+      : systemDarkQuery.matches;
+
+  applyDarkMode(shouldBeDark);
+
+  if (checkbox) {
+    checkbox.checked = shouldBeDark;
+    setTimeout(() => checkbox.classList.add("ready"), 50);
+    checkbox.addEventListener("change", toggleDarkMode);
   }
+});
 
-  setTimeout(() => checkbox?.classList.add("ready"), 50);
-  checkbox?.addEventListener("change", toggleDarkMode);
+// --- Live-Reaktion auf Systemwechsel (nur wenn User nichts gesetzt hat) ---
+systemDarkQuery.addEventListener("change", (e) => {
+  if (localStorage.getItem("darkMode") === null) {
+    applyDarkMode(e.matches);
+    const checkbox = document.getElementById("darkModeToggle");
+    if (checkbox) checkbox.checked = e.matches;
+  }
 });
 
 

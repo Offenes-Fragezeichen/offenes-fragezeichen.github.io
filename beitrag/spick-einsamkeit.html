@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Das ausgeschaltene Licht - Einsamkeit</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css?nocache=2" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <style>
+        h2 {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="../b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
+            <div id="audioPlayer" style="display: none;">
+                <button id="speakerBtn"><img src="../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button>
+                <button id="playBtn"><img src="../b/play.png" class="dark-switch" alt="Play"></button>
+                <button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button>
+                <button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
+            </div>
+            <audio id="myAudio" src="m/ex.mp3"></audio>
+        </div>
+    </div>
+
+    <h1>Das ausgeschaltene Licht - Einsamkeit</h1>
+
+    <p class="spickzettel">Dieser Beitrag erschien ursprünglich im Spickzettel/Juni 2025. <a href="../m/spick-einsamkeit.pdf" target="_blank">Zur Originalausgabe</a></p>
+    <article>Einsamkeit ist scheiße. Scheiße, weil sie so absolut ist, weil sie keine Gnade kennt 
+    und weil sie nur die nachvollziehen können, die sie persönlich angetroffen haben.<br><br>
+
+    Unser Gesundheitssystem ist toll. Toll, weil es einem alles finanziert: Akupunkturen zur 
+    künstlichen Befruchtung, Trinkkuren mit Heilwasser und Wanderwochen in Bayern.<br><br>
+
+    Dies sind wichtige Behandlungen der ‚Alternativmedizin‘ - es müssen schließlich alle Bereiche des 
+    Leides abgedeckt werden. Man muss wissen, wir Deutschen sind Weltmeister im Klagen in ärztlicher 
+    Anwesenheit. Jeden Tag finden bei uns etwa vier Millionen ambulante Arztkontakte statt, es gibt 
+    kaum eine Diagnose in anderen Ländern, die nicht auch längst bei uns zu den offiziellen gehört - 
+    und genau das macht unser Gesundheitssystem auch so toll.<br><br>
+
+    Bei einer Studie der Bertelsmann-Stiftung aus dem Jahr 2024 gaben 10% der befragten jungen 
+    Menschen zwischen 16 und 30 Jahren an, „sehr einsam“ zu sein. Nach Aussage der Deutschen 
+    Depressionshilfe in Zusammenarbeit mit Forsa fühlt sich jeder vierte Bundesbürger einsam - das 
+    macht 20 Millionen Menschen.<br><br>
+
+    Das zweitteuerste Gesundheitssystem Europas wird von Frankreich mit jährlichen Ausgaben von etwa 
+    314 Milliarden Euro geführt. Das teuerste ist das deutsche mit 489 Milliarden Euro - weil oder 
+    weshalb es mit seinen (versicherten) umfangreichen Behandlungsmethoden zu den besten der Welt 
+    zählt.<br><br>
+
+    Einsamkeit ist in Deutschland nicht als offizielle Diagnose anerkannt.<br><br>
+
+    -<br>
+    Dies ist kein Plot-Twist in einem schlechten Hollywood-Drehbuch, dies ist der bittere 
+    Sarkasmus einer Gesellschaft, welche immer noch nicht aus ihrer eigenen Komfortzone heraus 
+    getreten ist. Was nicht klar messbar und bio-chemisch nachweisbar ist, sei kein ernsthaftes 
+    Problem geschweige denn eine ausgeprägte Krankheit, gegen die es gilt, zu kämpfen. Außerdem 
+    stirbt ja niemand daran - so die gängige Begründung. Doch das ist differenzierter zu betrachten: 
+    Unser klassisches Verständnis von Krankheiten trifft tatsächlich nicht auf Einsamkeit zu. So ist 
+    es kein Virus, kein Infekt und keine körperliche Dysfunktion, die zu bekommen nun mal gewisse 
+    Wahrscheinlichkeiten bestehen. In diesem Falle kann man zum Arzt gehen, nach Beratung womöglich 
+    unterdrückende Chemikalien zu sich nehmen - vielleicht generiert sich unser Körper auch von 
+    selbst. Vielmehr liegt eine soziale Frage vor: Wer wird einsam und warum?<br><br>
+
+    Und hier liegt das Problem. Nach Artikel zwei des Fünften Sozialgesetzbuches (SGB) hätte jeder 
+    Krankenversicherte „einen Anspruch auf eine ausreichende, bedarfsgerechte, dem allgemein 
+    anerkannten Stand der medizinischen Wissenschaft entsprechende medizinische Krankenbehandlung“ 
+    (Zitat Gesundheitsministerium). Wieso also haben Millionen Menschen kein Recht auf das 
+    finanzielle Übernehmen der Maßnahmen gegen ihre Krankheit, geschweige denn deren Anerkennung 
+    überhaupt? Dazu später mehr.<br><br>
+
+    Im Folgenden wird Einsamkeit beschrieben als ein anhaltender Zustand von negativ-belasteter 
+    Diskrepanz zwischen den gewünschten und den tatsächlichen, emotionalen und sozialen, Beziehungen. 
+    Nicht gemeint sind vorübergehende, einzeln auftretende Stimmungstiefs, wie sie zum Leben dazu 
+    gehören können und die letztlich sogar gesund sind.
+
+    <h2>Zunächst einmal - wie entsteht eigentlich Einsamkeit?</h2>
+
+    Wie wir womöglich bereits gelernt haben, sprechen wir von etwas sehr Komplexem, 
+    Nicht-klar-Definierbarem, Beschränkbarem. Folglich ergibt sich eine sehr breite Palette an 
+    möglichen Ursachen. Versuchen wir sie ihn drei Kategorien einzuordnen:<br><br>
+
+    <u>1. Physische soziale Alleinigkeit</u><br>
+    Einer der häufigsten Faktoren, so behaupte ich, ist der Mangel an Kontakten. Das nach John Bowlby 
+    menschliche Grundbedürfnis nach Bindung kann nur dann befriedigt werden, wenn auch jemand da ist, 
+    mit dem man die Bindung eingehen kann. Ist man aber erst kürzlich umgezogen, kennt niemanden in 
+    der neuen Stadt oder schwindet der Bekanntenkreis altersbedingt, so kann es schwer sein, neue 
+    Freunde zu gewinnen. Auch die kontakt-beschränkenden Maßnahmen einer Pandemie tragen deutlich 
+    dazu bei. Im ersten Jahr von SARS Covid II vervierfachte sich die Zahl an Einsamkeitsbelastungen. 
+    Eine weitere wichtige Unterkategorie ist die der systematischen Ausgrenzung, z.B. wegen der 
+    Herkunft. Dies erscheint logisch. Ist man beispielsweise in einem neuen Land, so fehlt es an 
+    Bezugspersonen. Um neue Kontakte aufzubauen, muss man zuerst sich der Kultur nähern, womöglich 
+    sogar eine neue Sprache lernen. So fühlen sich statistisch bewiesen Migranten oft isolierter und 
+    dies wird auch noch verstärkt durch Rassismus oder die bloße räumliche Trennung mittels 
+    Unterkünften speziell für Migranten. Nicht zuletzt spielen auch die „Sozialen Medien“ eine Rolle: 
+    grundsätzlich ist der Online-Austausch fördernd, die Wahrscheinlichkeit, allein zu Humus zu 
+    gedeihen, ist geringer. Doch so realistisch er auch inzwischen entwickelt ist: der digitale 
+    Austausch kann zum jetzigen Zeitpunkt den „realen“, analogen nicht vollständig ersetzen - allein 
+    schon wegen der fehlenden nonverbalen Kommunikation.<br><br>
+
+    Weitere typische Faktoren dieser Kategorie sind der Wechsel der Arbeitsstelle/Eintritt in den 
+    Ruhestand, der Schulabschluss, Eintritt in ein Pflegeheim, Trennung oder Scheidung, Auszug der 
+    Kinder, übermäßige Erwerbsarbeit im Allgemeinen oder auch alleinige Erziehung.<br><br>
+
+    Doch wie kann es dann sein, dass viele Studien zeigen, Jüngere seien noch stärker betroffen? 
+    Diese müssten doch einen besonders vielfältigen Freundes- und Familienkreis haben. Neben 
+    Instabilität in gewissen Übergangsphasen wie dem Beginn von Studium/ Arbeit und damit verbundenem 
+    Umzug (geografisch und sozial) greift Kategorie zwei:<br><br>
+
+    <u>2. Nicht physische Einsamkeit</u><br>
+    Wichtig zu erwähnen: nicht jeder, der einsam ist, ist auch allein, das heißt Einsamkeit ≠ 
+    Alleinigkeit. Dem Einsamkeitsbarometer des Bundesministeriums für Bildung, Familie, Senioren, 
+    Frauen und Jugend (BMFSFJ) sowie einer Vielzahl weiterer Datenerhebungen entsprechend, sind alle 
+    Teile der Bevölkerung von diesem Gefühl betroffen, ob jung oder alt, Stadt oder Land, arm oder 
+    reich - ob Single oder in Beziehung. Im Jahr 2017 fühlten sich 5,7 Prozent der Befragten in 
+    Partnerschaften einsam, das geht aus einer Studie des Institutes der Deutschen Wirtschaft hervor. 
+    Wie ist das zu erklären? Über fehlende emotionale Bindungen, unterschiedliche Erwartungen... aber 
+    wie ist das allgemein zu begründen? Wie kann jemand das Gefühl von nicht genügend Beziehung haben, 
+    obwohl er oder sie von genügend Menschen umgeben ist? Das ist leider schwer zu erklären und 
+    schwer zu verstehen, ohne dass man selbst mal diese Erfahrung machen musste. Mir scheinen 
+    folgende drei Metaphern gut gewählt, sie stammen aus einem längeren 'Hin und Her' mit ChatGPT:
+    <br><br>
+
+    „<i>Das volle Bad - ohne Wasser</i><br>
+    Du hast alles eingelassen: Menschen, Arbeit, Nähe. Aber wenn du dich reinsetzt, merkst du - das 
+    Wasser fehlt. Es ist alles da, nur das, was wärmt, fehlt.“<br><br>
+
+    „<i>Die Musik, die du nicht mehr fühlst</i><br>
+    Die Töne sind da. Die Melodie läuft. Die Menschen tanzen. Und trotzdem stehst du da, wie betäubt. 
+    Du hörst die Musik - aber sie berührt dich nicht mehr.“<br><br>
+
+    „<i>Das ausgeschaltete Licht</i><br>
+    Alle Lichter um dich herum leuchten. Menschen, Stimmen, Nähe. Und trotzdem ist dein Inneres wie 
+    ein Raum mit ausgeschaltetem Licht. Es ist niemandes Schuld. Aber es bleibt dunkel.“<br><br>
+
+    Alle beschreiben eine bereits sehr starke, fortgeschrittene Situation von nicht physischer 
+    Einsamkeit, man kann sie in verschiedenen Stärken empfinden. Für eine solche gibt es viele, 
+    meist eigens psychologische Gründe - innere Unverbundenheit, Inszenierung gegenüber anderen, 
+    das Gefühl anders zu sein, wegen einer seltenen Krankheit zum Beispiel. Allein über das Spektrum 
+    tiefgreifender Depressionen lassen sich noch viele weitere Gründe ergänzen; wer innerlich 
+    ausgebrannt ist, kann keine Verbindung mehr spüren, obwohl sie theoretisch möglich wäre. Auch 
+    externe Faktoren können von Relevanz sein, wenn man bspw. nicht gesehen oder verstanden wird. 
+    Ein explizit zu erwähnendes Beispiel ist Liebeskummer. Einer Umfrage aus dem Jahr 2018 zufolge 
+    verspürten 13 Prozent der befragten Singles zum Zeitpunkt der Befragung Liebeskummer, 19% im 
+    vergangenen halben Jahr. Aus vielen Interviews und Schilderungen der Betroffenen geht hervor, 
+    dass sich diese häufig sozial zurück ziehen und sich einsam fühlen. Intensive, stabile 
+    Beziehungen muss man erst einmal aufbauen. Diese darf man dem jüngeren Teil unserer Gesellschaft 
+    nicht einfach absprechen, jedoch sind sie weniger häufig, was ein möglicher Grund für die große 
+    Belastung in diesem Alter ist.
+
+    <p class=“spickzettel“>nachträgliche Anmerkung: diese Behauptung stützte sich auf keine 
+    empirischen Belege, war lediglich ein maßloses Vorurteil. Ein Fehler der Redaktion.</p>
+
+    <u>Der Teufelskreis</u>
+    Ein Symptom der Einsamkeit - auch ich wünsche mir eine breitere Palette an Synonymen - ist 
+    innerer und äußerer Rückzug aus dem Sozialleben. Man spricht weniger über Gefühle, verbringt 
+    weniger Zeit gemeinsam oder lässt keine Nähe mehr zu - um sich selbst zu schützen, aber auch 
+    andere: darauf angesprochen, gaben 58 % der Menschen als Grund, nicht mit anderen über ihre 
+    Klagen zu sprechen, an, dass sie niemanden belasten wollten. Der verminderte soziale Kontakt 
+    kann die Einsamkeit jedoch noch verschärfen und so fällt immer mal wieder der Begriff eines 
+    Teufelskreises. 
+
+    <u>Die Gesellschaft</u>
+    Ein Ratgeber zu der Frage, wie man selbst als Individuum gegen Einsamkeit vorgehen kann, wird 
+    hier nicht erscheinen. Dieser Aufgabe widmen sich bereits viele Artikel in Internet und Co. Was 
+    jedoch noch interessant wäre zu wissen ist, wie wir als Gesellschaft helfen können. Zu allererst 
+    sehe ich es als essenziell an, seelische Alleinigkeit von der Liste der Tabuthemen zu streichen. 
+    Millionen Menschen haben niemanden - finde den Fehler! Die fehlende Kommunikation - auch 
+    zwischen den Betroffenen - liegt nicht nur an mangelnder technischer Infrastruktur, sondern 
+    gerade an dem gesellschaftlichen Umgang mit dem Thema. Oft treten Schamgefühle auf, frei nach der 
+    Sorge: „Wenn ich einsam bin, muss etwas mit mir nicht stimmen.“ Dazu kommt die eigene 
+    Einschätzung, wer allein klarkomme, sei stark, wer Hilfe brauche, sei schwach. Letztlich aber 
+    auch die Furcht, in die Mitleidsrolle zu schlüpfen oder auch anderen die Freude zu nehmen, ganz 
+    nach häufig erkennbarem Verhalten „Der ist traurig, es hilft, mit ihm mitzufühlen und ist 
+    unpassend, die eigene Freude auszuleben.“ Wer einsam ist, der weiß, wie hart das Leben sein kann. 
+    Folglich kommen einige Studien zu den Ergebnissen, betroffene Menschen seien besonders humorvoll, 
+    um ihre Mitmenschen vor dem Gefühl der Traurigkeit zu bewahren.<br><br>
+
+    Zum zweiten ist es wichtig, ehrenamtliche Hilfsmöglichkeiten zu fördern. Einsamkeit lässt sich 
+    nicht allein bekämpfen, sozialer Kontakt ist zwingend notwendig - und genau da helfen bereits 
+    kostenfreie Kommunikationsangebote, mit denen man als Betroffener einfach reden kann. In 
+    Deutschland haben wir ein bereits umfang reiches Angebot: sich austauschen kann man per Telefon, 
+    via WhatsApp oder auch sicheren Chats, ja gar per E Mail. Doch mit einer zunehmenden Zahl von 
+    Betroffenen steigt auch die Belastung der Angebote und immer wieder berichten Menschen von 
+    besetzten Leitungen oder einem Chat, auf den niemand reagiert. Das Zeitfenster wird hier 
+    ebenfalls zum Problem: Einige berichten davon, über den Tag (in der Schule, mit Freunden) 
+    vollkommen glücklich zu sein und sich erst am Abend vollkommen allein zu fühlen. Viele 
+    ehrenamtliche Angebote sind aber nur bis 20 Uhr, max. 22 Uhr erreichbar. Letztlich werden die 
+    Angebote geführt von Ehrenamtlichen - in ihrer Freizeit. Da ist es nur verständlich, dass die 
+    Programme irgendwann überlastet sind.
+
+    <h2>Was kann man dagegen tun? </h2>
+    Erste Möglichkeit: Mehr Subventionieren! Einige kommunikationsfördernde Programme wie die 
+    NummerGegenKummer werden bereits finanziell vom Staat unterstützt, meist vom BMFSFJ. Deutschland 
+    liegt dabei im europäischen Mittelfeld. Zwar gibt es Länder, in denen die Finanzierung noch 
+    geringer ausfällt, aber auch sehr umfangreiche Beispiele. In Europa führend: Großbritannien. Im 
+    Rahmen der „Tackling Loneliness Strategy“, welche von dem hauseigenen Einsamkeitsministerium 
+    eingeführt wurde, standen allein zu Beginn des Programms mindestens 23 Mio. Euro zur Verfügung, 
+    weitere 52 Mio. Euro über mehrere Jahre verteilt. Von der Grundfinanzierung her geht es also 
+    besser - auch wenn oft kritisiert wird, das Geld solle in Großbritannien weniger Pilot- und 
+    digitale Projekte erreichen und stattdessen mehr in langfristige, flächendeckende Initiativen 
+    investiert werden.<br><br>
+
+    Eine andere Möglichkeit: die Anerkennung von Einsamkeit als offizielle Diagnose. Aktuell zahlen 
+    Krankenkassen erst, wenn eine Folgekrankheit diagnostiziert wird. Frühzeitige soziale 
+    Interventionen (z. B. Besuchsdienste, Community-Programme) sind meist kommunale oder 
+    zivilgesellschaftliche Aufgaben, und somit nicht kassenfinanziert. Könnte man aber auch die 
+    Prävention zahlen, den Kern mit einer Diagnose treffen, statt nur die Symptome zu behandeln, so 
+    könnten auch Hilfsprogramme nachhaltig finanziert werden. Die Hürde im Konzept besteht darin, 
+    wie Ärzte und Psychologen einheitlich und umfangreich diagnostizieren können. Es gibt 
+    wissenschaftlich validierte Skalen (De Jong Gierveld Loneliness Scale, UCLA Loneliness Scale). 
+    Letztlich beruhen aber auch diese auf Selbstauskunft, keinem eineindeutigen Biofaktor - ein 
+    Punkt für die allgemeingültigen Subventionen.<br>
+    Alternativ zur harten Diagnose ließe sich auch ein Modell Großbritanniens einführen: Das „Social 
+    Prescribing“, zu Deutsch Sozialrezept. Ärzte verschreiben soziale Maßnahmen, auch ohne formale 
+    Diagnose. Beide Maßnahmen würden ergänzend die Sichtbarkeit und Legitimität des Problems fördern.
+    <br><br>
+
+    Zum Abschluss bleibt sicher die Frage, wie eine derartig umfassende Diagnose finanziert werden 
+    solle. Jedoch zeigen Studien, dass Einsamkeit mit einer Vielzahl von Folgeerkrankungen und damit 
+    hohen direkten und indirekten Kosten verbunden ist. Die britische Regierung schätzt Kosten in 
+    Höhe von 2,5 Milliarden Pfund (ca. 3 Milliarden Euro) für die Folgekosten jährlich. Es würde 
+    sich also finanziell lohnen - aber Milliardäre könnten wir trotzdem besteuern (;<br><br>
+
+    Wer Einsamkeit immernoch nicht als akutes Problem ansieht, den fordere ich auf, mal kurz in 
+    entsprechendem Reddit-Forum Schilderungen von den Betroffenen zu lesen. Folgend sind auch noch 
+    einige Hilfsprogramme zusammengestellt. Alle Angebote sind anonym und streng vertraulich, nach 
+    Bedarf meist unbefristet fortführbar und selbstverständlich kostenfrei.</article>
+    <p class="spickzettl">nachträgliche Anmerkung: eine umfassendere Übersicht findet sich unter
+    <a class="extern-a" href="https://youth-life-line.de/weitere-hilfe">youth-life-line.de/weitere-hilfe</a></p>
+
+    <p class="verfasst">Jeremias Ruff, in: Spickzettel<br><span class="datum">2025/06</span></p>
+    <img style="width: 100%; height: auto;" src="../b/ab/spick-einsamkeit-5.jpg" alt="Übersicht von Hilfsangeboten">
+
+    <div class="bildersammlung">
+        <img src="../b/ab/spick-einsamkeit-1.jpg" alt="Mehrere Tonfiguren in den Armen liegend, eine alleinige">
+        <img src="../b/ab/spick-einsamkeit-2.jpg" alt="Werbeplakat der Stiftung Deutscher Depressionshilfe">
+        <img src="../b/ab/spick-einsamkeit-3.jpeg" alt="Statistiken zu Folgeerkrankungen von Einsamkeit">
+        <img src="../b/ab/spick-einsamkeit-4.jpeg" alt="Statistiken zu Folgeerkrankungen von Einsamkeit 2">
+    </div>
+</main>
+
+<footer>
+    <div class="quellen">
+        <p>Quellenverweise:</p>
+        <ol><li>Rainer Klawki / <a class="extern-a" href="https://www.imabe.org/artikel/einsamkeitsstudie-persoenliche-begegnungen-helfen-nur-telefon-und-digitaler-kontakt-sind-zu-wenig">IMABE</a></li>
+            <li><a href="https://www.deutsche-depressionshilfe.de/unsere-angebote/kampagnen-und-aktionen/oeffentliche-kampagnen">Stiftung Deutsche Depressionshilfe</a></li>
+            <li>Die Techniker / <a href="https://www.tk.de/presse/themen/praevention/gesundheitsstudien/einsamkeitsreport-2024-2186772">Einsamkeitsreport 2024</a></li></ol>
+    </div>
+
+    <div class="komments">
+        <p>Kommentare</p>
+        <div id="commentRead">Lade Kommentare...</div>
+
+        <form id="commentWrite">
+            <textarea id="commentText" placeholder="POST /comments {body: …} | Eigenen Gedanken Platz verschaffen (öffentlich)" required></textarea>
+            <div><div id="loginDiv">
+                    <div id="loginForm">
+                        <input id="email" placeholder="Benutzername">
+                        <input type="password" id="password" placeholder="Passwort">
+                        <button type="button" id="loginBtn"><img src="../b/login.png" class="dark-switch" alt="Einloggen"></button>
+                    </div>
+                    <button type="button" id="logoutBtn" style="display:none;">Logout</button></div>
+
+                 <div id="sendDiv">
+                    <label><input type="checkbox" id="anonymousCheck"> anonym posten</label>
+                    <button type="submit">Absenden <img src="../b/send.png" class="dark-switch" alt="Abschicken"></button></div>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="../index.html">Root | Startseite</a></li>
+                    <li><a href="../t/zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="../t/forum.html">Forum</a></li>
+                    <li><a href="../t/fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="../t/kategorien.html">Kategorien</a></li>
+                    <li><a href="../t/auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="../t/ueber.html">Über</a></li>
+                    <li><a href="../t/rechtliches.html">Rechtliches</a></li>
+                    <li><a href="../t/kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js?nocache=2"></script>
+
+</body>
+</html>

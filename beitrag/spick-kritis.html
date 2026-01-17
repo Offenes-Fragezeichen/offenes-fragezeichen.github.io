@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Deutschlands KRITIS im digitalen Zeitalter: Fortschritt mit Risiken?</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css?nocache=2" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="../b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
+            <div id="audioPlayer" style="display: none;">
+                <button id="speakerBtn"><img src="../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button>
+                <button id="playBtn"><img src="../b/play.png" class="dark-switch" alt="Play"></button>
+                <button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button>
+                <button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
+            </div>
+            <audio id="myAudio" src="m/ex.mp3"></audio>
+        </div>
+    </div>
+
+    <h1>Deutschlands KRITIS im digitalen Zeitalter:<br> Fortschritt mit Risiken?</h1>
+
+    <p class="spickzettel">Dieser Beitrag erschien ursprünglich im Spickzettel/Dezember 2024. <a href="../m/spick-kritis.pdf" target="_blank">Zur Originalausgabe</a></p>
+    <article>„Weltweit strandeten Tausende Passa giere an Flughäfen, Tausende von Flügen wurden annulliert, 
+    Operationen mussten abgesagt werden und Läden vorübergehend schließen. Manche Bankkunden bekamen am 
+    Bankomaten kein Geld, Lebensmittelläden mussten vorübergehend schließen. In Australien berief die 
+    Regierung eine Krisensitzung ein. Der Fernsehsender Sky News sendete vorübergehend ein Standbild. In 
+    Israel waren Krankenhäuser betroffen, in Neuseeland viele Geschäfte. Kreditkartenzahlungen funktionierten 
+    nicht mehr.“ – all dies geht im Juli 2024 nicht etwa auf einen massiven Angriff einer professionellen 
+    Hackerbande zurück, sondern auf einen einzigen Updatefehler des Systems „Falcon“ von Crowdstrike. 
+    Crowdstrike ist ein international tätiges Cybersicherheitsunternehmen mit weltweit über 31-Tausend 
+    Unternehmenskunden, darunter hochrangige Regierungsbehörden, Anbieter aus dem Finanzsektor oder auch der 
+    kritischen Infrastruktur. Um die Systeme ihrer Anwender stabil und sicher zu halten, veröffentlichen der 
+    artige Anbieter regelmäßig dynamische Updates und Detektionsregeln, welche sich automatisch installieren. 
+    Doch trotz komplexer Testung und Überprüfung gelangt hier und da auch mal ein Fehler mit ins System. Im 
+    Fall der „Channel File 291“, ein eigentlich einfaches Sensorkonfigurationsupdate (Sicherheitsupdate) für 
+    Windows, löste dieses einen logischen Fehler aus, welcher wegen der tiefgreifenden Implementierung in das 
+    System am 19. Juli 2024 zum Absturz von ca. achteinhalb Millionen Geräten führte. Betroffen waren nicht 
+    nur etliche Einzelanbieter und Privatunternehmen, Notdienste wie Feuerwehr und Polizei in den USA, auch 
+    die bereits genannten hatten massive Probleme zu verzeichnen.<br><br>
+    Und all dies wegen eines einzigen Fehlers eines einzigen Systems. Klar, derartigen Vorfällen stehen 
+    vielfältige Präventionsmaßnahmen entgegen und damit kommt ein IT-Fehler dieses Ausmaßes auch nicht allzu 
+    oft vor. Aber wenn, dann führt er zu erheblichen Konsequenzen. Und dabei ist noch nicht einmal die Rede 
+    von professionellen Hackern, gar zum Cyberwar staatlich angeheuerten (vgl. Spickzettel Winter 2023, S. 
+    14f.).<br><br>
+    Zur kritischen Infrastruktur (KRITIS) gehören Anlagen, Systeme und Dienstleistungen, deren Ausfall oder 
+    Beeinträchtigung gravierende Folgen für die öffentliche Sicherheit, Gesundheit, das wirtschaftliche 
+    Wohlergehen oder die staatliche Funktionsfähigkeit hätte. Dazu zählen in Deutschland zehn Sektoren, deren 
+    digitale Vernetzung – aus der sich unsere Abhängigkeit von diesen digitalen Systemen ergibt – folgend grob 
+    aufgelistet wird.<br><br>
+    Voran gilt es noch einen Punkt zu er wähnen: das Zweite Gesetz zur Erhöhung der Sicherheit 
+    informationstechnischer Systeme“, umgangssprachlich auch IT-Sicherheitsgesetz 2.0 genannt. Dieses im Mai 
+    2021 in Kraft getretene Gesetz setzt allen Anbietern kritischer Infrastruktur einheitliche 
+    Sicherheitsstandards und regelt somit ein klein wenig mehr Immunität gegen Cyberangriffe. Wie wirksam es 
+    ist und ob die Regelungen genügen, darüber wird noch diskutiert.<br><br>
+
+    <u>1. Energie und 2. Wasser</u><br>
+    Das deutsche Stromnetz ist, im Vergleich zu anderen Ländern, mit rund 800 Verteilnetzbetreibern relativ 
+    dezentral aufgebaut. Die Wasser, Gas- und Fernwärmeversorgung beläuft sich ebenfalls auf viele verschiedene 
+    Systeme, Öl-/Kraftstoffe allerdings unterliegen wegen großer Pipelines und Raffinerien einer zentralen 
+    Steuerung. Ein großflächiger Angriff müsste also viele verschiedene Anbieter mit unterschiedlichen 
+    Sicherheitsstrukturen und deren jeweiligen Servern umfassen. Dies macht es komplexer, zeit- und 
+    kostenaufwendiger. Dass auch solch dezentrales System trotzdem angreifbar ist, zeigt ein Angriff 
+    russischer Hacker auf das ukrainische Energienetz 2015. Damals waren rund 189 Städte im totalen Blackout, 
+    weil Mitarbeiter von Netzbetreibern Word-Dateien einer fälschlichen E-Mail geöffnet hatten. Inwiefern das 
+    bei unserem Stromnetz möglich ist, ist nur schwer abzuschätzen.<br><br>
+
+    <u>3. Informationstechnik und Telekommunikation</u><br>
+    Für diesen Sektor haben wir hierzu lande ein eigenständiges Bundesamt, das Bundesamt für Sicherheit in der 
+    Informationstechnik (BSI). Zu seinen Aufgaben gehört eine sichere Gestaltung der Digitalisierung durch 
+    „Prävention, Detektion und Reaktion für Staat, Wirtschaft und Gesellschaft“, so das BSI selbst in seinem 
+    Leitbild. Das BSI hat in den vergangenen Jahren für vielfältige Anforderungen an deutsche 
+    Telekommunikationsanbieter gesorgt und u.a. Notfallsysteme für den Fall eines Hackerangriffes geschaffen. 
+    Vielmehr liegt hier das Risiko bei den Bürgern, welche statt sicherer und zuverlässiger 
+    Kommunikationsanbieter beispielsweise auf US-amerikanische Anbieter wie WhatsApp zugreifen. Diese sind u.a. 
+    vor allem der vollen Transparenz ihrer eigenen Geheim dienste verpflichtet und könnten auch jederzeit 
+    ihren Dienst in Deutschland einstellen.<br><br>
+
+    <u>4. Transport und Verkehr</u><br>
+    Unsere Straßen sind weitreichend analog, nichts desto trotz ist dieser Sektor sehr stark von den anderen 
+    abhängig: Immer tiefgreifender sind in Autos Computer eingebaut – und Computer sind fernsteuerbar. Damit 
+    wird ein innovatives, intelligentes Auto zur Anschlags-Drohne. Auch werden immer größere Teile des 
+    deutschen Ampelsystems vernetzt. In den Niederlanden fanden Experten heraus, dieses „intelligente“, 
+    automatische Ampelschalten sei recht einfach zu beeinflussen. So sendeten sie manipulierte Daten 
+    vorgetäuschter Fahrradfahrender an das System, welches daraufhin für diese grün schaltete. Damit war es 
+    den Forschern möglich, indirekt sämtliche untersuchten Kreuzungen zu steuern. Für diese simple Manipulation 
+    hängt sehr viel unserem Verkehr ab; nicht zuletzt auch unsere Grundversorgung und das Rettungs- sowie 
+    Gesundheitswesen.<br><br>
+
+    <u>5. Gesundheit</u><br>
+    Krankenhäuser und die Bestellung von Medikamenten sind weitgehend digital organisiert, was sie grundsätzlich 
+    angreifbar macht, man denke an die „WannaCry-Attacke“ im Jahr 2017, bei der 48 britische Kliniken zeitweise 
+    nicht einmal Akutpatienten aufnehmen konnten und kritische Operationen verschieben mussten. Jedoch finden 
+    sich immer wieder verschiedene Programme zum Schutze dieses Sektors, darunter ein Programm zur 
+    Unterstützung des Risikomanagements medizinischer Einrichtungen vom Bundesamt für Bevölkerungsschutz und 
+    Katastrophenhilfe (BBK) und einzelnen Ländern. Andere Stellen unseres Gesundheitssystems, wie die 
+    Expertisen von Hausärzten, sind größtenteils analog geblieben, was wir wohl der besonderen Affinität der 
+    CDU zum Digitalen zu verdanken haben.<br><br>
+
+    <u>6. Medien und Kultur</u><br>
+    Ja, auch Medien und Kultur sind wegen ihrer Vermittlung von Information, Geschichte und Identität in einer 
+    offiziellen Liste des BSI zur KRITIS vertreten. Doch gerade mit Blick auf die Dimensionen des Internets 
+    und die „Sozialen Medien“ hängen seriöse Informationen am seidenen Faden. Auch klassische kulturelle Medien 
+    wie das Theater verlieren zunehmend an Bedeutung, was jedoch nicht heißt, dass wir an Kultur verlieren. Nur 
+    übertragen wir diese immer weiter ins Digitale, was noch ein weiteres Mal die Notwendigkeit von sicheren 
+    Medien betont. Ein Teil dieser Medien kommt jedoch von ausländischen Servern, welche damit weder unserer 
+    Beeinflussung noch der unserer Legislative unterliegt.<br><br>
+
+    <u>7. Ernährung</u><br>
+    Auch unsere Ernährung wird maßgeblich durch die digital organisierte Vernetzung bestimmt. Eine Lahmlegung 
+    des Strom-, Kommunikations- oder Verkehrswesens hätte Engpässe in Supermärkten zur Folge – was dann? Für 
+    Situationen wie diese sind glücklicherweise umfangreiche Notfallsysteme vorgesehen, so ist genau bestimmt, 
+    wie Städte notfalls mit Lebensmittelgesellschaften Grundnahrungsmittel verteilen. Gehen wir jedoch von 
+    einem vollständigen Ausfall der Kommunikation oder des Verkehrs aus, sind auch diese keine langfristige 
+    Alternative.<br><br>
+
+    <u>8. Finanz- und Versicherungsdienstleister</u><br>
+    Diese sind essentiell für unsere Wirtschaftskreisläufe. Könnten die Bankautomaten kein Bargeld mehr 
+    ausgeben und wären auch digitale Zahlungssysteme unbrauchbar, wären wir teilweise wieder in einer 
+    Tauschgesellschaft, was spätestens bei den Lieferstrukturen unmöglich wäre, weshalb auch für diese konkrete 
+    Notfallbestimmungen gesetzt sind. Auch gibt es verschiedene Programme, um das nahezu unangreifbare Bargeld 
+    in Notsituationen zu fördern. Allgemein kann man sagen, dass der Finanzsektor zu den am besten gesicherten 
+    gehört.<br><br>
+
+    <u>9. Siedlungsabfallentsorgung</u><br>
+    Auch die Abfallentsorgung gehört zur KRITIS. Grund dafür: Störungen oder gar Ausfälle könnten zu 
+    erheblichen gesundheitlichen Gefährdungen der Bevölkerung führen, so das BSI. Und vor allem Recycling- 
+    oder Müllverbrennungsanlagen sind digital gesteuert. Doch auch hier ist Dezentralität der Schlüssel; so ist 
+    die Abfallentsorgung kommunal organisiert, was einen flächendeckenden Angriff sehr komplex gestalten würde. 
+    10. Staat und Verwaltung Hauptrisikofaktor dieses Punkts ist wohl eine fehlende Kommunikation. Das betrifft 
+    sowohl die Erreichbarkeit von Notdiensten, als auch ganz allgemein das Notfallmanagement des Staates, vom 
+    Organisieren einer stabilen Versorgung über die Gewährleistung von Energie und Wasser. Doch auch diese 
+    Systeme sind entweder auf ihre Eigenständigkeit ausgelegt – so wissen große Super marktketten schon im 
+    Voraus über die notwendigen Schritte im Falle von Engpässen Bescheid – oder aber den notwendigen Schutz 
+    gegen digitale Angreifer.<br><br>
+
+    <u>Fazit</u><br>
+    Langer Text, kurzer Sinn: Selbst hier zulande, wo „das Internet für uns alle Neuland“ (A. Merkel) scheinen 
+    mag, sind weitgehende Teile der KRITIS digitalisiert und damit durch weit entfernte Angreifer erreichbar. 
+    Dies ist inzwischen in der Politik angekommen, in welcher sich zwar einzelne Politiker zumindest öffentlich 
+    interessiert zeigen, die Thematik meist aber eher klein gehalten wird.</article>
+    
+    <p class="verfasst">Jeremias Ruff, in: Spickzettel<br><span class="datum">2024/12</span></p>
+    <div class="bildersammlung">
+        <img src="../b/ab/spick-kritis-1.jpg" alt="Ausfall am Dulles International Airport">
+        <img src="../b/ab/spick-kritis-2.png" alt="Symbolgrafik eines Wasserhahnes">
+        <img src="../b/ab/spick-kritis-3.png" alt="Symbolgrafik zur Enerieversorgung">
+        <img src="../b/ab/spick-kritis-4.png" alt="Symbolgrafik einer Schadsoftware">
+        <img src="../b/ab/spick-kritis-5.jpg" alt="Foto einer Autobahn mit Strommasten im Hintergrund">
+        <img src="../b/ab/spick-kritis-6.jpg" alt="Symbolgrafik eines Hackers, ich bitte um Entschuldigung">
+        <img src="../b/ab/spick-kritis-7.png" alt="Symbolgrafik iner digitalisierten Stadt">
+        <img src="../b/ab/spick-kritis-8.jpeg" alt="Innenministerin Nancy Faeser fordert stärkeren Schutz der KRITIS">
+    </div>
+</main>
+
+<footer>
+    <div class="quellen">
+        <p>Quellenverweise:</p>
+        <ol><li>reivax / <a class="extern-a" href="https://commons.wikimedia.org/wiki/File:Dulles_Airport_CrowdStruck_(53867936421).jpg">wikimedia</a></li>
+            <li>Talha Dogar / <a class="extern-a" href="https://www.flaticon.com/free-icon/water-tap_7120384">flaticon.com</a></li>
+            <li>Hilmy Abiyyu A. / <a class="extern-a" href="https://www.flaticon.com/free-icon/save-energy_4511056">flfaticon.com</a></li>
+            <li>Freepik / flaticon.com</li>
+            <li>picture alliance / dpa / Jochen Tack</li>
+            <li>Imago / Jochen Tack</li>
+            <li>Awicon / <a class="extern-a" href="https://www.flaticon.com/free-icon/cybercrime_18266260">flaticon.com</a></li>
+            <li>Alina Grünky / dpa</li></ol>
+    </div>
+
+    <div class="komments">
+        <p>Kommentare</p>
+        <div id="commentRead">Lade Kommentare...</div>
+
+        <form id="commentWrite">
+            <textarea id="commentText" placeholder="POST /comments {body: …} | Eigenen Gedanken Platz verschaffen (öffentlich)" required></textarea>
+            <div><div id="loginDiv">
+                    <div id="loginForm">
+                        <input id="email" placeholder="Benutzername">
+                        <input type="password" id="password" placeholder="Passwort">
+                        <button type="button" id="loginBtn"><img src="../b/login.png" class="dark-switch" alt="Einloggen"></button>
+                    </div>
+                    <button type="button" id="logoutBtn" style="display:none;">Logout</button></div>
+
+                 <div id="sendDiv">
+                    <label><input type="checkbox" id="anonymousCheck"> anonym posten</label>
+                    <button type="submit">Absenden <img src="../b/send.png" class="dark-switch" alt="Abschicken"></button></div>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="../index.html">Root | Startseite</a></li>
+                    <li><a href="../t/zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="../t/forum.html">Forum</a></li>
+                    <li><a href="../t/fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="../t/kategorien.html">Kategorien</a></li>
+                    <li><a href="../t/auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="../t/ueber.html">Über</a></li>
+                    <li><a href="../t/rechtliches.html">Rechtliches</a></li>
+                    <li><a href="../t/kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js?nocache=2"></script>
+
+</body>
+</html>

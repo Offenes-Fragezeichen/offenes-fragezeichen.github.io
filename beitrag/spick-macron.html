@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Macron zu Besuch</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../stylesheet.css?nocache=2" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+<body>
+    
+<input type="checkbox" id="darkModeToggle" checked style="--s:25px">
+
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="../b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<main>
+    <div class="werkzeuge">
+        <img class="toggleTrigger dark-switch" data="false flex left" src="../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge">
+        <div class="toggleContent" data-direction="left">
+            <button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
+            <button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
+            <div id="audioPlayer" style="display: none;">
+                <button id="speakerBtn"><img src="../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button>
+                <button id="playBtn"><img src="../b/play.png" class="dark-switch" alt="Play"></button>
+                <button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button>
+                <button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
+            </div>
+            <audio id="myAudio" src="m/ex.mp3"></audio>
+        </div>
+    </div>
+
+    <h1>Macron zu Besuch</h1>
+
+    <p class="spickzettel">Dieser Beitrag erschien ursprünglich im Spickzettel/Juni 2024. <a href="../m/spick-beratung.pdf" target="_blank">Zur Originalausgabe</a></p>
+    <article>Der erste Staatsbesuch eines französischen Präsidenten in Deutschland seit 24 Jahren - so 
+    begann Emmanuel Macron seine Rede zur Fête de l‘Europe hier in Dresden. Über drei Tage, vom 26. bis zum 28. 
+    Mai, war das französische Staatsoberhaupt zu Gast in Deutschland und besuchte in Begleitung unseres 
+    Bundespräsidenten Frank-Walter Steinmeier einige deutssche Städte, einige Politiker, und diskutierte mit 
+    ihnen über unbekannte und bekannte Thematiken, wie etwa den Russisch-Ukrainischen Krieg oder die 
+    Zusammenarbeit in Europa. An seinem zweiten Tag kam er hierbei auch nach Dresden, genauer: auf die Fête 
+    de l‘Europe, das europäische Fest, mit welchem vor allem ein gemeinsames Bewusstsein in und für Europa, 
+    oft aber auch die deutsch-französische Freundschaft gefördert werden sollen.<br><br>
+    Diesmal stand besonders die europäische Jugend im Fokus, so lud man Persönlichkeiten der Musikbranche ein, 
+    darunter Clueso, Bennett und Alle Farben, aber auch den Jugendchor des RoRo, welcher meiner Meinung nach 
+    den besten aller Auftritte zu verzeichnen hatte. Bereits Tage zuvor probte man hierfür aus voller Kehle 
+    und mit engstem Zeitplan, aber immerhin ging so alles ideal vonstatten. Schließlich konnte unser 
+    Jugendchor Ministerpräsidenten Kretschmer, den Bundespräsidenten sowie Macron höchstpersönlich 
+    annoncieren.<br><br>
+    In seiner Rede sprach Macron im ersten Sinne von der Bedeutung von Waffenlieferungen an die Ukraine für 
+    Demokratie und Sicherheit. Zudem äußerte er den Wunsch, die europäischen Investitionen zu verdoppeln und 
+    diese vermehrt in Forschung und Zukunftstechnologien zu investieren. Kritiker bezweifeln zwar die 
+    Umsetzung benannter Verdopplung und fordern das Geld für die im Ausnahmezustand versinkende französische 
+    Bevölkerung. Da der französische Präsident seine Rede mit der Jugend und Europa begann und mit ihnen auch 
+    aufhörte, zudem einige Passagen auf Deutsch hielt, so ertönte danach tosender Applaus.<br><br>
+    Die Frauen der drei Staatsmänner kamen zu Besuch ans RoRo, diskutierten dort mit Schülerinnen und Schülern 
+    über Cybermobbing, wurden auch durch die Schulbibliothek geführt und zeigten sich mit vielen Rückfragen 
+    höchst interessiert.</article>
+    
+    <p class="verfasst">Jeremias Ruff, in: Spickzettel<br><span class="datum">2024/06</span></p>
+    <div class="bildersammlung"><img src="../b/ab/spick-macron.jpeg"></div>
+</main>
+
+<footer>
+    <div class="quellen">
+        <p>Quellenverweise:</p>
+        <ol><li>Eigenaufnahme</li></ol>
+    </div>
+
+    <div class="komments">
+        <p>Kommentare</p>
+        <div id="commentRead">Lade Kommentare...</div>
+
+        <form id="commentWrite">
+            <textarea id="commentText" placeholder="POST /comments {body: …} | Eigenen Gedanken Platz verschaffen (öffentlich)" required></textarea>
+            <div><div id="loginDiv">
+                    <div id="loginForm">
+                        <input id="email" placeholder="Benutzername">
+                        <input type="password" id="password" placeholder="Passwort">
+                        <button type="button" id="loginBtn"><img src="../b/login.png" class="dark-switch" alt="Einloggen"></button>
+                    </div>
+                    <button type="button" id="logoutBtn" style="display:none;">Logout</button></div>
+
+                 <div id="sendDiv">
+                    <label><input type="checkbox" id="anonymousCheck"> anonym posten</label>
+                    <button type="submit">Absenden <img src="../b/send.png" class="dark-switch" alt="Abschicken"></button></div>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="../index.html">Root | Startseite</a></li>
+                    <li><a href="../t/zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="../t/forum.html">Forum</a></li>
+                    <li><a href="../t/fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="../t/kategorien.html">Kategorien</a></li>
+                    <li><a href="../t/auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="../t/ueber.html">Über</a></li>
+                    <li><a href="../t/rechtliches.html">Rechtliches</a></li>
+                    <li><a href="../t/kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js?nocache=2"></script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Fragezeichen | Spickzettel</title>
+    <meta name="author" content="&Eacute;mile Jeremias Ruff">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="../../stylesheet.css?nocache=2" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+<body class="fancy-bg k">
+
+<div class="darkModeToggle-safe"><input type="checkbox" id="darkModeToggle" checked style="--s:25px"></div>
+<svg viewBox="0 0 500 500" class="menu">
+    <g id="menu" transform="translate(200, 200)"></g>
+    <circle id="center" class="center-circle" cx="200" cy="200" r="60"/>
+    <image id="centerImage" href="../../b/menu-dark.png" x="170" y="170" width="60" height="60" pointer-events="none"/>
+</svg>
+
+<div style="display: none;" class="werkzeuge"><img class="toggleTrigger dark-switch" data="false flex left" src="../../b/settings.png" alt="Zahnrad - Werkzeuge/Einstellungen" title="Einstellungen/Werkzeuge"><div class="toggleContent" data-direction="left"><button id="fontToggle"><img class="dark-switch" src="../../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button><button id="fullscreenBtn"><img class="dark-switch" src="../../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button><div id="audioPlayer"><button id="speakerBtn"><img src="../../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button><button id="playBtn"><img src="../../b/play.png" class="dark-switch" alt="Play"></button><button id="pauseBtn"><img src="../../b/pause.png" class="dark-switch" alt="Pause"></button><button id="backBtn"><img src="../../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button></div><audio id="myAudio" src="../../m/ex.mp3"></audio></div></div>
+
+<main>
+    <h1>Spickzettel</h1>
+    <ul id="article-list"></ul>
+</main>
+
+<footer>
+    <div class="sitemap"><p>Sitemap</p><div class="sitemap-strich"></div>
+        <div><div><ul><li><a href="../../index.html">Root | Startseite</a></li>
+                    <li><a href="../zufall.html">Einfach mal irgendwo starten</a></li>
+                    <li><a href="../fremde-federn.html">Fremde Federn</a></li>
+                    <li><a href="../kategorien.html">Kategorien</a></li>
+                    <li><a href="../auth.html">Login</a></li></ul></div>
+             <div><ul><li><a href="../ueber.html">Über</a></li>
+                    <li><a href="../rechtliches.html">Rechtliches</a></li>
+                    <li><a href="../kontakt.html">Kontakt</a></li></ul></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../script.js?nocache=2"></script>
+<script src="../../fancy-bg.js"></script>
+
+<script>
+async function loadArticles() {
+  const list = document.getElementById("article-list");
+
+  const { data, error } = await client
+    .from("spickzettel")
+    .select("id, title, datum")
+    .order("datum", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    list.textContent = "Artikel konnten nicht geladen werden.";
+    return;
+  }
+
+  data.forEach(article => {
+    const li = document.createElement("li");
+
+    const a = document.createElement("a");
+    a.href = "../../beitrag/" + article.id + ".html";
+    a.textContent = article.title;
+
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+}
+
+loadArticles();
+</script>
+
+</body>
+</html>

@@ -302,11 +302,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       backBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-  audio.currentTime = Math.max(0, audio.currentTime - 10);
-});
-
+        e.preventDefault();
+        e.stopPropagation();
+        audio.currentTime = Math.max(0, audio.currentTime - 10);
+      });
 
       audio.addEventListener('ended', () => {
         pauseBtn.style.display = 'none';

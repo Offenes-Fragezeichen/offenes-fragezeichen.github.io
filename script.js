@@ -275,45 +275,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Audio
-    function initCustomAudioPlayer(audioId, speakerId, playId, pauseId, backId) {
-      const audio = document.getElementById(audioId);
-      const speakerBtn = document.getElementById(speakerId);
-      const playBtn = document.getElementById(playId);
-      const pauseBtn = document.getElementById(pauseId);
-      const backBtn = document.getElementById(backId);
+        function initCustomAudioPlayer(audioId, audioDownload, speakerId, playId, pauseId, backId) {
+          const audio = document.getElementById(audioId);
+          const speakerBtn = document.getElementById(speakerId);
+          const downloadBtn = document.getElementById(audioDownload);
+          const playBtn = document.getElementById(playId);
+          const pauseBtn = document.getElementById(pauseId);
+          const backBtn = document.getElementById(backId);
 
-      speakerBtn.addEventListener('click', () => {
-        audio.play();
-        pauseBtn.style.display = 'inline-block';
-        backBtn.style.display = 'inline-block';
-        speakerBtn.style.display = 'none';
-      });
+          speakerBtn.addEventListener('click', () => {
+            audio.play();
+            pauseBtn.style.display = 'inline-block';
+            backBtn.style.display = 'inline-block';
+            downloadBtn.style.display = 'inline-block';
+            speakerBtn.style.display = 'none';
+          });
 
-      playBtn.addEventListener('click', () => {
-        audio.play();
-        playBtn.style.display = 'none';
-        pauseBtn.style.display = 'inline-block';
-      });
+          playBtn.addEventListener('click', () => {
+            audio.play();
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'inline-block';
+          });
 
-      pauseBtn.addEventListener('click', () => {
-        audio.pause();
-        pauseBtn.style.display = 'none';
-        playBtn.style.display = 'inline-block';
-      });
+          pauseBtn.addEventListener('click', () => {
+            audio.pause();
+            pauseBtn.style.display = 'none';
+            playBtn.style.display = 'inline-block';
+          });
 
-      backBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        audio.currentTime = Math.max(0, audio.currentTime - 10);
-      });
+          backBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            audio.currentTime = Math.max(0, audio.currentTime - 10);
+          });
 
-      audio.addEventListener('ended', () => {
-        pauseBtn.style.display = 'none';
-        playBtn.style.display = 'inline-block';
-      });
-    }
+          audio.addEventListener('ended', () => {
+            pauseBtn.style.display = 'none';
+            playBtn.style.display = 'inline-block';
+          });
+        }
 
-    initCustomAudioPlayer('myAudio', 'speakerBtn', 'playBtn', 'pauseBtn', 'backBtn');
+        initCustomAudioPlayer('myAudio', 'audioDownload', 'speakerBtn', 'playBtn', 'pauseBtn', 'backBtn');
 
 
 // --- Komments + zugehöriger Login ---

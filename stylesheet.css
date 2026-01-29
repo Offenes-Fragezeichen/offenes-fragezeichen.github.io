@@ -163,7 +163,7 @@ main {
         margin-right: 10%;
     }
 
-    .werkzeuge button {
+    .werkzeuge button, #audioPlayer button, #audioDownload button {
         border-radius: 50px;
         width: 50px;
         height: 50px;
@@ -171,11 +171,11 @@ main {
         border: none;
     }
 
-    .werkzeuge button:hover, .werkzeuge > img:hover {
+    .werkzeuge button:hover, .werkzeuge > img:hover, #audioPlayer img:hover, #audioDownload img:hover {
         background-color: rgba(0, 0, 0, 0.3);
     }    
 
-    .werkzeuge img {
+    .werkzeuge img, #audioPlayer img, #audioDownload img {
         width: 20px;
         height: 20px;
         padding: 10px;
@@ -212,11 +212,11 @@ main {
         transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
-    .werkzeuge .toggleContent audio {
+    audio {
         background-color: transparent;
         border: 1px solid black;
     }
-
+    
     .toggleTrigger[data-direction="right"] + .toggleContent {
         left: 100%;
         margin-left: 10px;
@@ -251,6 +251,7 @@ main {
         display: none;
     }    
 /**/
+
 .spickzettel {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 15px;

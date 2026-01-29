@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="../stylesheet.css?nocache=2" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
+    
+    <style>
+        #audioPlayer {
+            border: 1px solid black;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     
@@ -26,19 +34,23 @@
         <div class="toggleContent" data-direction="left">
             <button id="fontToggle"><img class="dark-switch" src="../b/textsize.png" alt="Textgröße umschalten" title="Schriftgröße ändern"></button>
             <button id="fullscreenBtn"><img class="dark-switch" src="../b/maximize.png" alt="Vollbildschirm" title="Vollbildschirm"></button>
-            <div id="audioPlayer">
+              </div>
+    </div>
+
+    <h1>Achtsamkeit</h1>
+    <h3>von Robbe</h3>
+    
+    <article>Ha mein erster Beitrag hier, <br>ganz im Sinne der 1. Qualitäten (Anfängergeist) der Audiodatei.<br>
+    <div id="audioPlayer">
                 <button id="speakerBtn"><img src="../b/speaker.png" class="dark-switch" alt="Speaker" title="Vorlesen (wenn vorhanden)"></button>
                 <button id="playBtn"><img src="../b/play.png" class="dark-switch" alt="Play"></button>
                 <button id="pauseBtn"><img src="../b/pause.png" class="dark-switch" alt="Pause"></button>
                 <button id="backBtn"><img src="../b/10sec-back.png" class="dark-switch" alt="10 sec back"></button>
-            </div>
-            <audio id="myAudio" src="../m/robbe.mp3"></audio>
-        </div>
+                <a id="audioDownload" style="display: none;" href="../m/robbe.aac"><img src="../b/download.png" class="dark-switch" alt="Download"></a>
     </div>
-
-    <h1>Achtsamkeit</h1>
-
-    <article>Ha mein erster Beitrag hier, <br>ganz im Sinne der 1. Qualitäten (Anfängergeist) der Audiodatei.<br><br>Warum teile ich es? Weil mir die Haltung der Achtsamkeit hilft und die benannten 8 Qualitäten Orientierung schenken. <br>In der Jetzt Zeit ist so vieles Unsicher und leider Angst oft spürbar. Zumindest bei mir. 🤷‍♂️<br><br>Vor ein paar Monaten habe ich diese anhängende Audio eines guten Freundes wieder entdeckt. Und die positiven Empfindungen beim Hören als sehr wohltuend wahrgenommen.<br>Ob nun beispielsweise "Nicht Wissen", "Loslassen", "Akzeptanz" mir immer gelingen? Mit Sicherheit noch nicht. Aber! beim hören erinnert es mich daran und erleichtert mir mich und mein Leben und die Welt gelassener anzunehmen.</article>
+    <audio id="myAudio" src="../m/robbe.aac"></audio>
+    <br>Warum teile ich es? Weil mir die Haltung der Achtsamkeit hilft und die benannten 8 Qualitäten Orientierung schenken. <br>In der Jetzt Zeit ist so vieles Unsicher und leider Angst oft spürbar. Zumindest bei mir. 🤷‍♂️<br><br>Vor ein paar Monaten habe ich diese anhängende Audio eines guten Freundes wieder entdeckt. Und die positiven Empfindungen beim Hören als sehr wohltuend wahrgenommen.<br>Ob nun beispielsweise "Nicht Wissen", "Loslassen", "Akzeptanz" mir immer gelingen? Mit Sicherheit noch nicht. Aber! beim hören erinnert es mich daran und erleichtert mir mich und mein Leben und die Welt gelassener anzunehmen.</article>
+   
     <p class="verfasst">Robbe <br><span class="datum">26/01/27</span></p>
 </main>
 
@@ -95,6 +107,26 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../script.js?nocache=2"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const downloadLink = document.getElementById('audioDownload');
+
+  if (!downloadLink) return;
+
+  downloadLink.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const ok = confirm(
+      'Die Audiodatei ist nur zur privaten Nutzung gestattet.'
+    );
+
+    if (ok) {
+      window.location.href = downloadLink.href;
+    }
+  });
+});
+</script>
 
 </body>
 </html>

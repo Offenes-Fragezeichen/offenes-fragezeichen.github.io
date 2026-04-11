@@ -89,7 +89,7 @@
                 padding: 0 20px 0 20px;
             }
 
-            #sprueche-ul img, #topDreiListe img {
+            #sprueche-ul img:not(.extern-icon), #topDreiListe img {
                 width: 80vw;
             }
         }
@@ -167,7 +167,8 @@
         <span>- Jerry</span></li>
     
     <li>„Reife ist auch nur ein Ausdruck dafür, wie viel Elend man schluckt.“                    <br>
-        <span>- Johnny Depp als Richard Brown in <i>The Professor</i></span></li>
+        <span>- Johnny Depp</span>
+        <span>als Richard Brown in <a href="https://m.imdb.com/de/title/tt6865690/" class="extern-a"><i>The Professor</i></a></span></li>
 
     <li>„Ich hasse das, wenn dein Hirn sowas macht 😂😭“
         <span>- M.</span></li>    
@@ -180,7 +181,7 @@
         <span>- M, Jerry</span></li>
 
     <li>„Wir verbrennen ernsthaft die Welt für absurde KI-Videos“
-        <span>- Mark-Uwe Kling in Bosetti Lage Night: <a href="https://www.zdf.de/play/shows/bosetti-late-night-102/bosetti-late-night-folge-16-bln-102">Die Macht der KI</a></span>
+        <span>- Mark-Uwe Kling in Bosetti Lage Night: <a href="https://www.zdf.de/play/shows/bosetti-late-night-102/bosetti-late-night-folge-16-bln-102" class="extern-a">Die Macht der KI</a></span>
         <span>Kontext: das Verbrennen fossiler Rohstoffe zur Energieerzeugung, um Künstliche Intelligenzen zu betreiben</span></li>
 </ul>
 
@@ -248,24 +249,10 @@ function zeigeZufaelligeTopDrei() {
 
 window.onload = zeigeZufaelligeTopDrei;
 
-document.addEventListener('mouseover', e => {
-    const li = e.target.closest('#sprueche-ul li, #topDreiListe li');
-    if (!li) return;
-    const span = li.querySelector('span:nth-of-type(2)');
-    if (span) span.style.display = 'block';
-});
-
-document.addEventListener('mouseout', e => {
-    const li = e.target.closest('#sprueche-ul li, #topDreiListe li');
-    if (!li) return;
-    const span = li.querySelector('span:nth-of-type(2)');
-    if (span) span.style.display = 'none';
-});
-
 document.addEventListener('click', e => {
     const li = e.target.closest('#sprueche-ul li, #topDreiListe li');
     if (!li) return;
-    e.preventDefault();
+
     const span = li.querySelector('span:nth-of-type(2)');
     if (span) {
         span.style.display = (span.style.display === 'block') ? 'none' : 'block';

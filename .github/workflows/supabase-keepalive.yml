@@ -1,0 +1,35 @@
+name: Supabase Keepalive
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # Täglich um 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Supabase Projects (Keepalive)
+        run: |
+          echo "=== Supabase Keepalive ==="
+
+          declare -A projects=(
+            ["jgdbrtxptkfvxfovbsix"]="${{ secrets.SUPABASE_ANON_KEY_JGDBRTXPTKFVXFOVBSIX }}"
+            ["ngtujvgsbymtxphwncuj"]="${{ secrets.SUPABASE_ANON_KEY_NGTUJVGSBYMTXPHWNCUJ }}"
+            ["euuptkidjsquvhohvicv"]="${{ secrets.SUPABASE_ANON_KEY_EUUPTKIDJSQUVHOHVICV }}"
+            ["ziikbioeavgapnjumpju"]="${{ secrets.SUPABASE_ANON_KEY_ZIIKBIOEAVGAPNJUMPJU }}"
+          )
+
+          TABLE="keepalive"
+
+          for project in "${!projects[@]}"; do
+            KEY="${projects[$project]}"
+            echo "Keeping project $project alive..."
+            curl -s "https://$project.supabase.co/rest/v1/$TABLE?select=id&limit=1" \
+              -H "apikey: $KEY" \
+              -H "Authorization: Bearer $KEY" \
+              -H "Content-Type: application/json" \
+              && echo " → OK" || echo " → FAILED"
+          done
+          
